@@ -1,5 +1,4 @@
 var express = require('express');
-const db = require('./db');
 var passport = require('passport');
 var KakaoStrategy = require('passport-kakao').Strategy;
 var router = express.Router();
@@ -8,7 +7,6 @@ router.use('/auth', require('./auth'));
 
 router.get('/', (req, res) => {
   res.render('index', {title: "인덱스"})
-  db.selectUser();
 })
 
 router.post('/', passport.authenticate('local-login', {
