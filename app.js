@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require("express-session");
 var bodyParser = require('body-parser')
+var helmet = require('helmet')
 var indexRouter = require('./routes/index');
 var mysql = require('mysql');
 const passport = require('passport')
@@ -47,5 +48,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(helmet());
+app.disable('x-powered-by'); //HELMET으로 X-powerde-by 안보이게 수정
 
 module.exports = app;
