@@ -7,6 +7,8 @@ var session = require("express-session");
 var bodyParser = require('body-parser')
 var helmet = require('helmet')
 var indexRouter = require('./routes/index');
+var businessRouter = require('./routes/business');
+var companyRouter = require('./routes/company');
 var mysql = require('mysql');
 const passport = require('passport')
 
@@ -32,6 +34,8 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', indexRouter);
+app.use('/business', businessRouter);
+app.use('/company', companyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
