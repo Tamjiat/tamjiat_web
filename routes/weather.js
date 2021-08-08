@@ -57,6 +57,7 @@ request(defultURL +
     console.log('날씨 아이콘 아이디:    ' + info['current']['weather'][0]['icon']);
     console.log("===================================");
 
+    //일별 날씨 정보 출력
     for(i in info['hourly']){
         var h_date = new Date(info['hourly'][i]['dt'] * 1000);
         console.log("===================================");
