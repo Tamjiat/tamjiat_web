@@ -3,7 +3,8 @@ var passport = require('passport');
 var KakaoStrategy = require('passport-kakao').Strategy;
 var router = express.Router();
 
-router.use('/auth', require('./auth'));
+router.use('/auth', require('./auth')); //auth.js 연결
+router.use('/weather', require('./weather')); //weaher.js 연결
 
 router.get('/', (req, res) => {
   res.render('index', {title: "인덱스"})
