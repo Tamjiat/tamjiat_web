@@ -1,6 +1,6 @@
 /*
     * openWeather api 구현 페이지
-    * 자세한 반환 값 설명들은 openWeathjer.md파일 확인
+    * 자세한 반환 값 설명들은 openWeather.md파일 확인
     *
     * @author 김민수
     * @version 1.0.0
