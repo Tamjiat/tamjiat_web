@@ -11,6 +11,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy;
+var authController = require('../controllers/authController')
 
 /*
     * @brief : 카카오 서버로 검증 부분
@@ -44,8 +45,8 @@ router.get('/kakao', passport.authenticate('kakao'));
 router.get('/kakao/callback', passport.authenticate('kakao', {
     failureRedirect: '/',
 }), (req, res) => {
-    console.log(req.user.kakao_account.profile)
-    res.render('loginSuccess',{profile : req.user.kakao_account.profile})
+    console.log(req.user.kakao_account.profile.nickname)
+    res.render('index',{username : req.user.kakao_account.profile.nickname})
 });
 
 module.exports = router;
