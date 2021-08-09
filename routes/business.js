@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var businessController = require('../controllers/businessController')
 
-router.get('/', (req, res) => {
-  res.render('business')
-})
+router.get('/',businessController.business);
 
 module.exports = router

@@ -1,28 +1,19 @@
 var express = require('express');
 var passport = require('passport');
 var KakaoStrategy = require('passport-kakao').Strategy;
+var indexController = require('../controllers/indexController')
 var router = express.Router();
 
 router.use('/auth', require('./auth')); //auth.js 연결
 router.use('/weather', require('./weather')); //weaher.js 연결
 
-router.get('/', (req, res) => {
-  res.render('index', {title: "인덱스"})
-})
+router.get('/', indexController.getIndex)
 
-router.post('/', passport.authenticate('local-login', {
-  successRedirect : '/loginSuccess',
-  failureRedirect : '/loginFail',
-  failureFlash : true
-}))
+router.post('/', indexController.passport_auth)
 
-router.get('/loginSuccess', (req, res) => {
-  res.render('loginSuccess')
-})
+router.get('/loginSuccess', indexController.loginSuccess)
 
-router.get('/loginFail', (req, res) => {
-  res.render('loginFail')
-})
+router.get('/loginFail',indexController.loginSuccess)
 
 
 module.exports = router
