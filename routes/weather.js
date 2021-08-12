@@ -10,7 +10,6 @@
 
 const express = require('express');
 const router = express.Router();
-const request = require("request");
 
 var defultURL = "https://api.openweathermap.org/data/2.5/onecall"; //Default API 주소
 var serviceKey = '74518c7e58bf7780b75ad0b30206ea2e'; //API Key
