@@ -7,7 +7,9 @@ var router = express.Router();
 
 router.use('/auth', require('./auth')); //auth.js 연결
 
-router.use('/weather', weatherController.weather); //weaher.js 연결
+router.use('/weather/day', weatherController.getDayWeather); //weaher.js 연결
+
+router.use('/weather/today', weatherController.todayWeather); //weaher.js 연결
 
 router.get('/', indexController.getIndex)
 

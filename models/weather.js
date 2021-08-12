@@ -12,7 +12,7 @@ var serviceKey = '74518c7e58bf7780b75ad0b30206ea2e'; //API Key
     * @factor appid : API Key
 */
 
-function getWeatherAPI(parameter){ //비동기 처리
+function getWeatherAPI(lat, lon){ //비동기 처리
     return new Promise(function (resolve, reject){
         request(defultURL +
             "?lat=" + 36.736301639335366 +
