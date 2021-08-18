@@ -46,8 +46,8 @@
           <li><a class="nav-link scrollto " href="/service">문의하기</a></li>
           <li></li><li></li><li></li><li></li><li></li>
           <% if (username) { %>
-          <li><a class="nav-link scrollto" href="/auth/kakao"><%= username %></a></li>
-          <li><a class="nav-link scrollto" href="/auth/kakao">로그아웃</a></li>
+          <li><a class="nav-link scrollto"><%= username %></a></li>
+          <li><a class="nav-link scrollto" href="/auth/logout">로그아웃</a></li>
           <% } else { %>
           <li><a class="nav-link scrollto" href="/auth/kakao">로그인</a></li>
           <% } %>
