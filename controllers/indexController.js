@@ -9,7 +9,7 @@ function loginFail(req, res, next) {
 }
 
 function getIndex(req, res, next) {
-	res.render('business');
+	res.render('index',{});
 }
 
 function passport_auth(req, res, next) {
