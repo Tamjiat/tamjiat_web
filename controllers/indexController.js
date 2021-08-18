@@ -10,7 +10,7 @@ function loginFail(req, res, next) {
 
 function getIndex(req, res, next) {
     var username = undefined;
-	res.render('index', {username : username});
+  	res.render('index', {username : username});
 }
 
 function passport_auth(req, res, next) {
