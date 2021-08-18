@@ -9,6 +9,7 @@ var helmet = require('helmet')
 var indexRouter = require('./routes/index');
 var businessRouter = require('./routes/business');
 var companyRouter = require('./routes/company');
+var dashRouter = require('./routes/dash');
 var mysql = require('mysql');
 const passport = require('passport')
 
@@ -36,6 +37,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/business', businessRouter);
 app.use('/company', companyRouter);
+app.use('/dash', dashRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
