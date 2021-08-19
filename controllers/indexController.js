@@ -9,8 +9,13 @@ function loginFail(req, res, next) {
 }
 
 function getIndex(req, res, next) {
-    var username = undefined;
-  	res.render('index', {username : username});
+    var token = req.user;
+    if (token == undefined) {
+        res.render('index',{username : "손님"});
+    }
+    else {
+        res.render('index',{username : token})
+    }
 }
 
 function passport_auth(req, res, next) {
