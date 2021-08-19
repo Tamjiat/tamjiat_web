@@ -1,20 +1,12 @@
 var express = require('express');
 var CropInfoDAO = require('../models/CropInfoDAO')
 
-// 모든 작물의 개수 
-function dash_croplocateCount(req, res, next) {
-	CropInfoDAO.select_userCropLocate().then((db_data) => {
-    res.send(db_data);
-  }).catch(err=>res.send("<script>alert('err')</script>"));
-}
-
-
 //파라미터값에 해당하는 위치의 작물 개수값
-function dash_cropParamterLocateCount(req, res, next) {
+function dash_cropCategoryCount(req, res, next) {
   var parameters = {
-    "locate": "하우스" //req.body.locate
+    "uid": req.body.uid //req.body.uid
   }
-	CropInfoDAO.select_userparamterCropLocate(parameters).then((db_data) => {
+	CropInfoDAO.select_cropCategoryCount(parameters).then((db_data) => {
     res.send(db_data);
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
@@ -25,7 +17,6 @@ function dash_main(req, res, next) {
 }
 
 module.exports = {
-    dash_croplocateCount,
-    dash_cropParamterLocateCount,
+    dash_cropCategoryCount,
     dash_main
 }

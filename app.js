@@ -9,11 +9,7 @@ var helmet = require('helmet')
 var indexRouter = require('./routes/index');
 var businessRouter = require('./routes/business');
 var companyRouter = require('./routes/company');
-<<<<<<< HEAD
 var dashRouter = require('./routes/dash')
-=======
-var dashRouter = require('./routes/dash');
->>>>>>> 57d96d98259c61f22e64e47de4820eb8e79e841f
 var mysql = require('mysql');
 const passport = require('passport')
 
