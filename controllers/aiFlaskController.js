@@ -2,7 +2,7 @@ var express = require('express');
 var AAiFlask = require('../models/AAiFlask');
 
 function sendAFImg(req, res, next) {
-    req.connection.setTimeout(60 * 2 * 1000) // default timeout을 3분으로 변경
+    req.connection.setTimeout(60 * 2 * 1000) // default timeout을 2분으로 변경
 
     var parameters = {
         "img": req.body.img //req.body.uid, base64 이미지 문자열
