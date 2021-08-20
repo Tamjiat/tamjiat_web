@@ -9,7 +9,8 @@ var helmet = require('helmet')
 var indexRouter = require('./routes/index');
 var businessRouter = require('./routes/business');
 var companyRouter = require('./routes/company');
-var dashRouter = require('./routes/dash')
+var dashRouter = require('./routes/dash');
+var aiFlask =require('./routes/aiFlask');
 var mysql = require('mysql');
 const passport = require('passport')
 
@@ -38,6 +39,8 @@ app.use('/', indexRouter);
 app.use('/business', businessRouter);
 app.use('/company', companyRouter);
 app.use('/dash', dashRouter);
+app.use('/aiFlask', aiFlask);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
