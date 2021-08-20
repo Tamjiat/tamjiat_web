@@ -19,5 +19,9 @@ router.get('/loginSuccess', indexController.loginSuccess)
 
 router.get('/loginFail',indexController.loginSuccess)
 
+router.post('/total/cropNumber', indexController.cropNumber)
+
+router.post('/total/cropDateWeek', indexController.cropWeekDate)
+
 
 module.exports = router
