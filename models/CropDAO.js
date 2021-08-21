@@ -73,9 +73,28 @@ function select_cropPercent(parameters) {
        })    
 }
 
+function select_cropDetail(parameters) {
+    return new Promise(function (resolve, reject) {
+         db.query(`SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '${parameters.uid}'`, function (error, db_data) {
+             if (error) {
+                    logger.error(
+                        "DB error [usercrop]"+
+                        "\n \t" + `SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '${parameters.uid}'` +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                    //throw error;
+                }
+                else{
+                    resolve(db_data);
+                }
+            });
+        })    
+ }
+
 module.exports = {
     select_cropCategoryCount,
     select_totalCropnumber,
     select_recentDateWeek,
-    select_cropPercent
+    select_cropPercent,
+    select_cropDetail
 }

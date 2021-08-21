@@ -49,10 +49,22 @@ function dash_cropPercent(req, res, next) {
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
+function dash_cropDetail(req, res, next) {
+  var parameters = {
+      "uid": req.body.uid
+  }
+  //console.log(parameters.uid);
+  CropDAO.select_cropDetail(parameters).then(function (db_data){
+      console.log(db_data)
+      res.json(db_data)
+  }).catch(err=>res.send("<script>alert('err')</script>"));
+}
+
 module.exports = {
     dash_cropCategoryCount,
     dash_main,
     dash_cropWeekDate,
     dash_cropNumber,
-    dash_cropPercent
+    dash_cropPercent,
+    dash_cropDetail
 }
