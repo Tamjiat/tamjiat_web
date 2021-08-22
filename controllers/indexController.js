@@ -1,6 +1,5 @@
 var express = require('express');
-var cropTotalNumber = require('../models/CropTotalNumberDAO');
-var cropDateWeek = require('../models/CropsRecentDateWeekDAO');
+var crop = require('../models/CropDAO');
 
 
 function loginSuccess(req, res, next) {
@@ -16,7 +15,7 @@ function cropNumber(req, res, next) {
         "uid": req.body.uid //req.body.uid
     }
     //console.log(parameters.uid);
-    cropTotalNumber.totalCropnumber(parameters).then(function (db_data){
+    crop.select_totalCropnumber(parameters).then(function (db_data){
         console.log(db_data)
         res.json(db_data)
     }).catch(err=>res.send("<script>alert('err')</script>"));
@@ -27,7 +26,7 @@ function cropWeekDate(req, res, next) {
         "uid": req.body.uid //req.body.uid
     }
     //console.log(parameters.uid);
-    cropDateWeek.recentDateWeek(parameters).then(function (db_data){
+    crop.select_recentDateWeek(parameters).then(function (db_data){
         console.log(db_data)
         res.json(db_data)
     }).catch(err=>res.send("<script>alert('err')</script>"));
