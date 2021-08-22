@@ -11,6 +11,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy;
+var userController = require('../controllers/userController')
 
 /*
     * @brief : 카카오 서버로 검증 부분
@@ -23,9 +24,6 @@ passport.use('kakao', new KakaoStrategy({
     clientID: 'ebaf9e6022288f5b6781f31e644e0314',
     callbackURL: '/auth/kakao/callback',
 }, async (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
-    console.log(accessToken);
-    console.log(refreshToken);
     return done(null, profile._json);
 }))
 
@@ -38,13 +36,23 @@ passport.deserializeUser(function (id, done) {
     console.log('passport session get id: ', id);
     done(null, id);
 });
+//웹
+router.get('/updateUser', userController.updateUser)
+router.get('/signUpUser',userController.signUp)
+router.get('/findUser',userController.findUser)
+//안드로이드
+router.post('/findUserA',userController.findUserA)
 
 router.get('/kakao', passport.authenticate('kakao'));
 
 router.get('/kakao/callback', passport.authenticate('kakao', {
     failureRedirect: '/',
 }), (req, res) => {
-    res.render('index',{username : req.user.kakao_account.profile.nickname})
+    req.session.userid = req.user.id
+    req.session.userName = req.user.properties.nickname
+    req.session.img = req.user.properties.profile_image
+    req.session.email = req.user.kakao_account.email
+    res.redirect('/auth/findUser')
 });
 
 router.get('/logout', (req,res)=> {
