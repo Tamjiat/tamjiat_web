@@ -10,6 +10,7 @@ router.post('/cropNum',dashController.dash_cropNumber);
 router.post('/cropWeek',dashController.dash_cropWeekDate);
 router.post('/cropPercent', dashController.dash_cropPercent);
 router.post('/cropDetail', dashController.dash_cropDetail);
+router.post('/cropCategory', dashController.dash_cropCategory);
 
 
 router.get('/cropAdd',dashController.dashCropAdd);
