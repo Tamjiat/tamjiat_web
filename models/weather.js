@@ -15,13 +15,13 @@ var serviceKey = '74518c7e58bf7780b75ad0b30206ea2e'; //API Key
 function getWeatherAPI(lat, lon){ //비동기 처리
     return new Promise(function (resolve, reject){
         request(defultURL +
-            "?lat=" + 36.736301639335366 +
-            "&lon=" + 127.0743693981298 +
+            "?lat=" + lat +
+            "&lon=" + lon +
             "&exclude=" + 'hourly' +
             "&units="+ 'metric' +
             "&appid=" + serviceKey ,function (err, res, body){
 
-            console.log(body); // 응답받은 JSON 출력
+            //console.log(body); // 응답받은 JSON 출력
 
             if(err){
                 reject(new Error("Error"));
