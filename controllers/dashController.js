@@ -47,7 +47,6 @@ function dash_cropPercent(req, res, next) {
   }
   var lat = req.body.lat;
   var lon = req.body.lon;
-
   //console.log(parameters.uid);
   CropDAO.select_cropPercent(parameters).then((db_data)=> {
       console.log(db_data)
@@ -58,10 +57,10 @@ function dash_cropPercent(req, res, next) {
         console.log('현재 풍속: ' + info['current']['wind_speed']);
 
         const weather = new Object();
-        weather.temp = info['current']['temp']
-        weather.humidity = info['current']['humidity']
-        weather.windSpeed = info['current']['wind_speed']
-        res.send({"percentTHW" : db_data, "weather": weather})
+        weather.temp = Math.ceil(info['current']['temp'])
+        weather.humidity = Math.ceil(info['current']['humidity'])
+        weather.windSpeed = Math.ceil(info['current']['wind_speed'])
+        res.send({"cropPercent" : db_data, "weather": weather})
 
     }).catch(err=>res.send("<script>alert('weather err')</script>"));
   }).catch(err=>res.send("<script>alert('err')</script>"));
@@ -82,7 +81,6 @@ function dash_cropCategory(req, res, next) {
 	var parameters = {
     "uid": req.body.uid
   }
-  console.log(parameters)
   CropDAO.select_cropCategory(parameters).then(function (db_data){
     res.json(db_data)
   }).catch(err=>res.send("<script>alert('err')</script>"));
