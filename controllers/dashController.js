@@ -82,8 +82,8 @@ function dash_cropCategory(req, res, next) {
 	var parameters = {
     "uid": req.body.uid
   }
+  console.log(parameters)
   CropDAO.select_cropCategory(parameters).then(function (db_data){
-    console.log(db_data)
     res.json(db_data)
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
