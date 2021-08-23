@@ -1,5 +1,7 @@
 var express = require('express');
 var CropDAO = require('../models/CropDAO')
+var weather = require('../models/weather');
+
 //파라미터값에 해당하는 위치의 작물 개수값
 function dash_cropCategoryCount(req, res, next) {
   var parameters = {
@@ -37,15 +39,31 @@ function dash_cropWeekDate(req, res, next) {
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
+
 function dash_cropPercent(req, res, next) {
   var parameters = {
       "uid": req.body.uid ,
       "cropsNum": req.body.cropsNum
   }
+  var lat = req.body.lat;
+  var lon = req.body.lon;
+
   //console.log(parameters.uid);
-  CropDAO.select_cropPercent(parameters).then(function (db_data){
+  CropDAO.select_cropPercent(parameters).then((db_data)=> {
       console.log(db_data)
-      res.json(db_data)
+      weather.getWeatherAPI(lat,lon).then((body)=> {
+        let info = JSON.parse(body);
+        console.log('현재 온도: ' + info['current']['temp']);
+        console.log('현재 습도: ' + info['current']['humidity']);
+        console.log('현재 풍속: ' + info['current']['wind_speed']);
+
+        const weather = new Object();
+        weather.temp = info['current']['temp']
+        weather.humidity = info['current']['humidity']
+        weather.windSpeed = info['current']['wind_speed']
+        res.send({"percentTHW" : db_data, "weather": weather})
+
+    }).catch(err=>res.send("<script>alert('weather err')</script>"));
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
