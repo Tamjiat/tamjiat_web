@@ -43,7 +43,7 @@ function dash_cropWeekDate(req, res, next) {
 function dash_cropPercent(req, res, next) {
   var parameters = {
       "uid": req.body.uid ,
-      "cropsNum": req.body.cropsNum
+      "cropsName": req.body.cropsName
   }
   var lat = req.body.lat;
   var lon = req.body.lon;
