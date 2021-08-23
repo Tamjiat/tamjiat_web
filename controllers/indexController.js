@@ -35,7 +35,7 @@ function cropWeekDate(req, res, next) {
 function getIndex(req, res, next) {
     var token = req.user;
     if (token == undefined) {
-        res.render('index',{username : "손님"});
+        res.render('index',{username : token});
     }
     else {
         res.render('index',{username : token})

@@ -77,6 +77,25 @@ function dash_cropDetail(req, res, next) {
       res.json(db_data)
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
+function dashCropAdd(req, res, next) {
+	res.render('dash_Crop_add');
+}
+
+function dashDCropAdd(req, res, next) {
+	res.render('dash_DCrop_Add');
+}
+
+function dashPest(req, res, next) {
+	res.render('dash_Pest');
+}
+
+function dashNotice(req, res, next) {
+	res.render('dash_notice');
+}
+
+function dashTalk(req, res, next) {
+	res.render('dash_talk');
+}
 
 module.exports = {
     dash_cropCategoryCount,
@@ -84,5 +103,10 @@ module.exports = {
     dash_cropWeekDate,
     dash_cropNumber,
     dash_cropPercent,
-    dash_cropDetail
+    dash_cropDetail,
+    dashCropAdd,
+    dashDCropAdd,
+    dashNotice,
+    dashPest,
+    dashTalk
 }
