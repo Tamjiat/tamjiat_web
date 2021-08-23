@@ -44,7 +44,7 @@
           <li><a class="nav-link scrollto" href="/notice">공지사항</a></li>
           <li><a class="nav-link scrollto " href="/service">문의하기</a></li>
           <li></li><li></li><li></li><li></li><li></li>
-          <% if (username) { %>
+          <% if (username != undefined) { %>
           <li><a class="nav-link scrollto"><%= username %></a></li>
           <li><a class="nav-link scrollto" href="/auth/logout">로그아웃</a></li>
           <% } else { %>
