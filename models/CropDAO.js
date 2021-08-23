@@ -57,11 +57,11 @@ function select_totalCropnumber(parameters) {
 }
 function select_cropPercent(parameters) {
    return new Promise(function (resolve, reject) {
-        db.query(`SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS percent  FROM userCrop WHERE uid = '${parameters.uid}' and cropsNum ='${parameters.cropsNum}'`, function (error, db_data) {
+        db.query(`SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS percent  FROM userCrop WHERE uid = '${parameters.uid}' and cropsNum IN (SELECT cropsNum FROM cropCode WHERE cropsName = '${parameters.cropsName}'`, function (error, db_data) {
             if (error) {
                    logger.error(
                        "DB error [usercrop]"+
-                       "\n \t" + `SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS percent  FROM userCrop WHERE uid = '${parameters.uid}' and cropsNum ='${parameters.cropsNum}'` +
+                       "\n \t" + `SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS percent  FROM userCrop WHERE uid = '${parameters.uid}' and cropsNum IN (SELECT cropsNum FROM cropCode WHERE cropsName = '${parameters.cropsName}'` +
                        "\n \t" + error);
                    reject('DB ERR');
                    //throw error;
