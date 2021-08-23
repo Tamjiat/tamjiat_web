@@ -2,7 +2,6 @@ var express = require('express');
 var userDao = require('../models/userDAO');
 
 function signUp(req, res, next) {
-
     var parameters = {
         "id": req.session.userid,
         "name" : req.session.userName,
@@ -71,18 +70,61 @@ function findUserA(req, res, next) {
 
         if(db_data.length == 0){
             console.log('존재하지 않는 회원입니다. 회원가입 라우터로 이동합니다.')
-            res.redirect('/auth/signUpUser')
+            res.redirect('/auth/signUpUserA')
         }else{
             console.log('이미 존재하는 회원입니다.')
-            res.redirect('/auth/updateUser')
+            res.redirect('/auth/updateUserA')
         }
+    }).catch(err=>res.send("<script>alert('err')</script>"));
+}
+
+function signUpA(req, res, next) {
+    var parameters = {
+        "id": req.session.userid,
+        "name" : req.session.userName,
+        "img" : req.session.img,
+        "email": req.session.email,
+        "token" : "0"
+    }
+
+    var jsonData = {
+        messgae : "회원가입 성공 - 로그인 성공"
+    }
+
+
+    userDao.insert_userInfo(parameters).then(function (db_data){
+        res.json(JSON.stringify(jsonData))
     }).catch(err=>res.send("<script>alert('err')</script>"));
 
 }
+
+function updateUserA(req, res, next) {
+
+    var parameters = {
+        "id": req.session.userid,
+        "name" : req.session.userName,
+        "img" : req.session.img,
+        "email": req.session.email,
+        "token" : "0"
+    }
+
+    var jsonData = {
+        messgae : "로그인 성공"
+    }
+
+    userDao.update_userInfo(parameters).then(function (db_data){
+        console.log("업데이트 성공");
+        res.json(JSON.stringify(jsonData))
+    }).catch(err=>res.send("<script>alert('err')</script>"));
+
+}
+
 
 module.exports = {
     signUp,
     findUser,
     updateUser,
     findUserA,
+    signUpA,
+    updateUserA
 }
