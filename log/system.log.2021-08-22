@@ -1,0 +1,15 @@
+2021-08-22 09:26:33 [ERROR] - DB error [usercrop]
+ 	select if(cropsStart is NULL, "시작날짜", cropsStart) AS 시작날짜, cropsNum AS 품종, TIMESTAMPDIFF(WEEK, cropsStart, NOW()) AS 주차 FROM userCrop WHERE cropsStart >= date_add(now(), interval -1 MONTH) and uid='1234' LIMIT 2
+ 	Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'undefined'' at line 1
+2021-08-22 09:26:39 [ERROR] - DB error [usercrop]
+ 	select if(cropsStart is NULL, "시작날짜", cropsStart) AS 시작날짜, cropsNum AS 품종, TIMESTAMPDIFF(WEEK, cropsStart, NOW()) AS 주차 FROM userCrop WHERE cropsStart >= date_add(now(), interval -1 MONTH) and uid='1234' LIMIT 2
+ 	Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'undefined'' at line 1
+2021-08-22 13:10:47 [ERROR] - DB error [usercrop]
+ 	SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS percent  FROM userCrop WHERE uid = '1234' and cropsNum ='4'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'userID' in 'field list'
+2021-08-22 13:10:51 [ERROR] - DB error [usercrop]
+ 	SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS percent  FROM userCrop WHERE uid = '1234' and cropsNum ='4'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'userID' in 'field list'
+2021-08-22 13:11:19 [ERROR] - DB error [usercrop]
+ 	SELECT uid AS userID, cropsStart, cropsEnd, ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100) AS 퍼센트  FROM userCrop WHERE uid = '1234' and cropsNum ='4'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'userID' in 'field list'

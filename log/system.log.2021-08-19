@@ -1,0 +1,6 @@
+2021-08-19 14:47:46 [ERROR] - DB error [usercrop]
+ 	SELECT if(categoryName IS NULL, "합계", categoryName) AS 카테고리, COUNT(categoryName) AS 개수  FROM userCrop WHERE uid = '1234' GROUP BY categoryName WITH ROLLUP
+ 	Error: connect ECONNREFUSED 127.0.0.1:3306
+2021-08-19 14:49:23 [ERROR] - DB error [usercrop]
+ 	SELECT if(categoryName IS NULL, "합계", categoryName) AS 카테고리, COUNT(categoryName) AS 개수  FROM userCrop WHERE uid = '1234' GROUP BY categoryName WITH ROLLUP
+ 	Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''' at line 1
