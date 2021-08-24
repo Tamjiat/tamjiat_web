@@ -41,9 +41,7 @@ router.get('/updateUser', userController.updateUser)
 router.get('/signUpUser',userController.signUp)
 router.get('/findUser',userController.findUser)
 //안드로이드
-router.post('/findUserA',userController.findUserA)
-router.get('/signUpUserA',userController.signUpA)
-router.get('/updateUserA', userController.updateUserA)
+router.post('/verificationUserInfo',userController.verificationUserInfo)
 
 router.get('/kakao', passport.authenticate('kakao'));
 

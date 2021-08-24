@@ -54,69 +54,39 @@ function findUser(req, res, next) {
 
 }
 
-function findUserA(req, res, next) {
-
-    req.session.userid = req.body.userid,
-    req.session.userName = req.body.userName,
-    req.session.img = req.body.img,
-    req.session.email = req.body.email
-
+function verificationUserInfo(req, res, next) {
     var parameters = {
-        "id": req.session.userid
+        "id": req.body.userid,
+        "name" : req.body.userName,
+        "img" : req.body.img,
+        "email" : req.body.email,
+        "token" : "0"
     }
+
+    var data = {
+        message : "로그인 성공"
+    }
+
+    var sendJsonData = JSON.stringify(data)
 
     userDao.select_userFind(parameters).then(function (db_data){
         console.log(db_data)
 
         if(db_data.length == 0){
-            console.log('존재하지 않는 회원입니다. 회원가입 라우터로 이동합니다.')
-            res.redirect('/auth/signUpUserA')
+            console.log('존재하지 않는 회원입니다. 회원가입을 진행합니다.')
+            userDao.insert_userInfo(parameters).then(function (db_data){
+                console.log(db_data)
+                res.json(sendJsonData)
+            }).catch(err=>res.send("<script>alert('err')</script>"));
         }else{
             console.log('이미 존재하는 회원입니다.')
-            res.redirect('/auth/updateUserA')
+            userDao.update_userInfo(parameters).then(function (db_data){
+                console.log(db_data)
+                console.log("업데이트 성공");
+                res.json(sendJsonData)
+            }).catch(err=>res.send("<script>alert('err')</script>"));
         }
     }).catch(err=>res.send("<script>alert('err')</script>"));
-}
-
-function signUpA(req, res, next) {
-    var parameters = {
-        "id": req.session.userid,
-        "name" : req.session.userName,
-        "img" : req.session.img,
-        "email": req.session.email,
-        "token" : "0"
-    }
-
-    var jsonData = {
-        messgae : "회원가입 성공 - 로그인 성공"
-    }
-
-
-    userDao.insert_userInfo(parameters).then(function (db_data){
-        res.json(JSON.stringify(jsonData))
-    }).catch(err=>res.send("<script>alert('err')</script>"));
-
-}
-
-function updateUserA(req, res, next) {
-
-    var parameters = {
-        "id": req.session.userid,
-        "name" : req.session.userName,
-        "img" : req.session.img,
-        "email": req.session.email,
-        "token" : "0"
-    }
-
-    var jsonData = {
-        messgae : "로그인 성공"
-    }
-
-    userDao.update_userInfo(parameters).then(function (db_data){
-        console.log("업데이트 성공");
-        res.json(JSON.stringify(jsonData))
-    }).catch(err=>res.send("<script>alert('err')</script>"));
-
 }
 
 
@@ -124,7 +94,5 @@ module.exports = {
     signUp,
     findUser,
     updateUser,
-    findUserA,
-    signUpA,
-    updateUserA
+    verificationUserInfo,
 }
