@@ -93,20 +93,20 @@ function select_cropDetail(parameters) {
 
  function select_cropCategory(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT uc.cropsNum, cc.cropsName FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsNum = cc.cropsNum AND uc.uid = ${parameters.uid} GROUP BY uc.cropsNum`, function (error, db_data) {
-            if (error) {
-                   logger.error(
-                       "DB error [cropCategory]"+
-                       "\n \t" + `SELECT uc.cropsNum, cc.cropsName FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsNum = cc.cropsNum AND uc.uid = ${parameters.uid} GROUP BY uc.cropsNum'` +
-                       "\n \t" + error);
-                   reject('DB ERR');
-                   //throw error;
-               }
-               else{
-                   resolve(db_data);
-               }
-           });
-       })  
+         db.query(`SELECT uc.cropsNum, cc.cropsName FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsNum = cc.cropsNum AND uc.uid = '${parameters.uid}' GROUP BY uc.cropsNum;`, function (error, db_data) {
+             if (error) {
+                    logger.error(
+                        "DB error [usercrop]"+
+                        "\n \t" + `SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '${parameters.uid}'` +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                    //throw error;
+                }
+                else{
+                    resolve(db_data);
+                }
+            });
+        })    
  }
 
 module.exports = {
