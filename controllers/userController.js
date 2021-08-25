@@ -55,6 +55,7 @@ function findUser(req, res, next) {
 }
 
 function verificationUserInfo(req, res, next) {
+    console.log(req.body)
     var parameters = {
         "id": req.body.userid,
         "name" : req.body.userName,
@@ -63,11 +64,10 @@ function verificationUserInfo(req, res, next) {
         "token" : "0"
     }
 
-    var data = {
-        message : "로그인 성공"
-    }
+    var data = new Object();
+    data.message = "로그인 성공"
 
-    var sendJsonData = JSON.stringify(data)
+    var sendJsonData = data // json string으로 하면 파싱불가 String으로 바뀜
 
     userDao.select_userFind(parameters).then(function (db_data){
         console.log(db_data)
@@ -81,8 +81,8 @@ function verificationUserInfo(req, res, next) {
         }else{
             console.log('이미 존재하는 회원입니다.')
             userDao.update_userInfo(parameters).then(function (db_data){
-                console.log(db_data)
                 console.log("업데이트 성공");
+                console.log("hello : "+sendJsonData)
                 res.json(sendJsonData)
             }).catch(err=>res.send("<script>alert('err')</script>"));
         }

@@ -20,7 +20,7 @@ function todayWeather(req, res, next) {
 
         weather.currTemp = Math.ceil(info['current']['temp'])+ '℃';
         weather.currWeather = info['current']['weather'][0]['main'];
-        weather.currWeatherIcon = (weatherIcon.indexOf("01") > -1 || weatherIcon.indexOf("02") > -1) ? weatherIcon : weatherIcon.replace("n", ""); // 날씨가 01 or 02이면 아이콘이 다르기 때문에 n을 붙이고 나머지는 n삭제
+        weather.currWeatherIcon = (weatherIcon.indexOf("01") > -1 || weatherIcon.indexOf("02") > -1) ? weatherIcon : weatherIcon.replace(/[nd]/g, ""); // 날씨가 01 or 02이면 아이콘이 다르기 때문에 n을 붙이고 나머지는 n삭제
         
         console.log(weather);
         res.status(200).send({
