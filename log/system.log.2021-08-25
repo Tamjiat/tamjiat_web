@@ -1,0 +1,9 @@
+2021-08-25 03:33:28 [ERROR] - DB error [userInfo]
+ 	update userInfo set uid = '1835646018', userName = '김득회', userEmail = 'dh97k@naver.com', userImage = 'https://k.kakaocdn.net/dn/bscRQd/btqLpmx4s95/yDR6CUqu24iYVGQFhCCeTK/img_640x640.jpg', userToken='0' where uid = 1835646018
+ 	Error: ER_TRUNCATED_WRONG_VALUE: Truncated incorrect DOUBLE value: 'undefined'
+2021-08-25 03:35:24 [ERROR] - DB error [userInfo]
+ 	update userInfo set uid = '1835646018', userName = '김득회', userEmail = 'dh97k@naver.com', userImage = 'https://k.kakaocdn.net/dn/bscRQd/btqLpmx4s95/yDR6CUqu24iYVGQFhCCeTK/img_640x640.jpg', userToken='0' where uid = 1835646018
+ 	Error: ER_TRUNCATED_WRONG_VALUE: Truncated incorrect DOUBLE value: 'undefined'
+2021-08-25 04:47:22 [ERROR] - DB error [userInfo]
+ 	update userInfo set uid = '1835646018', userName = '김득회', userEmail = 'dh97k@naver.com', userImage = 'https://k.kakaocdn.net/dn/bscRQd/btqLpmx4s95/yDR6CUqu24iYVGQFhCCeTK/img_640x640.jpg', userToken='0' where uid = 1835646018
+ 	Error: ER_TRUNCATED_WRONG_VALUE: Truncated incorrect DOUBLE value: 'undefined'

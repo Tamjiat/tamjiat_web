@@ -40,11 +40,11 @@ function select_userFind(parameters) {
 
 function update_userInfo(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`update userInfo set uid = '${parameters.id}', userName = '${parameters.name}', userEmail = '${parameters.email}', userImage = '${parameters.img}', userToken='${parameters.token}' where uid = ${parameters.id}`, function (error, db_data) {
+        db.query(`update userInfo set uid = '${parameters.id}', userName = '${parameters.name}', userEmail = '${parameters.email}', userImage = '${parameters.img}', userToken='${parameters.token}' where uid = '${parameters.id}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userInfo]"+
-                    "\n \t" + `update userInfo set uid = '${parameters.id}', userName = '${parameters.name}', userEmail = '${parameters.email}', userImage = '${parameters.img}', userToken='${parameters.token}' where uid = ${parameters.id}` +
+                    "\n \t" + `update userInfo set uid = '${parameters.id}', userName = '${parameters.name}', userEmail = '${parameters.email}', userImage = '${parameters.img}', userToken='${parameters.token}' where uid = '${parameters.id}'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
