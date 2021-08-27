@@ -117,8 +117,8 @@ function dashTalk(req, res, next) {
 
 function dash_cropMulter(req, res, next) {
 	var parameters = {
-    "imagefile" : req.body.files
-  }
+    		"imagefile" : req.files
+  	}
   res.send('success')
 }
 
