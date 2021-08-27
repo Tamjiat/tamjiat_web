@@ -1,3 +1,0 @@
-2021-08-23 16:54:13 [ERROR] - DB error [userInfo]
- 	INSERT INTO userInfo VALUES ('undefined', 'undefined', 'undefined', 'undefined', '0')
- 	Error: ER_DUP_ENTRY: Duplicate entry 'undefined' for key 'PRIMARY'
