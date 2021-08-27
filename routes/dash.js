@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const upload = require('../middleware/multer');
 var dashController = require('../controllers/dashController')
 
 
@@ -12,6 +13,8 @@ router.post('/cropPercent', dashController.dash_cropPercent);
 router.post('/cropDetail', dashController.dash_cropDetail);
 router.post('/cropCategory', dashController.dash_cropCategory);
 
+
+router.post('/cropMulter', upload.single('myFile'), dashController.dash_cropMulter)
 
 router.get('/cropAdd',dashController.dashCropAdd);
 router.get('/cropAddForm',dashController.dashCropAddForm);

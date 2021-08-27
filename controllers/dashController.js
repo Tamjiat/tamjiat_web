@@ -115,6 +115,14 @@ function dashTalk(req, res, next) {
 	res.render('dash_talk');
 }
 
+function dash_cropMulter(req, res, next) {
+	var parameters = {
+    "imagefile" : req.body.files
+  }
+  res.send('success')
+}
+
+
 module.exports = {
     dash_cropCategoryCount,
     dash_main,
@@ -123,6 +131,7 @@ module.exports = {
     dash_cropPercent,
     dash_cropDetail,
     dash_cropCategory,
+    dash_cropMulter,
     dashCropAdd,
     dashCropAddForm,
     dashDCropAdd,
