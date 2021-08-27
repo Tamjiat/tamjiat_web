@@ -90,9 +90,18 @@ function dashCropAdd(req, res, next) {
 	res.render('dash_Crop_add');
 }
 
-function dashDCropAdd(req, res, next) {
-	res.render('dash_DCrop_Add');
+function dashCropAddForm(req, res, next) {
+	res.render('dash_Crop_add_form');
 }
+
+function dashDCropAdd(req, res, next) {
+	res.render('dash_DCrop_add');
+}
+
+function dashDCropAddForm(req, res, next) {
+	res.render('dash_DCrop_add_form');
+}
+
 
 function dashPest(req, res, next) {
 	res.render('dash_Pest');
@@ -115,7 +124,9 @@ module.exports = {
     dash_cropDetail,
     dash_cropCategory,
     dashCropAdd,
+    dashCropAddForm,
     dashDCropAdd,
+    dashDCropAddForm,
     dashNotice,
     dashPest,
     dashTalk

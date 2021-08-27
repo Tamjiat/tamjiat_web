@@ -14,7 +14,9 @@ router.post('/cropCategory', dashController.dash_cropCategory);
 
 
 router.get('/cropAdd',dashController.dashCropAdd);
+router.get('/cropAddForm',dashController.dashCropAddForm);
 router.get('/dcropAdd',dashController.dashDCropAdd);
+router.get('/dcropAddForm', dashController.dashDCropAddForm);
 router.get('/pest',dashController.dashPest);
 router.get('/notice',dashController.dashNotice);
 router.get('/talk',dashController.dashTalk);
