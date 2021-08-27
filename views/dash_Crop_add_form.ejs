@@ -4,28 +4,54 @@
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="row">
-
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px; color: green;">농작물 등록하기 <i class="mdi mdi-leaf"></i></h4>
+                <p class="card-description" style = "margin: 0.8rem 0 0 0">
+                  새롭게 추가하고 싶은 농작물을 등록해주세요.
+                </p>
+                <form class="forms-sample" style="margin: 50px 0 0 0;">
+                  <div class="form-group">
+                    <label for="Cropkind">농작물 종류</label>
+                      <select class="form-select" aria-label="Default select example" id="Cropkind">
+                        <option>곡류</option>
+                        <option>콩류</option>
+                        <option>채소</option>
+                        <option>구근류</option>
+                        <option>과실류</option>
+                        <option>종실류</option>
+                        <option>버섯류</option>
+                        <option>특용작물</option>
+                        <option>약용작물</option>
+                        <option>전매작물</option>
+                        <option>화훼작물</option>
+                      </select>
+                    </div>
+                  <div class="form-group">
+                    <label for="CropName1">농작물 이름</label>
+                    <input type="text" class="form-control" id="CropName1" placeholder="ex) 벼">
+                  </div>
+                  <div class="form-group">
+                    <label for="Sowing2">파종 시기</label>
+                    <input type="email" class="form-control" id="Sowing2" placeholder="ex) 2021.08.21">
+                  </div>
+                  <div class="form-group">
+                    <label for="cropmemo">메모</label>
+                    <textarea class="form-control" id="cropmemo" rows="3" style="height: 150px;"></textarea>
+                  </div>
+                  <button type="button" class="btn btn-success btn-icon-text" data-toggle="modal" data-target="#cropadd" style="float: right; margin: 25px 0 0 0">
+                    <i class="mdi mdi-plus"></i>                                                    
+                    &nbsp; 등록하기
+                  </button>
+                  <button type="button" class="btn btn-warning btn-icon-text" data-toggle="modal" data-target="#cropadd" style="float: right; margin: 25px 20px 0 0">
+                    <i class="mdi mdi-minus"></i>                                                    
+                    &nbsp; 취소하기
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-
-         <!-- Modal -->
-         <div class="modal" id="cropadd" tabindex="-1" role="dialog" aria-labelledby="cropaddTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-              <h5 class="modal-title" id="cropaddTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-              </div>
-              <div class="modal-body">
-              ...
-              </div>
-              <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-          </div>
-          </div>
-      </div>
 
 <% include ./include/dash_footer %>
