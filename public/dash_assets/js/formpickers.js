@@ -2,7 +2,7 @@
   'use strict';
   if ($("#timepicker-example").length) {
     $('#timepicker-example').datetimepicker({
-      format: 'LT'
+      format: 'YYYY-MM-DD'
     });
   }
   if ($(".color-picker").length) {
