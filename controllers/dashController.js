@@ -115,6 +115,14 @@ function dashTalk(req, res, next) {
 	res.render('dash_talk');
 }
 
+function dashCropCulture(req, res, next) {
+	res.render('dash_crop_culture');
+}
+
+function dashCropCultureDetail(req, res, next) {
+	res.render('dash_Crop_culture_detail');
+}
+
 function dash_cropMulter(req, res, next) {
 	var parameters = {
     		"imagefile" : req.files
@@ -136,6 +144,8 @@ module.exports = {
     dashCropAddForm,
     dashDCropAdd,
     dashDCropAddForm,
+    dashCropCulture,
+    dashCropCultureDetail,
     dashNotice,
     dashPest,
     dashTalk
