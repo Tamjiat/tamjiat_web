@@ -11,6 +11,7 @@ var businessRouter = require('./routes/business');
 var companyRouter = require('./routes/company');
 var dashRouter = require('./routes/dash');
 var aiFlask =require('./routes/aiFlask');
+
 var mysql = require('mysql');
 const passport = require('passport')
 
@@ -44,6 +45,12 @@ app.use('/aiFlask', aiFlask);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+});
+
+/// multer
+app.use(function(req,res,next){
+  var dir = './public/image';
+    if(!fs.existsSync(dir)) fs.mkdirSync(dir);
 });
 
 // error handler
