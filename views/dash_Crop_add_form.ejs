@@ -15,23 +15,49 @@
                   <div class="form-group">
                     <label for="Cropkind">농작물 종류</label>
                       <select class="form-select" aria-label="Default select example" id="Cropkind">
-                        <% for (var i = 0; i < db_data.length; i++) { %>
-                          <option><%=db_data[i].cropsName %></option>
+                        <% for (var i = 0; i < codeData.length; i++) { %>
+                          <option><%= codeData[i].cropsName %></option>
                         <% } %>
                       </select>
                     </div>
                   <div class="form-group">
                     <label for="CropName1">농작물 이름</label>
-                    <input type="text" class="form-control" id="CropName1" placeholder="ex) 벼">
+                    <input type="text" class="form-control" id="CropName1" placeholder="ex) 금빛 토마토">
+                  </div>
+                  <div class="form-group">
+                    <label for="CropcategoryName">농작물 재배 유형</label>
+                      <select class="form-select" aria-label="Default select example" id="CropcategoryName">
+                        <% for (var i = 0; i < categoryData.length; i++) { %>
+                          <option><%=categoryData[i].categoryName %></option>
+                        <% } %>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="useCompost">비료</label>
+                    <input type="text" class="form-control" id="useCompost" placeholder="ex) 한국산 비료">
+                  </div>
+                  <div class="form-group">
+                    <label for="Croplocation">농작물 위치</label>
+                    <input type="text" class="form-control" id="Croplocation" placeholder="ex) 충청남도 아산시 배방읍">
                   </div>
                   <div class="form-group row">
                     <div class="col">
                       <label for="Sowing2">파종 시기</label>
-                      <input type="text" class="form-control" id="datepicker" placeholder="ex) 01/01/2021">
+                      <input type="text" class="form-control" id="datepicker" placeholder="ex) 2021-08-01">
                     </div>
                     <div class="col">
                       <label for="Sowing2">재배 예정 시기</label>
-                      <input type="text" class="form-control" id="datepicker2" placeholder="ex) 01/02/2021">
+                      <input type="text" class="form-control" id="datepicker2" placeholder="ex) 2021-09-01">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col">
+                      <label for="goalYield">예상 수확량</label>
+                      <input type="text" class="form-control" id="goalYield" placeholder="ex) 2500">
+                    </div>
+                    <div class="col">
+                      <label for="currentYield">현재 수확량</label>
+                      <input type="text" class="form-control" id="currentYield" placeholder="ex) 3200">
                     </div>
                   </div>
                   <div class="form-group">

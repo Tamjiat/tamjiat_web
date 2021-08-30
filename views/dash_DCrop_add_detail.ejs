@@ -2,72 +2,130 @@
 
 <!-- partial -->
 <div class="main-panel">
-    <div class="content-wrapper">
-      <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px; color: darkred;">피해 농작물 상태&nbsp;<i class="mdi mdi mdi-hospital"></i></h4>
-              <p class="card-description" style = "margin: 0.8rem 0 0 0">
-                피해 농작물에 대한 상태와 해결책을 받아 보세요!
-              </p>
-              <div class="table-responsive" style = "margin: 25px 0 20px 0">
-                <table class="table table-hover" style="text-align: center;">
-                  <thead>
-                    <tr>
-                      <th class="col-md-1">번호</th>
-                      <th class="col-md-2">종류</th>
-                      <th class="col-md-3">농작물</th>
-                      <th class="col-md-2">업로드 시간</th>
-                      <th class="col-md-2">AI 진단 상황</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>곡류</td>
-                      <td>벼</td>
-                      <td>2021.08.27</td>
-                      <td><label class="badge badge-danger">실패</label></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>콩류</td>
-                      <td>강낭콩</td>
-                      <td>2021.08.28</td>
-                      <td><label class="badge badge-warning">진행중</label></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>채소</td>
-                      <td>배추</td>
-                      <td>2021.08.29</td>
-                      <td><label class="badge badge-warning">진행중</label></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>채소</td>
-                      <td>시금치</td>
-                      <td>2021.08.30</td>
-                      <td><label class="badge badge-success">완료</label></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>곡류</td>
-                      <td>옥수수</td>
-                      <td>2021.09.01</td>
-                      <td><label class="badge badge-danger">실패</label></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button type="button" class="btn btn-inverse-danger btn-fw" style="float: right; margin: 25px 0 0 0">
-                  <i class="mdi mdi-hospital"></i>
-                  &nbsp;&nbsp;등록하기
-                </button>
+  <div class="content-wrapper">
+  <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+          <div class="card-body">
+            <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px; color: darkred;">피해 농작물 상태&nbsp;<i class="mdi mdi mdi-hospital"></i></h4>
+          <p class="card-description" style = "margin: 0.8rem 0 0 0">
+            피해 농작물에 대한 상태를 확인해보세요.
+          </p>
+          <div class="form-group row" style = "margin: 30px 0 0 0;">
+              <div class="card col" style="margin: 0 50px 0 0;">
+                  <div class="card-body">
+                    <h3 class="card-title">농작물 종류</h3>
+                    <ul class="list-star" style="font-size: 20px;">
+                      <li>고추</li>
+                    </ul>
+                  </div>
               </div>
-            </div>
+              <div class="card col" >
+                  <div class="card-body">
+                    <h3 class="card-title">농작물 이름</h3>
+                    <ul class="list-star" style="font-size: 20px;">
+                      <li>햇고추</li>
+                    </ul>
+                  </div>
+              </div>
           </div>
-        </div>
+          <div class="card" style = "margin: 30px 0 0 0;">
+              <div class="card-body">
+                <h4 class="card-title">AI 진단</h4>
+                <div class="row" style="margin: 20px 0 0 0;">
+                  <div class="col">
+                      <p class="card-description">
+                          진단 결과 : <label class="badge badge-success">완료</label></h4>
+                      </p>
+                    </div>
+                </div>
+                <div class="card" style="width: 500px; margin: 0 auto;">
+                  <div class="card-body">
+                    <h4 class="card-title">Headings with secondary text</h4>
+                    <p class="card-description">
+                      Add faded secondary text to headings
+                    </p>
+                    <div class="template-demo">
+                      <h1>
+                        h1. Heading
+                        <small class="text-muted">
+                          Secondary text
+                        </small>
+                      </h1>
+                      <h2>
+                        h2. Heading
+                        <small class="text-muted">
+                          Secondary text
+                        </small>
+                      </h2>
+                      <h3>
+                        h3. Heading
+                        <small class="text-muted">
+                          Secondary text
+                        </small>
+                      </h3>
+                      <h4>
+                        h4. Heading
+                        <small class="text-muted">
+                          Secondary text
+                        </small>
+                      </h4>
+                      <h5>
+                        h5. Heading
+                        <small class="text-muted">
+                          Secondary text
+                        </small>
+                      </h5>
+                      <h6>
+                        h6. Heading
+                        <small class="text-muted">
+                          Secondary text
+                        </small>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin: 50px 0 0 0;">
+                  <div class="col">
+                      <p class="card-description" style="font-size:20px">
+                          병명
+                      </p>
+                       <ul class="list-ticked" style="font-size:15px">
+                         <li>고추탄저병</li>
+                       </ul>
+                    </div>
+                    <hr class="my-4">
+                    <div class="col">
+                      <p class="card-description" style="font-size:20px">
+                          해결방안
+                      </p>
+                      <div class="card" style = "margin: 30px 0 0 0;">
+                        <div class="card-body">
+                          <h5 class="card-title text-warning">고추 탄저병</h5>
+                          <hr class="my-4">
+                          <P>고추 탄저병의 경우에는 우식에게 물어보면 답이 나옵니다. 그는 농사의 신 농심입니다.</P>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
+              </div>
+          </div>
+          <div class="card" style = "margin: 30px 0 0 0;">
+              <div class="card-body">
+                <h4 class="card-title">Memo</h4>
+                <hr class="my-4">
+                <P>규환이 바보!</P>
+              </div>
+          </div>
+              <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+                  <i class="mdi mdi-checkbox-marked-circle-outline"></i>                                                    
+                  &nbsp; 확인
+              </button>
+                  </div>                
+              </div>
+          </div>
       </div>
+  </div>
 
 <% include ./include/dash_footer %>

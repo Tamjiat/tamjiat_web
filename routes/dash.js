@@ -22,10 +22,11 @@ router.post('/cropMulter', upload.single('myFile'), dashController.dash_cropMult
 //웹
 router.get('/crop',dashController.dashCropAdd);
 router.get('/cropAdd',dashController.dashCropAddForm);
+router.get('/cropDetail',dashController.dashCropDetail);
 router.get('/dcrop',dashController.dashDCropAdd);
 router.get('/dcropAdd', dashController.dashDCropAddForm);
+router.get('/dcropDetail',dashController.dashDCropAddDetail);
 router.get('/cropCulture', dashController.dashCropCulture);
-router.get('/cropCultureDetail', dashController.dashCropCultureDetail);
 router.get('/pest',dashController.dashPest);
 router.get('/notice',dashController.dashNotice);
 router.get('/talk',dashController.dashTalk);

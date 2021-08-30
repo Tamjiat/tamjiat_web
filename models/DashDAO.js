@@ -37,6 +37,23 @@ function select_cropCode() {
       });
   })
 }
+function select_cropCategory() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT * FROM cropCategory`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [cropCategory]"+
+                    "\n \t" + `SELECT * FROM cropCategory` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
 
 
 function insert_crop(parameters) {
@@ -66,5 +83,6 @@ function insert_crop(parameters) {
 module.exports = {
   select_crop,
   select_cropCode,
-  insert_crop
+  insert_crop,
+  select_cropCategory
 }
