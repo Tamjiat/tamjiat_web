@@ -15,17 +15,9 @@
                   <div class="form-group">
                     <label for="Cropkind">농작물 종류</label>
                       <select class="form-select" aria-label="Default select example" id="Cropkind">
-                        <option>곡류</option>
-                        <option>콩류</option>
-                        <option>채소</option>
-                        <option>구근류</option>
-                        <option>과실류</option>
-                        <option>종실류</option>
-                        <option>버섯류</option>
-                        <option>특용작물</option>
-                        <option>약용작물</option>
-                        <option>전매작물</option>
-                        <option>화훼작물</option>
+                        <% for (var i = 0; i < db_data.length; i++) { %>
+                          <option><%=db_data[i].cropsName %></option>
+                        <% } %>
                       </select>
                     </div>
                   <div class="form-group">

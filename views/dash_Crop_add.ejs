@@ -36,146 +36,28 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <% for (var i = 0; i < db_data.length; i++) { %>
                       <tr>
                         <td>
-                          1
+                          <%= db_data[i].cid %>
                         </td>
                         <td>
-                          곡류
+                          <%= db_data[i].cropsName %>
                         </td>
                         <td>
-                          벼
+                          <%= db_data[i].cropsCultivar %>
                         </td>
                         <td>
-                          2021.08.26
+                          <%= db_data[i].cropsStart %>
                         </td>
                         <td>
-                          2021.08.26
+                          <%= db_data[i].cropsEnd %>
                         </td>
                         <td>
-                          벼 농사 잘해보기!
+                          <%= db_data[i].cropsMemo %>
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          콩류
-                        </td>
-                        <td>
-                          콩
-                        </td>
-                        <td>
-                            2021.08.27
-                        </td>
-                        <td>
-                          2021.08.26
-                        </td>
-                        <td>
-                          콩을 먹으면 콩콩
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          3
-                        </td>
-                        <td>
-                          구근류
-                        </td>
-                        <td>
-                          감자
-                        </td>
-                        <td>
-                            2021.08.28
-                        </td>
-                        <td>
-                          2021.08.26
-                        </td>
-                        <td>
-                          감자에 싹이 나서 잎이 나서!
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          4
-                        </td>
-                        <td>
-                          채소
-                        </td>
-                        <td>
-                          배추
-                        </td>
-                        <td>
-                            2021.08.29
-                        </td>
-                        <td>
-                          2021.08.26
-                        </td>
-                        <td>
-                          배추도사!
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          5
-                        </td>
-                        <td>
-                          과실류
-                        </td>
-                        <td>
-                          사과
-                        </td>
-                        <td>
-                            2021.08.27
-                        </td>
-                        <td>
-                          2021.08.26
-                        </td>
-                        <td>
-                          아침 사과는 개꿀!
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          6
-                        </td>
-                        <td>
-                          버섯류
-                        </td>
-                        <td>
-                          양송이
-                        </td>
-                        <td>
-                            2021.08.28
-                        </td>
-                        <td>
-                          2021.08.26
-                        </td>
-                        <td>
-                          초록 버섯 주황 버섯
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          7
-                        </td>
-                        <td>
-                          전매작물
-                        </td>
-                        <td>
-                          인삼
-                        </td>
-                        <td>
-                            2021.08.29
-                        </td>
-                        <td>
-                          2021.08.26
-                        </td>
-                        <td>
-                          인삼이 먹으면 힘이 불끈!
-                        </td>
-                      </tr>
+                      <% } %>
                     </tbody>
                   </table>
                     <button type="button" class="btn btn-success btn-icon-text" data-toggle="modal" data-target="#cropadd" style="float: right; margin: 25px 0 0 0">

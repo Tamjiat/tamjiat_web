@@ -1,5 +1,6 @@
 var express = require('express');
-var CropDAO = require('../models/CropDAO')
+var CropDAO = require('../models/CropDAO');
+var DashDAO = require('../models/DashDAO');
 var weather = require('../models/weather');
 
 //파라미터값에 해당하는 위치의 작물 개수값
@@ -87,11 +88,18 @@ function dash_cropCategory(req, res, next) {
 }
 
 function dashCropAdd(req, res, next) {
-	res.render('dash_Crop_add');
+  var parameters = {
+    "uid": 1234
+  }
+	DashDAO.select_crop(parameters).then((db_data)=> {
+    res.render('dash_Crop_add', {db_data});
+  })
 }
 
 function dashCropAddForm(req, res, next) {
-	res.render('dash_Crop_add_form');
+  DashDAO.select_cropCode().then((db_data)=> {
+    res.render('dash_Crop_add_form', {db_data});
+  })
 }
 
 function dashDCropAdd(req, res, next) {
