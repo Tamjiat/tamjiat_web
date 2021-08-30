@@ -40,7 +40,6 @@ function dash_cropWeekDate(req, res, next) {
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
-
 function dash_cropPercent(req, res, next) {
   var parameters = {
       "uid": req.body.uid ,
@@ -92,13 +91,27 @@ function dashCropAdd(req, res, next) {
     "uid": 1234
   }
 	DashDAO.select_crop(parameters).then((db_data)=> {
-    res.render('dash_Crop_add', {db_data});
+      res.render('dash_Crop_add', {db_data});
   })
 }
 
 function dashCropAddForm(req, res, next) {
   DashDAO.select_cropCode().then((db_data)=> {
-    res.render('dash_Crop_add_form', {db_data});
+    codeData = db_data
+    DashDAO.select_cropCategory().then((db_data)=> {
+      categoryData = db_data
+      res.render('dash_Crop_add_form',{codeData, categoryData});
+    })
+  })
+}
+
+function dashCropDetail(req, res, next) {
+  DashDAO.select_cropCode().then((db_data)=> {
+    codeData = db_data
+    DashDAO.select_cropCategory().then((db_data)=> {
+      categoryData = db_data
+      res.render('dash_Crop_add_detail',{codeData, categoryData});
+    })
   })
 }
 
@@ -108,6 +121,10 @@ function dashDCropAdd(req, res, next) {
 
 function dashDCropAddForm(req, res, next) {
 	res.render('dash_DCrop_add_form');
+}
+
+function dashDCropAddDetail(req, res, next) {
+	res.render('dash_DCrop_add_detail');
 }
 
 
@@ -125,10 +142,6 @@ function dashTalk(req, res, next) {
 
 function dashCropCulture(req, res, next) {
 	res.render('dash_crop_culture');
-}
-
-function dashCropCultureDetail(req, res, next) {
-	res.render('dash_Crop_culture_detail');
 }
 
 function dash_cropMulter(req, res, next) {
@@ -150,10 +163,11 @@ module.exports = {
     dash_cropMulter,
     dashCropAdd,
     dashCropAddForm,
+    dashCropDetail,
     dashDCropAdd,
     dashDCropAddForm,
+    dashDCropAddDetail,
     dashCropCulture,
-    dashCropCultureDetail,
     dashNotice,
     dashPest,
     dashTalk
