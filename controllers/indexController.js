@@ -49,11 +49,16 @@ function passport_auth(req, res, next) {
         failureFlash : true
     })
 }
+
+function test(req, res, next) {
+	res.render('test');
+}
 module.exports = {
     loginFail,
     loginSuccess,
     getIndex,
     passport_auth,
     cropNumber,
-    cropWeekDate
+    cropWeekDate,
+    test
 }

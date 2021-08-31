@@ -13,3 +13,6 @@
 2021-08-31 11:20:55 [ERROR] - DB error [cropCode]
  	SELECT * FROM cropCode
  	Error: Cannot enqueue Query after fatal error.
+2021-08-31 11:57:55 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous

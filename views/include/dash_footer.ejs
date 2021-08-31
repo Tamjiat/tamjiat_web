@@ -23,6 +23,7 @@
     <script src="../dash_assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="../dash_assets/vendors/progressbar.js/progressbar.min.js"></script>
   
+
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="../dash_assets/js/off-canvas.js"></script>
@@ -42,7 +43,9 @@
     
     <script>
       $(function(){
-        $("#datepicker").datepicker({ dateFormat: 'yyyy-mm-dd' }); // yyyy-mm-dd 형식으로 date타입 포멧
+        $("#datepicker").datepicker(); // yyyy-mm-dd 형식으로 date타입 포멧
+        $("#datepicker2").datepicker(); // yyyy-mm-dd 형식으로 date타입 포멧
+     
       });
     </script>
   </body>
