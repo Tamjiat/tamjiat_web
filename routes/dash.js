@@ -20,7 +20,7 @@ router.post('/cropMulter', upload.single('myFile'), dashController.dash_cropMult
 
 
 //웹
-router.get('/crop',dashController.dashCrop);
+router.get('/crop/:num',dashController.dashCrop);
 router.get('/cropAdd',dashController.dashCropAdd);
 router.get('/cropDetail',dashController.dashCropDetail);
 router.post('/cropInsert',dashController.dashinsertCrop);

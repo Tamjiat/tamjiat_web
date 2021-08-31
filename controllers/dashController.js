@@ -91,7 +91,7 @@ function dashCrop(req, res, next) {
     "uid": 1234
   }
 	DashDAO.select_crop(parameters).then((db_data)=> {
-      res.render('dash/Crop', {db_data});
+      res.render('dash/Crop', {db_data: db_data, c_num : req.params.num, max_value : 9});
   })
 }
 
@@ -122,7 +122,7 @@ function dashinsertCrop(req, res, next) {
     "cropsCultivar" : req.body.CropName,
     "categoryName" : req.body.CropcategoryName,
     "useCompost" : req.body.useCompost,
-    "location" : req.body.Croplocation,
+    "locate" : req.body.Croplocation,
     "cropsStart" : req.body.cropsStart,
     "cropsEnd" : req.body.cropsEnd,
     "goalYield" : req.body.goalYield,
