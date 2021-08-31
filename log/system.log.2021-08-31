@@ -13,7 +13,38 @@
 2021-08-31 11:20:55 [ERROR] - DB error [cropCode]
  	SELECT * FROM cropCode
  	Error: Cannot enqueue Query after fatal error.
+<<<<<<< Updated upstream
 2021-08-31 11:57:55 [ERROR] - DB error [userCrop]
+=======
+2021-08-31 11:55:26 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 11:56:34 [ERROR] - DB error [userCrop]
+>>>>>>> Stashed changes
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 13:37:05 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 13:37:06 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 13:44:52 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 13:45:02 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 14:15:57 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 14:15:59 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 14:43:55 [ERROR] - DB error [userCrop]
+ 	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
+ 	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
+2021-08-31 15:13:38 [ERROR] - DB error [userCrop]
  	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
  	Error: ER_NON_UNIQ_ERROR: Column 'cropsName' in field list is ambiguous
 2021-08-31 13:51:57 [ERROR] - DB error [userCrop]

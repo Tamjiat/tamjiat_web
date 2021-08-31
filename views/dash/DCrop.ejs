@@ -7,7 +7,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
           <div class="card" style = "margin: 50px 0 80px 0">
             <div class="card-body">
-              <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px; color: darkred;">피해 농작물 상태&nbsp;<i class="mdi mdi mdi-hospital"></i></h4>
+              <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px; color: darkred;">피해 농작물&nbsp;<i class="mdi mdi mdi-hospital"></i></h4>
               <p class="card-description" style = "margin: 0.8rem 0 0 0">
                 피해 농작물에 대한 상태와 해결책을 받아 보세요!
               </p>
@@ -15,7 +15,14 @@
                 <table class="table table-hover" style="text-align: center;">
                   <thead>
                     <tr>
-                      <th class="col-md-1">번호</th>
+                      <th class="col-md-1">
+                        <div class="form-check form-check-danger">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                           번호
+                          <i class="input-helper"></i></label>
+                        </div>
+                      </th>
                       <th class="col-md-2">종류</th>
                       <th class="col-md-3">농작물</th>
                       <th class="col-md-2">업로드 시간</th>
@@ -24,35 +31,70 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1</td>
+                      <td>
+                        <div class="form-check form-check-danger">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                           1
+                          <i class="input-helper"></i></label>
+                        </div>
+                      </td>
                       <td>곡류</td>
                       <td>벼</td>
                       <td>2021.08.27</td>
                       <td><label class="badge badge-danger">실패</label></td>
                     </tr>
                     <tr>
-                      <td>2</td>
+                      <td>
+                        <div class="form-check form-check-danger">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                           2
+                          <i class="input-helper"></i></label>
+                        </div>
+                      </td>
                       <td>콩류</td>
                       <td>강낭콩</td>
                       <td>2021.08.28</td>
                       <td><label class="badge badge-warning">진행중</label></td>
                     </tr>
                     <tr>
-                      <td>3</td>
+                      <td>
+                        <div class="form-check form-check-danger">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                           3
+                          <i class="input-helper"></i></label>
+                        </div>
+                      </td>
                       <td>채소</td>
                       <td>배추</td>
                       <td>2021.08.29</td>
                       <td><label class="badge badge-warning">진행중</label></td>
                     </tr>
                     <tr>
-                      <td>4</td>
+                      <td>
+                        <div class="form-check form-check-danger">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                           4
+                          <i class="input-helper"></i></label>
+                        </div>
+                      </td>
                       <td>채소</td>
                       <td>시금치</td>
                       <td>2021.08.30</td>
                       <td><label class="badge badge-success">완료</label></td>
                     </tr>
                     <tr>
-                      <td>5</td>
+                      <td>
+                        <div class="form-check form-check-danger">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                           5
+                          <i class="input-helper"></i></label>
+                        </div>
+                      </td>
                       <td>곡류</td>
                       <td>옥수수</td>
                       <td>2021.09.01</td>
@@ -60,10 +102,16 @@
                     </tr>
                   </tbody>
                 </table>
-                <button type="button" class="btn btn-inverse-danger btn-fw" style="float: right; margin: 25px 0 0 0">
-                  <i class="mdi mdi-hospital"></i>
-                  &nbsp;&nbsp;등록하기
-                </button>
+                <div style="float: right; margin: 25px 0 0 0">
+                  <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+                    <i class="mdi mdi-hospital"></i>                                                    
+                    &nbsp; 등록하기
+                  </button>
+                  <button type="button" class="btn btn-danger btn-icon-text"style="float: right; margin: 25px 20px 0 0;">
+                    <i class="mdi mdi-minus"></i>                                                    
+                    &nbsp; 삭제하기
+                  </button>
+                </div>
               </div>
             </div>
           </div>
