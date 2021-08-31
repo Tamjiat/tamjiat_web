@@ -42,32 +42,42 @@
                               </tr>
                             </thead>
                             <tbody>
+                              <% for(var i =(c_num - 1) * max_value; i < c_num * max_value; i++){ %>
+                                <% var data_value=db_data[i]; if(data_value===undefined){ continue; } %>
+                                <tr onclick="location.href='/dash/cropCulture/<%= data_value.cid %>'">
                               <tr>
                                 <td>
-                                    1
+                                  <%= data_value.cid %>
                                 </td>
                                 <td>
-                                  고추
+                                  <%= data_value.cropsName %>
                                 </td>
                                 <td>
-                                    벼
+                                  <%= data_value.cropsCultivar %>
                                 </td>
                                 <td>
                                   <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: <%= data_value.percent %>%" aria-valuenow="<%= data_value.percent %>" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                                 </td>
                                 <td>
-                                    2021.08.21
+                                    <%= data_value.cropsStart %>
                                 </td>
                                 <td> 
-                                    2021.09.21
+                                    <%= data_value.cropsEnd %>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
+                                    <% if (data_value.percent >= 100) {%>
+                                      <button type="button" class="btn btn-outline-warning btn-icon-text">
                                         <i class="ti-reload btn-icon-prepend"></i>                                                    
                                         수확 완료
-                                    </button>
+                                      </button>
+                                    <% } else { %>
+                                      <button type="button" class="btn btn-outline-warning btn-icon-text">
+                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
+                                        수확중
+                                      </button>
+                                    <% } %>
                                 </td>
                                 <td>
                                   <button type="button" class="btn btn-danger btn-icon-text">                                             
@@ -75,206 +85,28 @@
                                   </button>
                                 </td>
                               </tr>
-                              <tr>
-                                <td>
-                                  2
-                                </td>
-                                <td>
-                                  고추
-                                </td>
-                                <td>
-                                  강남콩
-                                </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td>
-                                    2021.08.22
-                                </td>
-                                <td>
-                                    2021.09.22
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
-                                        수확 완료
-                                    </button>
-                                </td>
-                                <td>
-                                  <button type="button" class="btn btn-danger btn-icon-text">                                             
-                                    취소하기
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  3
-                                </td>
-                                <td>
-                                  고추
-                                </td>
-                                <td>
-                                  양배추
-                                </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td>
-                                    2021.08.24
-                                </td>
-                                <td>
-                                    2021.09.24
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
-                                        수확 완료
-                                    </button>
-                                </td>
-                                <td>
-                                  <button type="button" class="btn btn-danger btn-icon-text">                                             
-                                    취소하기
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                    4
-                                </td>
-                                <td>
-                                  고추
-                                </td>
-                                <td>
-                                    감자
-                                </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td>
-                                    2021.08.27
-                                </td>
-                                <td>
-                                    2021.09.27
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
-                                        수확 완료
-                                    </button>
-                                </td>
-                                <td>
-                                  <button type="button" class="btn btn-danger btn-icon-text">                                             
-                                    취소하기
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  5
-                                </td>
-                                <td>
-                                  고추
-                                </td>
-                                <td>
-                                  딸기
-                                </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td>
-                                    2021.08.30
-                                </td>
-                                <td>
-                                    2021.09.30
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
-                                        수확 완료
-                                    </button>
-                                </td>
-                                <td>
-                                  <button type="button" class="btn btn-danger btn-icon-text">                                             
-                                    취소하기
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  6
-                                </td>
-                                <td>
-                                  고추
-                                </td>
-                                <td>
-                                    고구마
-                                </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td>
-                                    2021.09.01
-                                </td>
-                                <td>
-                                    2021.10.01
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
-                                        수확 완료
-                                    </button>
-                                </td>
-                                <td>
-                                  <button type="button" class="btn btn-danger btn-icon-text">                                             
-                                    취소하기
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  7
-                                </td>
-                                <td>
-                                  고추
-                                </td>
-                                <td>
-                                    녹두
-                                </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td>
-                                    2021.09.05
-                                </td>
-                                <td>
-                                    2021.10.05
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
-                                        수확 완료
-                                    </button>
-                                </td>
-                                <td>
-                                  <button type="button" class="btn btn-danger btn-icon-text">                                             
-                                    취소하기
-                                  </button>
-                                </td>
-                              </tr>
+                              <% } %>
                             </tbody>
                           </table>
+                          <nav>
+                            <ul class="pagination justify-content-center mt-5">
+                              <% if(c_num == 1) { %>
+                                  <li class="page-item"><a id="prev" class="page-link" style="color: black; display:none;" href="/dash/cropCulture/<%=Number(c_num)-1%>">">이전</a></li>
+                              <% } else if (c_num > 1) { %>
+                                  <li class="page-item"><a id="prev" class="page-link" style="color: black; display:block;" href="/dash/cropCulture/<%=Number(c_num)-1%>">이전</a></li>
+                              <% } %>
+                              <% for(var j = 1; j<= Math.ceil(db_data.length / max_value); j++){ %>
+                                <%if(j != c_num){%>
+                                  <li class="page-item"><a class="page-link" style="color: black;" href="/dash/cropCulture/<%= j %>"><%= j %></a>
+                                <%}else{%>
+                                  <li class="page-item"><a class="page-link" style="color: black; background-color: #c8c8c8;" href="/dash/cropCulture/<%= j %>"><%= j %></a>
+                                <%}%>
+                              <% } if(c_num == Math.ceil(db_data.length / max_value)) { %>
+                                  <li class="page-item"><a id="next" class="page-link" style="color: black; display:none;" href="/dash/cropCulture/<%=Number(c_num)+1%>">다음</a></li>
+                              <% } else if (c_num < Math.ceil(db_data.length / max_value)) { %>
+                                  <li class="page-item"><a id="next" class="page-link" style="color: black; display:block;" href="/dash/cropCulture/<%=Number(c_num)+1%>">다음</a></li>
+                              <% } %></ul>
+                          </nav>
                     </div>
                   </div>
                 </div>

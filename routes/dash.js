@@ -3,13 +3,8 @@ var router = express.Router();
 const upload = require('../middleware/multer');
 var dashController = require('../controllers/dashController')
 
-
-router.get('/',dashController.dash_main);
+//안드로이드-----------------------------------------
 router.post('/crop', dashController.dash_cropCategoryCount);
-
-
-
-//안드로이드
 router.post('/cropNum',dashController.dash_cropNumber);
 router.post('/cropWeek',dashController.dash_cropWeekDate);
 router.post('/cropPercent', dashController.dash_cropPercent);
@@ -19,19 +14,18 @@ router.post('/cropCategory', dashController.dash_cropCategory);
 router.post('/cropMulter', upload.single('myFile'), dashController.dash_cropMulter)
 
 
-//웹
+//웹------------------------------------------------
+router.get('/',dashController.dash_main);
 router.get('/crop/:num',dashController.dashCrop);
 router.get('/cropAdd',dashController.dashCropAdd);
 router.get('/cropDetail/:num',dashController.dashCropDetail);
 router.post('/cropInsert',dashController.dashinsertCrop);
 
-
 router.get('/dcrop',dashController.dashDCrop);
 router.get('/dcropAdd', dashController.dashDCropAdd);
 router.get('/dcropDetail',dashController.dashDCropDetail);
 
-
-router.get('/cropCulture', dashController.dashCropCulture);
+router.get('/cropCulture/:num', dashController.dashCropPercent);
 router.get('/pest',dashController.dashPest);
 router.get('/notice',dashController.dashNotice);
 router.get('/talk',dashController.dashTalk);
