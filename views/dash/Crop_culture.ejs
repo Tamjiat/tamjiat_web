@@ -27,10 +27,10 @@
                                 <th>
                                     진행률
                                 </th>
-                                <th class="col-md-2">
+                                <th class="col-md-1">
                                     농사 시작일
                                 </th>
-                                <th class="col-md-2">
+                                <th class="col-md-1">
                                     재배 예정일
                                 </th>
                                 <th class="col-md-1">
@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
                                   <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: <%= data_value.percent %>%" aria-valuenow="<%= data_value.percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: <%= data_value.percent %>%" aria-valuenow="<%= data_value.percent %>" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                                 </td>
                                 <td>
@@ -68,13 +68,13 @@
                                 </td>
                                 <td>
                                     <% if (data_value.percent >= 100) {%>
-                                      <button type="button" class="btn btn-outline-warning btn-icon-text">
+                                      <button type="button" class="btn btn-outline-primary btn-icon-text">
                                         <i class="ti-reload btn-icon-prepend"></i>                                                    
                                         수확 완료
                                       </button>
                                     <% } else { %>
                                       <button type="button" class="btn btn-outline-warning btn-icon-text">
-                                        <i class="ti-reload btn-icon-prepend"></i>                                                    
+                                        <i class="ti-alert btn-icon-prepend"></i>                                                    
                                         수확중
                                       </button>
                                     <% } %>
