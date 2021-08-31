@@ -4,3 +4,12 @@
 2021-08-31 00:37:53 [ERROR] - DB error [userCrop]
  	SELECT cid,c.cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop AS u JOIN cropCode AS c ON c.cropsNum =u.cropsNum and uid = 1234;
  	Error: Cannot enqueue Query after fatal error.
+2021-08-31 11:20:47 [ERROR] - DB error [cropCode]
+ 	SELECT * FROM cropCode
+ 	Error: ER_BAD_DB_ERROR: Unknown database 'tamjiat'
+2021-08-31 11:20:51 [ERROR] - DB error [cropCode]
+ 	SELECT * FROM cropCode
+ 	Error: Cannot enqueue Query after fatal error.
+2021-08-31 11:20:55 [ERROR] - DB error [cropCode]
+ 	SELECT * FROM cropCode
+ 	Error: Cannot enqueue Query after fatal error.
