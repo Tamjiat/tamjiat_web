@@ -19,6 +19,23 @@ function select_crop(parameters) {
         });
     })
 }
+function select_cropDetail(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT * FROM userCrop WHERE cid = '${parameters.cid}' and uid = '${parameters.uid}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT * FROM userCrop WHERE cid = '${parameters.cid}' and uid = '${parameters.uid}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+}
 
 function select_cropCode() {
   return new Promise(function (resolve, reject) {
@@ -58,7 +75,7 @@ function select_cropCategory() {
 
 function insert_crop(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropsCultivar}',
+        db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropCultivar}',
          locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
          currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}'`, function (error, db_data) {
             if (error) {
@@ -82,6 +99,7 @@ function insert_crop(parameters) {
 
 module.exports = {
   select_crop,
+  select_cropDetail,
   select_cropCode,
   insert_crop,
   select_cropCategory
