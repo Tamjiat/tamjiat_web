@@ -11,7 +11,7 @@ router.post('/cropPercent', dashController.dash_cropPercent);
 router.post('/cropDetail', dashController.dash_cropDetail);
 router.post('/cropCategory', dashController.dash_cropCategory);
 
-router.post('/cropMulter', upload.single('myFile'), dashController.dash_cropMulter)
+router.post('/cropMulter', upload.fields([{name:'myFile', maxCount:1}]), dashController.dash_cropMulter)
 
 
 //웹------------------------------------------------

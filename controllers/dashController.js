@@ -182,7 +182,10 @@ function dash_cropMulter(req, res, next) {
 	var parameters = {
     		"imagefile" : req.files
   	}
-  res.send('success')
+
+  var files = req.files
+  console.log(files.myFile[0])
+  res.send({"message": "success"})
 }
 
 

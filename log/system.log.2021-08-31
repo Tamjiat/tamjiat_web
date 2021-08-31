@@ -1,0 +1,57 @@
+2021-08-31 12:02:00 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:02:09 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'U.cropsNum' in 'on clause'
+2021-08-31 12:02:09 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'field list'
+2021-08-31 12:02:11 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:02:13 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'U.cropsNum' in 'on clause'
+2021-08-31 12:02:13 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'field list'
+2021-08-31 12:02:28 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'field list'
+2021-08-31 12:02:28 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'U.cropsNum' in 'on clause'
+2021-08-31 12:05:18 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:05:22 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'field list'
+2021-08-31 12:05:22 [ERROR] - DB error [usercrop]
+ 	SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '1835646018'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'U.cropsNum' in 'on clause'
+2021-08-31 12:07:22 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:10:16 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:11:25 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:13:03 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:13:35 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:19:40 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:20:50 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
+2021-08-31 12:26:19 [ERROR] - DB error [usercrop]
+ 	select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='1835646018' and uc.cropsNum = cc.cropsNum LIMIT 2
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'uc.cropsNum' in 'where clause'
