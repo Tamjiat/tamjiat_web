@@ -24,4 +24,5 @@ router.post('/total/cropNumber', indexController.cropNumber)
 router.post('/total/cropDateWeek', indexController.cropWeekDate)
 
 
+router.get('/test', indexController.test);
 module.exports = router
