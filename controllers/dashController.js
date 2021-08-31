@@ -106,11 +106,17 @@ function dashCropAdd(req, res, next) {
 }
 
 function dashCropDetail(req, res, next) {
+  var parameters = {
+    "cid" : req.params.num,
+    "uid" : 1234
+  }
   DashDAO.select_cropCode().then((db_data)=> {
     codeData = db_data
     DashDAO.select_cropCategory().then((db_data)=> {
       categoryData = db_data
-      res.render('dash/Crop_detail',{codeData, categoryData});
+      DashDAO.select_cropDetail(parameters).then((db_data)=> {
+        res.render('dash/Crop_detail',{codeData, categoryData, db_data});
+      })
     })
   })
 }

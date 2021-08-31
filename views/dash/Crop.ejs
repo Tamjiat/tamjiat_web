@@ -38,7 +38,7 @@
                     <tbody>
                       <% for(var i =(c_num - 1) * max_value; i < c_num * max_value; i++){ %>
                         <% var data_value=db_data[i]; if(data_value===undefined){ continue; } %>
-                       <tr>
+                        <tr onclick="location.href='/dash/cropDetail/<%= data_value.cid %>'">
                         <td>
                           <%= data_value.cid %>
                         </td>
