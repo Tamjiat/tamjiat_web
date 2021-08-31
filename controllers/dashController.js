@@ -13,11 +13,6 @@ function dash_cropCategoryCount(req, res, next) {
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
-//대쉬보드 메인페이지
-function dash_main(req, res, next) {
-	res.render('dash/main');
-}
-
 function dash_cropNumber(req, res, next) {
   var parameters = {
       "uid": req.body.uid //req.body.uid
@@ -85,6 +80,13 @@ function dash_cropCategory(req, res, next) {
     res.json(db_data)
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
+//---------------------------------웹 
+
+
+//대쉬보드 메인페이지
+function dash_main(req, res, next) {
+	res.render('dash/main');
+}
 
 function dashCrop(req, res, next) {
   var parameters = {
@@ -92,7 +94,7 @@ function dashCrop(req, res, next) {
   }
 	DashDAO.select_crop(parameters).then((db_data)=> {
       res.render('dash/Crop', {db_data: db_data, c_num : req.params.num, max_value : 9});
-  })
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashCropAdd(req, res, next) {
@@ -101,8 +103,8 @@ function dashCropAdd(req, res, next) {
     DashDAO.select_cropCategory().then((db_data)=> {
       categoryData = db_data
       res.render('dash/Crop_add',{codeData, categoryData});
-    })
-  })
+    }).catch(err=>res.send("<script>alert('err')</script>"));
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashCropDetail(req, res, next) {
@@ -116,9 +118,9 @@ function dashCropDetail(req, res, next) {
       categoryData = db_data
       DashDAO.select_cropDetail(parameters).then((db_data)=> {
         res.render('dash/Crop_detail',{codeData, categoryData, db_data});
-      })
-    })
-  })
+      }).catch(err=>res.send("<script>alert('err')</script>"));
+    }).catch(err=>res.send("<script>alert('err')</script>"));
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashinsertCrop(req, res, next) {
@@ -137,9 +139,16 @@ function dashinsertCrop(req, res, next) {
   }
     DashDAO.insert_crop(parameters).then((db_data)=> {
       res.redirect('/dash/crop')
-    })
+    }).catch(err=>res.send("<script>alert('err')</script>"));
 }
-
+function dashCropPercent(req, res, next) {
+  var parameters = {
+    "uid": 1234
+  }
+	DashDAO.select_cropPercent(parameters).then((db_data)=> {
+      res.render('dash/Crop_culture', {db_data: db_data , c_num : req.params.num, max_value : 5});
+  }).catch(err=>res.send("<script>alert('err')</script>"));
+}
 function dashDCrop(req, res, next) {
 	res.render('dash/DCrop');
 }
@@ -189,6 +198,7 @@ module.exports = {
     dashCrop,
     dashCropAdd,
     dashCropDetail,
+    dashCropPercent,
     dashinsertCrop,
     dashDCrop,
     dashDCropAdd,
