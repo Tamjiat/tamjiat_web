@@ -1,4 +1,4 @@
-<% include ./include/dash_header %>
+<% include ../include/dash_header %>
 
     <!-- partial -->
     <div class="main-panel">
@@ -11,22 +11,22 @@
                 <p class="card-description" style = "margin: 0.8rem 0 0 0">
                   새롭게 추가하고 싶은 농작물을 등록해주세요.
                 </p>
-                <form class="forms-sample" style="margin: 50px 0 0 0;">
+                <form class="forms-sample" style="margin: 50px 0 0 0;" action="/dash/cropInsert" method="POST">
                   <div class="form-group">
                     <label for="Cropkind">농작물 종류</label>
-                      <select class="form-select" aria-label="Default select example" id="Cropkind">
+                      <select class="form-select" aria-label="Default select example" id="Cropkind" name="Cropkind">
                         <% for (var i = 0; i < codeData.length; i++) { %>
                           <option><%= codeData[i].cropsName %></option>
                         <% } %>
                       </select>
                     </div>
                   <div class="form-group">
-                    <label for="CropName1">농작물 이름</label>
-                    <input type="text" class="form-control" id="CropName1" placeholder="ex) 금빛 토마토">
+                    <label for="CropName">농작물 이름</label>
+                    <input type="text" class="form-control" id="CropName" name="CropName" placeholder="ex) 금빛 토마토">
                   </div>
                   <div class="form-group">
                     <label for="CropcategoryName">농작물 재배 유형</label>
-                      <select class="form-select" aria-label="Default select example" id="CropcategoryName">
+                      <select class="form-select" aria-label="Default select example" id="CropcategoryName" name="CropcategoryName">
                         <% for (var i = 0; i < categoryData.length; i++) { %>
                           <option><%=categoryData[i].categoryName %></option>
                         <% } %>
@@ -34,37 +34,37 @@
                   </div>
                   <div class="form-group">
                     <label for="useCompost">비료</label>
-                    <input type="text" class="form-control" id="useCompost" placeholder="ex) 한국산 비료">
+                    <input type="text" class="form-control" id="useCompost" name="useCompost" placeholder="ex) 한국산 비료">
                   </div>
                   <div class="form-group">
                     <label for="Croplocation">농작물 위치</label>
-                    <input type="text" class="form-control" id="Croplocation" placeholder="ex) 충청남도 아산시 배방읍">
+                    <input type="text" class="form-control" id="Croplocation" name="Croplocation" placeholder="ex) 충청남도 아산시 배방읍">
                   </div>
                   <div class="form-group row">
                     <div class="col">
                       <label for="Sowing2">파종 시기</label>
-                      <input type="text" class="form-control" id="datepicker" placeholder="ex) 2021-08-01">
+                      <input type="text" class="form-control" id="datepicker" name="cropsStart" placeholder="ex) 2021-08-01">
                     </div>
                     <div class="col">
                       <label for="Sowing2">재배 예정 시기</label>
-                      <input type="text" class="form-control" id="datepicker2" placeholder="ex) 2021-09-01">
+                      <input type="text" class="form-control" id="datepicker2" name="cropsEnd"placeholder="ex) 2021-09-01">
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col">
                       <label for="goalYield">예상 수확량</label>
-                      <input type="text" class="form-control" id="goalYield" placeholder="ex) 2500">
+                      <input type="text" class="form-control" id="goalYield" name="goalYield" placeholder="ex) 2500">
                     </div>
                     <div class="col">
                       <label for="currentYield">현재 수확량</label>
-                      <input type="text" class="form-control" id="currentYield" placeholder="ex) 3200">
+                      <input type="text" class="form-control" id="currentYield" name="currentYield" placeholder="ex) 3200">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="cropmemo">메모</label>
-                    <textarea class="form-control" id="cropmemo" rows="3" style="height: 150px;"></textarea>
+                    <textarea class="form-control" id="cropmemo" name="cropmemo"rows="3" style="height: 150px;"></textarea>
                   </div>
-                  <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+                  <button type="submit" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
                     <i class="mdi mdi-plus"></i>                                                    
                     &nbsp; 등록하기
                   </button>
@@ -80,4 +80,4 @@
 
 
 
-<% include ./include/dash_footer %>
+<% include ../include/dash_footer %>

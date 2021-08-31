@@ -15,7 +15,7 @@ function dash_cropCategoryCount(req, res, next) {
 
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
-	res.render('dash_main');
+	res.render('dash/main');
 }
 
 function dash_cropNumber(req, res, next) {
@@ -86,21 +86,21 @@ function dash_cropCategory(req, res, next) {
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
-function dashCropAdd(req, res, next) {
+function dashCrop(req, res, next) {
   var parameters = {
     "uid": 1234
   }
 	DashDAO.select_crop(parameters).then((db_data)=> {
-      res.render('dash_Crop_add', {db_data});
+      res.render('dash/Crop', {db_data});
   })
 }
 
-function dashCropAddForm(req, res, next) {
+function dashCropAdd(req, res, next) {
   DashDAO.select_cropCode().then((db_data)=> {
     codeData = db_data
     DashDAO.select_cropCategory().then((db_data)=> {
       categoryData = db_data
-      res.render('dash_Crop_add_form',{codeData, categoryData});
+      res.render('dash/Crop_add',{codeData, categoryData});
     })
   })
 }
@@ -110,38 +110,57 @@ function dashCropDetail(req, res, next) {
     codeData = db_data
     DashDAO.select_cropCategory().then((db_data)=> {
       categoryData = db_data
-      res.render('dash_Crop_add_detail',{codeData, categoryData});
+      res.render('dash/Crop_detail',{codeData, categoryData});
     })
   })
 }
 
+function dashinsertCrop(req, res, next) {
+  parameters ={
+    "cropsName": req.body.Cropkind,
+    "uid" : 1234,
+    "cropsCultivar" : req.body.CropName,
+    "categoryName" : req.body.CropcategoryName,
+    "useCompost" : req.body.useCompost,
+    "location" : req.body.Croplocation,
+    "cropsStart" : req.body.cropsStart,
+    "cropsEnd" : req.body.cropsEnd,
+    "goalYield" : req.body.goalYield,
+    "currentYield" : req.body.currentYield,
+    "cropsMemo" : req.body.cropmemo
+  }
+    DashDAO.insert_crop(parameters).then((db_data)=> {
+      res.redirect('/dash/crop')
+    })
+}
+
+function dashDCrop(req, res, next) {
+	res.render('dash/DCrop');
+}
+
 function dashDCropAdd(req, res, next) {
-	res.render('dash_DCrop_add');
+	res.render('dash/DCrop_add');
 }
 
-function dashDCropAddForm(req, res, next) {
-	res.render('dash_DCrop_add_form');
-}
-
-function dashDCropAddDetail(req, res, next) {
-	res.render('dash_DCrop_add_detail');
+function dashDCropDetail(req, res, next) {
+	res.render('dash/DCrop_detail');
 }
 
 
 function dashPest(req, res, next) {
-	res.render('dash_Pest');
+	res.render('dash/Pest');
 }
 
 function dashNotice(req, res, next) {
-	res.render('dash_notice');
+	res.render('dash/notice');
 }
 
 function dashTalk(req, res, next) {
-	res.render('dash_talk');
+	res.render('dash/talk');
 }
 
 function dashCropCulture(req, res, next) {
-	res.render('dash_crop_culture');
+	res.render('dash/Crop_culture');
 }
 
 function dash_cropMulter(req, res, next) {
@@ -161,12 +180,13 @@ module.exports = {
     dash_cropDetail,
     dash_cropCategory,
     dash_cropMulter,
+    dashCrop,
     dashCropAdd,
-    dashCropAddForm,
     dashCropDetail,
+    dashinsertCrop,
+    dashDCrop,
     dashDCropAdd,
-    dashDCropAddForm,
-    dashDCropAddDetail,
+    dashDCropDetail,
     dashCropCulture,
     dashNotice,
     dashPest,
