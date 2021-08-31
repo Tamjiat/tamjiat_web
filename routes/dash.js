@@ -20,12 +20,17 @@ router.post('/cropMulter', upload.single('myFile'), dashController.dash_cropMult
 
 
 //웹
-router.get('/crop',dashController.dashCropAdd);
-router.get('/cropAdd',dashController.dashCropAddForm);
-router.get('/cropDetail',dashController.dashCropDetail);
-router.get('/dcrop',dashController.dashDCropAdd);
-router.get('/dcropAdd', dashController.dashDCropAddForm);
-router.get('/dcropDetail',dashController.dashDCropAddDetail);
+router.get('/crop/:num',dashController.dashCrop);
+router.get('/cropAdd',dashController.dashCropAdd);
+router.get('/cropDetail/:num',dashController.dashCropDetail);
+router.post('/cropInsert',dashController.dashinsertCrop);
+
+
+router.get('/dcrop',dashController.dashDCrop);
+router.get('/dcropAdd', dashController.dashDCropAdd);
+router.get('/dcropDetail',dashController.dashDCropDetail);
+
+
 router.get('/cropCulture', dashController.dashCropCulture);
 router.get('/pest',dashController.dashPest);
 router.get('/notice',dashController.dashNotice);

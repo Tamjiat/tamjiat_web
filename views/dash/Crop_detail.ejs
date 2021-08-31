@@ -1,4 +1,4 @@
-<% include ./include/dash_header %>
+<% include ../include/dash_header %>
 
 
     <!-- partial -->
@@ -17,7 +17,7 @@
                         <div class="card-body">
                           <h3 class="card-title">농작물 종류</h3>
                           <ul class="list-star" style="font-size: 20px;">
-                            <li>고추</li>
+                            <li><%= db_data[0].cropsName%></li>
                           </ul>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         <div class="card-body">
                           <h3 class="card-title">농작물 이름</h3>
                           <ul class="list-star" style="font-size: 20px;">
-                            <li>햇고추</li>
+                            <li><%= db_data[0].cropsCultivar%></li>
                           </ul>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 농작물 재배 유형
                             </p>
                              <ul class="list-ticked">
-                               <li>고랭지</li>
+                               <li><%= db_data[0].categoryName%></li>
                              </ul>
                           </div>
                           <div class="col">
@@ -47,7 +47,7 @@
                                 농작물 위치
                             </p>
                              <ul class="list-ticked">
-                               <li>충청남도 아산시 배방읍</li>
+                               <li><%= db_data[0].locate%></li>
                              </ul>
                           </div>
                           <div class="col">
@@ -55,7 +55,7 @@
                                 비료
                             </p>
                              <ul class="list-ticked">
-                               <li>한국산 비료</li>
+                               <li><%= db_data[0].useCompost%></li>
                              </ul>
                           </div>
                       </div>
@@ -66,7 +66,7 @@
                                 파종시기
                             </p>
                              <ul class="list-ticked">
-                               <li>2021-08-31</li>
+                               <li><%= db_data[0].cropsStart%></li>
                              </ul>
                           </div>
                           <div class="col">
@@ -74,7 +74,7 @@
                                 재배예정시기
                             </p>
                              <ul class="list-ticked">
-                               <li>2021-09-31</li>
+                               <li><%= db_data[0].cropsEnd%></li>
                              </ul>
                           </div>
                           <div class="col">
@@ -82,7 +82,7 @@
                                 예상 수확량
                             </p>
                              <ul class="list-ticked">
-                               <li>2500</li>
+                               <li><%= db_data[0].goalYield%></li>
                              </ul>
                           </div>
                           <div class="col">
@@ -90,7 +90,7 @@
                                 현재 수확량
                             </p>
                              <ul class="list-ticked">
-                               <li>2100</li>
+                               <li><%= db_data[0].currentYield%></li>
                              </ul>
                           </div>
                       </div>
@@ -100,10 +100,10 @@
                     <div class="card-body">
                       <h4 class="card-title">Memo</h4>
                       <hr class="my-4">
-                      <P>규환이 바보!</P>
+                      <P><%= db_data[0].cropsMemo%>!</P>
                     </div>
                 </div>
-                    <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+                    <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;" onclick="location.href='/dash/crop/1'">
                         <i class="mdi mdi-checkbox-marked-circle-outline"></i>                                                    
                         &nbsp; 확인
                     </button>
@@ -113,4 +113,4 @@
             </div>
         </div>
 
-<% include ./include/dash_footer %>
+<% include ../include/dash_footer %>
