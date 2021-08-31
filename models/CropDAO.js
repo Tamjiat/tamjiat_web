@@ -22,11 +22,11 @@ function select_cropCategoryCount(parameters) {
 
 function select_recentDateWeek(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='${parameters.uid}' and uc.cropsNum = cc.cropsNum LIMIT 2`, function (error, db_data) {
+        db.query(`select if(cropsStart is NULL, "startDate", cropsStart) AS startDate, cropsName, TIMESTAMPDIFF(WEEK, cropsStart, NOW()) AS "month" FROM userCrop WHERE cropsStart >= date_add(now(), interval -1 MONTH) and uid='${parameters.uid}' LIMIT 2`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [usercrop]"+
-                    "\n \t" +`select if(uc.cropsStart is NULL, "startDate", uc.cropsStart) AS startDate, cc.cropsName AS cropName, TIMESTAMPDIFF(WEEK, uc.cropsStart, NOW()) AS "month" FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsStart >= date_add(now(), interval -1 MONTH) and uc.uid='${parameters.uid}' and uc.cropsNum = cc.cropsNum LIMIT 2` +
+                    "\n \t" +`select if(cropsStart is NULL, "startDate", cropsStart) AS startDate, cropsName, TIMESTAMPDIFF(WEEK, cropsStart, NOW()) AS "month" FROM userCrop WHERE cropsStart >= date_add(now(), interval -1 MONTH) and uid='${parameters.uid}' LIMIT 2` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -44,7 +44,7 @@ function select_totalCropnumber(parameters) {
             if (error) {
                 logger.error(
                     "DB error [usercrop]"+
-                    "\n \t" + `SELECT if(uid IS NULL, "총개수", uid) AS 회원번호, COUNT(uid) AS 개수 FROM userCrop WHERE uid = '${parameters.uid}'` +
+                    "\n \t" + `SELECT uid AS userID, COUNT(uid) AS totalNum FROM userCrop WHERE uid = '${parameters.uid}'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -75,11 +75,11 @@ function select_cropPercent(parameters) {
 
 function select_cropDetail(parameters) {
     return new Promise(function (resolve, reject) {
-         db.query(`SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '${parameters.uid}'`, function (error, db_data) {
+         db.query(`SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsName =U.cropsName WHERE uid = '${parameters.uid}'`, function (error, db_data) {
              if (error) {
                     logger.error(
                         "DB error [usercrop]"+
-                        "\n \t" + `SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '${parameters.uid}'` +
+                        "\n \t" + `SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsName =U.cropsName WHERE uid = '${parameters.uid}'` +
                         "\n \t" + error);
                     reject('DB ERR');
                     //throw error;
@@ -93,11 +93,11 @@ function select_cropDetail(parameters) {
 
  function select_cropCategory(parameters) {
     return new Promise(function (resolve, reject) {
-         db.query(`SELECT uc.cropsNum, cc.cropsName FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsNum = cc.cropsNum AND uc.uid = '${parameters.uid}' GROUP BY uc.cropsNum;`, function (error, db_data) {
+         db.query(`SELECT cc.cropsNum, uc.cropsName FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsName = cc.cropsName AND uc.uid = '${parameters.uid}' GROUP BY cc.cropsNum;`, function (error, db_data) {
              if (error) {
                     logger.error(
                         "DB error [usercrop]"+
-                        "\n \t" + `SELECT C.cropsNum, C.cropsName, cropsCultivar, locate , cropsStart FROM userCrop as U JOIN cropCode as C ON C.cropsNum =U.cropsNum WHERE uid = '${parameters.uid}'` +
+                        "\n \t" + `SELECT cc.cropsNum, uc.cropsName FROM userCrop AS uc, cropCode AS cc WHERE uc.cropsName = cc.cropsName AND uc.uid = '${parameters.uid}' GROUP BY cc.cropsNum;` +
                         "\n \t" + error);
                     reject('DB ERR');
                     //throw error;
