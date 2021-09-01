@@ -86,7 +86,6 @@ function dash_cropCategory(req, res, next) {
 
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
-  
   console.log(req.session.userName);
   res.render('dash/main',{ username : req.session.userName});
 }
@@ -234,6 +233,53 @@ function dash_cropMulter(req, res, next) {
 }
 
 
+function dashHeader(req, res, next){
+  var avgPercent = 0
+  var nearHavestDate = ""
+  var totalYieldPercent = ""
+  var totalDiseaseCount = 0
+  var damagedCropsCount = 0
+  var parameters = {
+    "userid": req.session.userid,
+    "cropsName" : req.body.cropsName
+  }
+
+  DashDAO.select_totalGrowPercent(parameters).then(function(db_data){
+    var totalPercent = 0
+    //선택 농작물 총 성장률 구하기
+    db_data.forEach(element => {
+      totalPercent += element.percent;
+    });
+    avgPercent = Math.round((totalPercent / db_data.length) * 100) / 100
+
+    //가장 가까운 작물 수확예정일
+    DashDAO.select_nearHarvestDate(parameters).then(function(db_data){
+      nearHavestDate = db_data[0].cropsEnd;
+      
+      //작물별 총 수확 진행률
+      DashDAO.select_totalYieldPercent(parameters).then(function(db_data){
+        totalYieldPercent = db_data[0].avgYield;
+
+        //작물별 병 해충 발행건수 및 피해 농작물 종 개수
+        DashDAO.select_countDisease_totalCrops(parameters).then(function(db_data){
+          totalDiseaseCount = db_data[db_data.length-1].result
+          damagedCropsCount = db_data.length -1
+        })
+      })
+    })
+  })
+
+  var headerInfo = {
+    "avgPercent" : avgPercent,
+    "nearHavestDate" : nearHavestDate,
+    "totalYieldPercent" : totalYieldPercent,
+    "totalDiseaseCount" : totalDiseaseCount,
+    "damagedCropsCount" : damagedCropsCount
+  }
+  res.send({"result" : headerInfo})
+}
+
+
 module.exports = {
     dash_cropCategoryCount,
     dash_main,
@@ -257,5 +303,6 @@ module.exports = {
     dashNoticeDetail,
     dashNoticeInsert,
     dashPest,
-    dashTalk
+    dashTalk,
+    dashHeader
 }

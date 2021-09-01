@@ -190,7 +190,7 @@ function insert_crop(parameters) {
         });
     })
   }
-  function select_notice() {
+  function select_notice(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT * FROM notice`, function (error, db_data) {
             if (error) {
@@ -207,6 +207,79 @@ function insert_crop(parameters) {
         });
     })
   }
+
+  function select_totalGrowPercent(parameters){
+    return new Promise(function(resolve, reject){
+        db.query(`SELECT ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100, 2) AS percent  FROM userCrop WHERE uid = '${parameters.userid}' and cropsName = '${parameters.cropsName}'`, function(error, db_data){
+            if (error) {
+                logger.error(
+                    "DB error [totalGrowPercent]"+
+                    "\n \t" + `SELECT ROUND(((TIMESTAMPDIFF(day, cropsStart, NOW())) / (TIMESTAMPDIFF(day, cropsStart, cropsEnd))) * 100, 2) AS percent  FROM userCrop WHERE uid = '${parameters.userid}' and cropsName = '${parameters.cropsName}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    });
+  }
+
+  function select_nearHarvestDate(parameters){
+    return new Promise(function(resolve, reject){
+        db.query(`SELECT cropsEnd FROM userCrop WHERE NOW() <= cropsEnd AND uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" ORDER BY cropsEnd ASC LIMIT 1`, function(error, db_data){
+            if (error) {
+                logger.error(
+                    "DB error [nearHarvestDate]"+
+                    "\n \t" + `SELECT cropsEnd FROM userCrop WHERE NOW() <= cropsEnd AND uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" ORDER BY cropsEnd ASC LIMIT 1` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        })
+    })
+  }
+  
+  function select_totalYieldPercent(parameters){
+      return new Promise(function(resolve, reject){
+          db.query(`SELECT ROUND(AVG(((goalYield - currentYield) / goalYield) *100),2) AS avgYield FROM userCrop WHERE uid = "${parameters.userid}" AND cropsName = "${parameters.cropsName}"`, function(error, db_data){
+            if (error) {
+                logger.error(
+                    "DB error [totalYieldPercent]"+
+                    "\n \t" + `SELECT ROUND(AVG(((goalYield - currentYield) / goalYield) *100),2) AS avgYield FROM userCrop WHERE uid = "${parameters.userid}" AND cropsName = "${parameters.cropsName}"` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+          });
+      });
+  }
+
+  function select_countDisease_totalCrops(parameters){
+      return new Promise(function(resolve, reject){
+          db.query(`SELECT COUNT(*) AS result FROM userCropDisease WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cdOccurDate GROUP BY cropsCultivar WITH rollup`, function(error, db_data){
+            if (error) {
+                logger.error(
+                    "DB error [countDisease_totalCrops]"+
+                    "\n \t" + `SELECT COUNT(*) AS result FROM userCropDisease WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cdOccurDate GROUP BY cropsCultivar WITH rollup` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+          });
+      });
+  }
+
 module.exports = {
   select_crop,
   select_cropDetail,
@@ -218,5 +291,9 @@ module.exports = {
   select_cropPercent,
   select_dcrop,
   select_dcropDetail,
-  select_notice
+  select_notice,
+  select_totalGrowPercent,
+  select_nearHarvestDate,
+  select_totalYieldPercent,
+  select_countDisease_totalCrops
 }
