@@ -190,7 +190,23 @@ function insert_crop(parameters) {
         });
     })
   }
-
+  function select_notice() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT * FROM notice`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [notice]"+
+                    "\n \t" + `SELECT * FROM notice` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
 module.exports = {
   select_crop,
   select_cropDetail,
@@ -201,5 +217,6 @@ module.exports = {
   select_cropCategory,
   select_cropPercent,
   select_dcrop,
-  select_dcropDetail
+  select_dcropDetail,
+  select_notice
 }

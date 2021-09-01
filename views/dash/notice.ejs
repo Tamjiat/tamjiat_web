@@ -21,55 +21,44 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="text-primary">[ 공지 ]</td>
-                      <td>탐지앗이 새롭게 출시 했습니다!!</td>
-                      <td>운영자</td>
-                      <td>2021-08-31</td>
+                    <% for(var i =(n_num - 1) * max_value; i < n_num * max_value; i++){ %>
+                      <% var data_value=db_data[i]; if(data_value===undefined){ continue; } %>
+                      <tr onclick="location.href='/dash/noticedetail/<%= data_value.nid %>'">
+                      <td>
+                        [ 공지 ]
+                      </td>
+                      <td>
+                        <%= data_value.nTitle %>
+                      </td>
+                      <td>
+                        <%= data_value.nWriter %>
+                      </td>
+                      <td>
+                        <%= data_value.nDate %>
+                      </td>
                     </tr>
-                    <tr>
-                        <td>[ 공지 ]</td>
-                        <td>탐지앗이 새롭게 출시 했습니다!!</td>
-                        <td>운영자</td>
-                        <td>2021-08-31</td>
-                    </tr>
-                    <tr>
-                        <td>[ 공지 ]</td>
-                        <td>탐지앗이 새롭게 출시 했습니다!!</td>
-                        <td>운영자</td>
-                        <td>2021-08-31</td>
-                    </tr>
-                    <tr>
-                        <td>[ 공지 ]</td>
-                        <td>탐지앗이 새롭게 출시 했습니다!!</td>
-                        <td>운영자</td>
-                        <td>2021-08-31</td>
-                    </tr>
-                    <tr>
-                        <td>[ 공지 ]</td>
-                        <td>탐지앗이 새롭게 출시 했습니다!!</td>
-                        <td>운영자</td>
-                        <td>2021-08-31</td>
-                    </tr>
+                    <% } %>
                   </tbody>
                 </table>
-                <nav aria-label="Page navigation example" style="margin:30px 0 30px 0">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
+                <nav>
+                  <ul class="pagination justify-content-center mt-5">
+                    <% if(n_num == 1) { %>
+                        <li class="page-item"><a id="prev" class="page-link" style="color: black; display:none;" href="/dash/notice/<%=Number(n_num)-1%>">">이전</a></li>
+                    <% } else if (n_num > 1) { %>
+                        <li class="page-item"><a id="prev" class="page-link" style="color: black; display:block;" href="/dash/notice/<%=Number(n_num)-1%>">이전</a></li>
+                    <% } %>
+                    <% for(var j = 1; j<= Math.ceil(db_data.length / max_value); j++){ %>
+                      <%if(j != n_num){%>
+                        <li class="page-item"><a class="page-link" style="color: black;" href="/dash/notice/<%= j %>"><%= j %></a>
+                      <%}else{%>
+                        <li class="page-item"><a class="page-link" style="color: black; background-color: #c8c8c8;" href="/dash/notice/<%= j %>"><%= j %></a>
+                      <%}%>
+                    <% } if(n_num == Math.ceil(db_data.length / max_value)) { %>
+                        <li class="page-item"><a id="next" class="page-link" style="color: black; display:none;" href="/dash/notice/<%=Number(n_num)+1%>">다음</a></li>
+                    <% } else if (n_num < Math.ceil(db_data.length / max_value)) { %>
+                        <li class="page-item"><a id="next" class="page-link" style="color: black; display:block;" href="/dash/notice/<%=Number(n_num)+1%>">다음</a></li>
+                    <% } %></ul>
+                </nav>
                   <button type="button" class="btn btn-success btn-icon-text"style="float: right;">
                     <i class="mdi mdi-library-plus"></i>                                                    
                     &nbsp; 게시글 등록하기

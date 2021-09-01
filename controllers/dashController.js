@@ -2,6 +2,7 @@ var express = require('express');
 var CropDAO = require('../models/CropDAO');
 var DashDAO = require('../models/DashDAO');
 var weather = require('../models/weather');
+var dayjs =  require('dayjs')
 
 //파라미터값에 해당하는 위치의 작물 개수값
 function dash_cropCategoryCount(req, res, next) {
@@ -85,7 +86,9 @@ function dash_cropCategory(req, res, next) {
 
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
-	res.render('dash/main');
+  
+  console.log(req.session.userName);
+  res.render('dash/main',{ username : req.session.userName});
 }
 
 function dashCrop(req, res, next) {
@@ -154,7 +157,7 @@ function dashDCrop(req, res, next) {
     "uid":1234
   }
   DashDAO.select_dcrop(parameters).then((db_data)=>{
-    res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 });
+    res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 , dayjs});
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
@@ -164,7 +167,6 @@ function dashDCropAdd(req, res, next) {
       res.render('dash/DCrop_add',{codeData});
     }).catch(err=>res.send("<script>alert('err')</script>"));
 }
-
 
 function dashinsertDCrop(req, res, next) {
   parameters ={
@@ -195,12 +197,22 @@ function dashDCropDetail(req, res, next) {
 
 function dashPest(req, res, next) {
   DashDAO.select_cropDisease().then((db_data)=> {
-    res.render('dash/Pest', {db_data, p_num : req.params.num, max_value : 7});
+    res.render('dash/Pest', {db_data, p_num : req.params.num, max_value : 7, dayjs, username : req.session.userName});
   })
 }
 
 function dashNotice(req, res, next) {
-	res.render('dash/notice');
+  DashDAO.select_notice().then((db_data)=> {
+    res.render('dash/notice',{db_data, n_num : req.params.num , max_value : 7, username : req.session.userName});
+  })
+}
+
+function dashNoticeDetail(req, res, next) {
+	res.render('dash/notice_detail',{username : req.session.userName});
+}
+
+function dashNoticeInsert(req, res, next) {
+	res.render('dash/notice_write',{username : req.session.userName});
 }
 
 function dashTalk(req, res, next) {
@@ -242,6 +254,8 @@ module.exports = {
     dashinsertDCrop,
     dashCropCulture,
     dashNotice,
+    dashNoticeDetail,
+    dashNoticeInsert,
     dashPest,
     dashTalk
 }
