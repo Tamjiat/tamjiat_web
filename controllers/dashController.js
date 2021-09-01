@@ -173,7 +173,8 @@ function dashinsertDCrop(req, res, next) {
     "cropsCultivar" : req.body.CropName,
     "cropsImage" : req.files.attachments[0].filename,
     "cropsMemo" : req.body.cropmemo,
-    "AICheck": "진행중"
+    "AICheck": "진행중",
+    "cdName": "검사중"
   }
     DashDAO.insert_dcrop(parameters).then((db_data)=> {
       res.redirect('/dash/dcrop/1')
@@ -193,7 +194,9 @@ function dashDCropDetail(req, res, next) {
 
 
 function dashPest(req, res, next) {
-	res.render('dash/Pest');
+  DashDAO.select_cropDisease().then((db_data)=> {
+    res.render('dash/Pest', {db_data, p_num : req.params.num, max_value : 7});
+  })
 }
 
 function dashNotice(req, res, next) {

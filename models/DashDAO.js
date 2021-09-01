@@ -156,12 +156,30 @@ function insert_crop(parameters) {
   function insert_dcrop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
-          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}'`, function (error, db_data) {
+          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]"+
                     "\n \t" + `INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
-                    , cropsImage = '${parameters.cropsImage}', cropsDate=NOW(),cropsMemo = '${parameters.cropsMemo}'` +
+                    cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
+
+  function select_cropDisease() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT * FROM userCropDisease`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCropDisease]"+
+                    "\n \t" + `SELECT * FROM userCropDisease` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -177,6 +195,7 @@ module.exports = {
   select_crop,
   select_cropDetail,
   select_cropCode,
+  select_cropDisease,
   insert_crop,
   insert_dcrop,
   select_cropCategory,

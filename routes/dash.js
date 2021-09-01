@@ -27,7 +27,7 @@ router.get('/dcropDetail/:num',dashController.dashDCropDetail);
 router.post('/dcropInsert',upload.fields([{name:'attachments', maxCount:1}]), dashController.dashinsertDCrop);
 
 router.get('/cropCulture/:num', dashController.dashCropPercent);
-router.get('/pest',dashController.dashPest);
+router.get('/pest/:num',dashController.dashPest);
 router.get('/notice',dashController.dashNotice);
 router.get('/talk',dashController.dashTalk);
 

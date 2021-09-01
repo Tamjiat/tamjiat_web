@@ -16,7 +16,7 @@
                   <div class="card-body">
                     <h3 class="card-title">농작물 종류</h3>
                     <ul class="list-star" style="font-size: 20px;">
-                      <li><%= db_data[0].cropsName %></li>
+                      <li><%= db_data[0].cropsName%></li>
                     </ul>
                   </div>
               </div>
@@ -41,52 +41,10 @@
                     </div>
                 </div>
                 <div class="card" style="width: 500px; margin: 0 auto;">
-                  <div class="card-body">
-                    <h4 class="card-title">Headings with secondary text</h4>
-                    <p class="card-description">
-                      Add faded secondary text to headings
-                    </p>
-                    <div class="template-demo">
-                      <h1>
-                        h1. Heading
-                        <small class="text-muted">
-                          Secondary text
-                        </small>
-                      </h1>
-                      <h2>
-                        h2. Heading
-                        <small class="text-muted">
-                          Secondary text
-                        </small>
-                      </h2>
-                      <h3>
-                        h3. Heading
-                        <small class="text-muted">
-                          Secondary text
-                        </small>
-                      </h3>
-                      <h4>
-                        h4. Heading
-                        <small class="text-muted">
-                          Secondary text
-                        </small>
-                      </h4>
-                      <h5>
-                        h5. Heading
-                        <small class="text-muted">
-                          Secondary text
-                        </small>
-                      </h5>
-                      <h6>
-                        h6. Heading
-                        <small class="text-muted">
-                          Secondary text
-                        </small>
-                      </h6>
-                    </div>
-                  </div>
+                  <img src="/<%= db_data[0].cropsImage %>" alt="No Images">
                 </div>
-                <% if (!db_data[0].cdName) { %>
+                </div>
+                <% if (db_data[0].cdName != "진행중") { %>
                 <div class="row" style="margin: 50px 0 0 0;">
                     <hr class="my-4">
                     <div class="col">
@@ -102,7 +60,7 @@
                     </div>
                     </div>
                 </div>
-                <% } %>
+              <% } %>
               </div>
           </div>
           <div class="card" style = "margin: 30px 0 0 0;">
