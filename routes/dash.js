@@ -21,9 +21,10 @@ router.get('/cropAdd',dashController.dashCropAdd);
 router.get('/cropDetail/:num',dashController.dashCropDetail);
 router.post('/cropInsert',dashController.dashinsertCrop);
 
-router.get('/dcrop',dashController.dashDCrop);
+router.get('/dcrop/:num',dashController.dashDCrop);
 router.get('/dcropAdd', dashController.dashDCropAdd);
-router.get('/dcropDetail',dashController.dashDCropDetail);
+router.get('/dcropDetail/:num',dashController.dashDCropDetail);
+router.post('/dcropInsert',upload.fields([{name:'attachments', maxCount:1}]), dashController.dashinsertDCrop);
 
 router.get('/cropCulture/:num', dashController.dashCropPercent);
 router.get('/pest',dashController.dashPest);

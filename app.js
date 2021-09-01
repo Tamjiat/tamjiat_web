@@ -13,7 +13,8 @@ var dashRouter = require('./routes/dash');
 var aiFlask =require('./routes/aiFlask');
 
 var mysql = require('mysql');
-const passport = require('passport')
+const passport = require('passport');
+const morgan = require('morgan');
 
 var app = express();
 

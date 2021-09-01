@@ -38,7 +38,7 @@ function getIndex(req, res, next) {
         res.render('index',{username : token});
     }
     else {
-        res.render('index',{username : token})
+        res.render('index',{username : req.session.userName})
     }
 }
 
