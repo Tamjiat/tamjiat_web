@@ -16,7 +16,7 @@
                   <div class="card-body">
                     <h3 class="card-title">농작물 종류</h3>
                     <ul class="list-star" style="font-size: 20px;">
-                      <li>고추</li>
+                      <li><%= db_data[0].cropsName %></li>
                     </ul>
                   </div>
               </div>
@@ -24,7 +24,7 @@
                   <div class="card-body">
                     <h3 class="card-title">농작물 이름</h3>
                     <ul class="list-star" style="font-size: 20px;">
-                      <li>햇고추</li>
+                      <li><%= db_data[0].cropsCultivar %></li>
                     </ul>
                   </div>
               </div>
@@ -36,7 +36,7 @@
                   <div class="col">
                       <p class="card-description">
                           발생 현황 : <label class="badge badge-warning">2021-09-01</label></h4><br><br>
-                          진단 결과 : <label class="badge badge-success">완료</label></h4>
+                          진단 결과 : <label class="badge badge-success"><%= db_data[0].AICheck%></label></h4>
                       </p>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                           병명
                       </p>
                        <ul class="list-ticked" style="font-size:15px">
-                         <li>고추탄저병</li>
+                         <li><%= db_data[0].cdName%></li>
                        </ul>
                     </div>
                     <hr class="my-4">
@@ -102,9 +102,9 @@
                       </p>
                       <div class="card" style = "margin: 30px 0 0 0;">
                         <div class="card-body">
-                          <h5 class="card-title text-warning">고추 탄저병</h5>
+                          <h5 class="card-title text-warning"><%= db_data[0].cdName%></h5>
                           <hr class="my-4">
-                          <P>고추 탄저병의 경우에는 우식에게 물어보면 답이 나옵니다. 그는 농사의 신 농심입니다.</P>
+                          <P><%= db_data[0].cdSolution%></P>
                         </div>
                     </div>
                     </div>
@@ -116,10 +116,10 @@
               <div class="card-body">
                 <h4 class="card-title">Memo</h4>
                 <hr class="my-4">
-                <P>규환이 바보!</P>
+                <P><%= db_data[0].cropsMemo%></P>
               </div>
           </div>
-              <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+              <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;" onclick="location.href='/dash/dcrop/1'">
                   <i class="mdi mdi-checkbox-marked-circle-outline"></i>                                                    
                   &nbsp; 확인
               </button>

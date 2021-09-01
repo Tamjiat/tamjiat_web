@@ -116,12 +116,71 @@ function insert_crop(parameters) {
     })
   }
 
+  function select_dcrop() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT * FROM userDcrop`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userDcrop]"+
+                    "\n \t" + `SELECT * FROM userDcrop` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
+  function select_dcropDetail(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT ud.did, ud.cropsName, ud.cropsCultivar, ud.AICheck, ud.cdName, ud.cropsImage, cd.cdSolution, ud.cropsDate, ud.cropsMemo FROM userDcrop 
+        as ud JOIN diseaseCode as cd ON cd.cdName = ud.cdName WHERE ud.uid = '${parameters.uid}' and ud.did = '${parameters.did}';`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userDcrop]"+
+                    "\n \t" + `SELECT ud.did, ud.cropsName, ud.cropsCultivar, ud.AICheck, ud.cdName, cd.cdSolution, ud.cropsDate, ud.cropsMemo FROM userDcrop
+                     as ud JOIN diseaseCode as cd ON cd.cdName = ud.cdName WHERE ud.uid = '${parameters.uid}';` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
+
+  function insert_dcrop(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
+          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userDcrop]"+
+                    "\n \t" + `INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
+                    , cropsImage = '${parameters.cropsImage}', cropsDate=NOW(),cropsMemo = '${parameters.cropsMemo}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
 
 module.exports = {
   select_crop,
   select_cropDetail,
   select_cropCode,
   insert_crop,
+  insert_dcrop,
   select_cropCategory,
-  select_cropPercent
+  select_cropPercent,
+  select_dcrop,
+  select_dcropDetail
 }

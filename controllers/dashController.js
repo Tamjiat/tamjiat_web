@@ -150,15 +150,45 @@ function dashCropPercent(req, res, next) {
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 function dashDCrop(req, res, next) {
-	res.render('dash/DCrop');
+	var parameters = {
+    "uid":1234
+  }
+  DashDAO.select_dcrop(parameters).then((db_data)=>{
+    res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 });
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashDCropAdd(req, res, next) {
-	res.render('dash/DCrop_add');
+	DashDAO.select_cropCode().then((db_data)=> {
+    codeData = db_data
+      res.render('dash/DCrop_add',{codeData});
+    }).catch(err=>res.send("<script>alert('err')</script>"));
+}
+
+
+function dashinsertDCrop(req, res, next) {
+  parameters ={
+    "cropsName": req.body.Cropkind,
+    "uid" : 1234,
+    "cropsCultivar" : req.body.CropName,
+    "cropsImage" : req.files.attachments[0].filename,
+    "cropsMemo" : req.body.cropmemo,
+    "AICheck": "진행중"
+  }
+    DashDAO.insert_dcrop(parameters).then((db_data)=> {
+      res.redirect('/dash/dcrop/1')
+    }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashDCropDetail(req, res, next) {
-	res.render('dash/DCrop_detail');
+  var parameters = {
+    "uid": 1234,
+    "did": req.params.num
+  }
+  DashDAO.select_dcropDetail(parameters).then((db_data)=> {
+    console.log(db_data)
+    res.render('dash/dcrop_detail',{db_data})
+}).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 
@@ -206,6 +236,7 @@ module.exports = {
     dashDCrop,
     dashDCropAdd,
     dashDCropDetail,
+    dashinsertDCrop,
     dashCropCulture,
     dashNotice,
     dashPest,

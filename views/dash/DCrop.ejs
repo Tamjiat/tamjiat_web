@@ -30,80 +30,55 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <% for(var i =(d_num - 1) * max_value; i < d_num * max_value; i++){ %>
+                      <% var data_value=db_data[i]; if(data_value===undefined){ continue; } %>
+                      <tr onclick="location.href='/dash/dcropDetail/<%= data_value.did %>'">
                       <td>
                         <div class="form-check form-check-danger">
                           <label class="form-check-label">
                             <input type="checkbox" class="form-check-input">
-                           1
+                              <%= data_value.did %>
                           <i class="input-helper"></i></label>
                         </div>
                       </td>
-                      <td>곡류</td>
-                      <td>벼</td>
-                      <td>2021.08.27</td>
-                      <td><label class="badge badge-danger">실패</label></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <div class="form-check form-check-danger">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
-                           2
-                          <i class="input-helper"></i></label>
-                        </div>
+                        <%= data_value.cropsName %>
                       </td>
-                      <td>콩류</td>
-                      <td>강낭콩</td>
-                      <td>2021.08.28</td>
-                      <td><label class="badge badge-warning">진행중</label></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <div class="form-check form-check-danger">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
-                           3
-                          <i class="input-helper"></i></label>
-                        </div>
+                        <%= data_value.cropsCultivar %>
                       </td>
-                      <td>채소</td>
-                      <td>배추</td>
-                      <td>2021.08.29</td>
-                      <td><label class="badge badge-warning">진행중</label></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <div class="form-check form-check-danger">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
-                           4
-                          <i class="input-helper"></i></label>
-                        </div>
+                        <%= data_value.cropsDate %>
                       </td>
-                      <td>채소</td>
-                      <td>시금치</td>
-                      <td>2021.08.30</td>
-                      <td><label class="badge badge-success">완료</label></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <div class="form-check form-check-danger">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
-                           5
-                          <i class="input-helper"></i></label>
-                        </div>
+                        <%= data_value.AICheck %>
                       </td>
-                      <td>곡류</td>
-                      <td>옥수수</td>
-                      <td>2021.09.01</td>
-                      <td><label class="badge badge-danger">실패</label></td>
                     </tr>
+                    <% } %>
                   </tbody>
                 </table>
+
+                <nav>
+                  <ul class="pagination justify-content-center mt-5">
+                    <% if(d_num == 1) { %>
+                        <li class="page-item"><a id="prev" class="page-link" style="color: black; display:none;" href="/dash/crop/<%=Number(d_num)-1%>">">이전</a></li>
+                    <% } else if (d_num > 1) { %>
+                        <li class="page-item"><a id="prev" class="page-link" style="color: black; display:block;" href="/dash/crop/<%=Number(d_num)-1%>">이전</a></li>
+                    <% } %>
+                    <% for(var j = 1; j<= Math.ceil(db_data.length / max_value); j++){ %>
+                      <%if(j != d_num){%>
+                        <li class="page-item"><a class="page-link" style="color: black;" href="/dash/crop/<%= j %>"><%= j %></a>
+                      <%}else{%>
+                        <li class="page-item"><a class="page-link" style="color: black; background-color: #c8c8c8;" href="/dash/crop/<%= j %>"><%= j %></a>
+                      <%}%>
+                    <% } if(d_num == Math.ceil(db_data.length / max_value)) { %>
+                        <li class="page-item"><a id="next" class="page-link" style="color: black; display:none;" href="/dash/crop/<%=Number(d_num)+1%>">다음</a></li>
+                    <% } else if (d_num < Math.ceil(db_data.length / max_value)) { %>
+                        <li class="page-item"><a id="next" class="page-link" style="color: black; display:block;" href="/dash/crop/<%=Number(d_num)+1%>">다음</a></li>
+                    <% } %></ul>
+                </nav>
                 <div style="float: right; margin: 25px 0 0 0">
-                  <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+                  <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;" onclick="location.href='/dash/dcropadd'">
                     <i class="mdi mdi-hospital"></i>                                                    
                     &nbsp; 등록하기
                   </button>

@@ -10,30 +10,22 @@
                   <p class="card-description" style = "margin: 0.8rem 0 0 0">
                     피해 농작물을 등록해주세요.
                   </p>
-                  <form class="forms-sample" style="margin: 50px 0 0 0;">
+                  <form class="forms-sample" style="margin: 50px 0 0 0;" action="/dash/dcropInsert" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="Cropkind">농작물 종류</label>
-                        <select class="form-select" aria-label="Default select example" id="Cropkind">
-                          <option>곡류</option>
-                          <option>콩류</option>
-                          <option>채소</option>
-                          <option>구근류</option>
-                          <option>과실류</option>
-                          <option>종실류</option>
-                          <option>버섯류</option>
-                          <option>특용작물</option>
-                          <option>약용작물</option>
-                          <option>전매작물</option>
-                          <option>화훼작물</option>
+                        <select class="form-select" aria-label="Default select example" id="Cropkind" name="Cropkind">
+                          <% for (var i = 0; i < codeData.length; i++) { %>
+                            <option><%= codeData[i].cropsName %></option>
+                          <% } %>
                         </select>
                       </div>
                     <div class="form-group">
-                      <label for="CropName1">농작물 이름</label>
-                      <input type="text" class="form-control" id="CropName1" placeholder="ex) 벼">
+                      <label for="CropName">농작물 이름</label>
+                      <input type="text" class="form-control" id="CropName" name="CropName" placeholder="ex) 벼">
                     </div>
                     <div class="form-group">
                         <label>농작물 이미지 업로드</label>
-                        <input type="file" name="img[]" class="file-upload-default">
+                        <input type="file" name="attachments" class="file-upload-default">
                         <div class="input-group col-xs-12">
                           <input type="text" class="form-control file-upload-info" disabled="" placeholder="농작물 이미지" style="height: 44px;">
                           <span class="input-group-append">
@@ -43,9 +35,9 @@
                     </div>
                     <div class="form-group">
                       <label for="cropmemo">메모</label>
-                      <textarea class="form-control" id="cropmemo" rows="3" style="height: 150px;"></textarea>
+                      <textarea class="form-control" id="cropmemo" name="cropmemo" rows="3" style="height: 150px;"></textarea>
                     </div>
-                    <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
+                    <button type="submit" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;">
                       <i class="mdi mdi-plus"></i>                                                    
                       &nbsp; 등록하기
                     </button>
