@@ -21,7 +21,8 @@ var userController = require('../controllers/userController')
     * callbackURL : 카카오 디벨로퍼에서 설정한 Redirect URI
 */
 passport.use('kakao', new KakaoStrategy({
-    clientID: 'ebaf9e6022288f5b6781f31e644e0314',
+    //clientID: 'ebaf9e6022288f5b6781f31e644e0314',
+    clientID: '3ffce141de5af4a5630f168695fa9658',
     callbackURL: '/auth/kakao/callback',
 }, async (accessToken, refreshToken, profile, done) => {
     return done(null, profile._json);
