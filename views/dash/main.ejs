@@ -527,21 +527,20 @@
             </div>
           </div>
         </div>
-<!-- 
         <script>
-          function dash_header() {
-            var content = document.getElementById('').value; //자동완성 동적생성
-        
+          $("#cropSelecor").on("change", function(){
             $.ajax({
-              url:"/dash/Header",
-              type:"POST",
-              data: {content : content},
-              success:function(db_data){
-                  makeElement(db_data[0]) //함수에 대한 정보를 넘겨준다.
-                  setEventSelect(db_data[0])
-            }
+                url:"/dash/Header",
+                type:"POST",
+                data: {cropsName : this.value},
+                success:function(db_data){
+                    /*makeElement(db_data[0]) //함수에 대한 정보를 넘겨준다.
+                    setEventSelect(db_data[0])*/
+                    console.log(db_data.result)
+              }
+            })
           })
-        }
-        </script> -->
+        </script>
+
 
 <% include ../include/dash_footer %>
