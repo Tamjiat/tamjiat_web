@@ -33,6 +33,10 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="/../../dash_assets/images/favicon.png" />
 
+  <!-- 실시간 통신 -->
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
+
 </head>
 <body>   
   <div class="container-scroller"> 
@@ -60,14 +64,6 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown d-none d-lg-block">
-            <select id = "cropSelecor"class="form-select" aria-label="Default select example">
-              <option selected>선택하시오</option>
-              <% for (var i = 0; i < db_data.length; i++ ) { %>
-                <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
-              <% } %>
-            </select>
-          </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date navbar-date-picker">
               <span class="input-group-addon input-group-prepend border-right">

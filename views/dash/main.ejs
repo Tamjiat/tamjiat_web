@@ -9,6 +9,25 @@
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">진행 사항</a>
+                      <li class="nav-item dropdown d-none d-lg-block">
+                        <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">농작물</a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+                          <a class="dropdown-item py-3" >
+                            <p class="mb-0 font-weight-medium float-left">농작물</p>
+                          </a>
+                          <div class="dropdown-divider"></div>
+                          
+                          <% for (var i = 0; i < db_data.length; i++ ) { %>
+                            <a class="dropdown-item preview-item">
+                            <div class="preview-item-content flex-grow py-2">
+                              <p class="preview-subject ellipsis font-weight-medium text-dark"><%= db_data[i].categoryName %></p>
+                              <p class="fw-light small-text mb-0"><%= db_data[i].cropsName %></p>
+                            </div>
+                          </a>
+                          <% } %>
+                        
+                        </div>
+                      </li>
                     </li>
                   </ul>
                   <div>
