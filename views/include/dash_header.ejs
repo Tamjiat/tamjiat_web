@@ -72,30 +72,15 @@
                 <p class="mb-0 font-weight-medium float-left">농작물</p>
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
+              
+              <% for (var i = 0; i < db_data.length; i++ ) { %>
+                <a class="dropdown-item preview-item">
                 <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">[ 농작물 ]</p>
-                  <p class="fw-light small-text mb-0">토마토</p>
+                  <p class="preview-subject ellipsis font-weight-medium text-dark"><%= db_data[i].categoryName %></p>
+                  <p class="fw-light small-text mb-0"><%= db_data[i].cropsName %></p>
                 </div>
               </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">[ 노지물 ]</p>
-                  <p class="fw-light small-text mb-0">양배추</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">[ 노지물 ]</p>
-                  <p class="fw-light small-text mb-0">콩</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">[ 농작물 ]</p>
-                  <p class="fw-light small-text mb-0">상추</p>
-                </div>
-              </a>
+              <% } %>
             </div>
           </li>
           <li class="nav-item d-none d-lg-block">
@@ -230,7 +215,7 @@
           </li>
           <li class="nav-item nav-category">알림</li>
           <li class="nav-item">
-            <a class="nav-link" href="/dash/notice" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" href="/dash/notice/1" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
               <span class="menu-title">공지사항</span>
             </a>

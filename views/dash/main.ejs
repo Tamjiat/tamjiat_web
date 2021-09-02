@@ -131,7 +131,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                     <div class="row">
                       <div class="col-lg-8 d-flex flex-column">
                         <div class="row flex-grow">
                           <div class="col-12 grid-margin stretch-card">
@@ -684,5 +684,21 @@
             </div>
           </div>
         </div>
+<!-- 
+        <script>
+          function dash_header() {
+            var content = document.getElementById('').value; //자동완성 동적생성
+        
+            $.ajax({
+              url:"/dash/Header",
+              type:"POST",
+              data: {content : content},
+              success:function(db_data){
+                  makeElement(db_data[0]) //함수에 대한 정보를 넘겨준다.
+                  setEventSelect(db_data[0])
+            }
+          })
+        }
+        </script> -->
 
 <% include ../include/dash_footer %>

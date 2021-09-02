@@ -33,4 +33,6 @@ router.get('/noticeDetail',dashController.dashNoticeDetail);
 router.get('/noticeInsert',dashController.dashNoticeInsert);
 router.get('/talk',dashController.dashTalk);
 
+router.post('/Header',dashController.dashHeader);
+
 module.exports = router
