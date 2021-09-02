@@ -87,7 +87,7 @@ function dash_cropCategory(req, res, next) {
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
   var parameters = {
-    "uid": req.session.userid
+    "uid": 1234
   }
   DashDAO.select_dashMenuList(parameters).then((db_data)=>{
     console.log(db_data)
@@ -118,7 +118,7 @@ function dashCropAdd(req, res, next) {
 function dashCropDetail(req, res, next) {
   var parameters = {
     "cid" : req.params.num,
-    "uid" : 1234
+    "uid": 1234
   }
   DashDAO.select_cropCode().then((db_data)=> {
     codeData = db_data
@@ -134,7 +134,7 @@ function dashCropDetail(req, res, next) {
 function dashinsertCrop(req, res, next) {
   parameters ={
     "cropsName": req.body.Cropkind,
-    "uid" : 1234,
+    "uid": 1234,
     "cropsCultivar" : req.body.CropName,
     "categoryName" : req.body.CropcategoryName,
     "useCompost" : req.body.useCompost,
@@ -145,8 +145,9 @@ function dashinsertCrop(req, res, next) {
     "currentYield" : req.body.currentYield,
     "cropsMemo" : req.body.cropmemo
   }
+  console.log(parameters.cropsCultivar)
     DashDAO.insert_crop(parameters).then((db_data)=> {
-      res.redirect('/dash/crop')
+      res.redirect('/dash/crop/1')
     }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 function dashCropPercent(req, res, next) {
@@ -159,7 +160,7 @@ function dashCropPercent(req, res, next) {
 }
 function dashDCrop(req, res, next) {
 	var parameters = {
-    "uid":1234
+    "uid": 1234
   }
   DashDAO.select_dcrop(parameters).then((db_data)=>{
     res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 , dayjs,username : req.session.userName});
@@ -176,7 +177,7 @@ function dashDCropAdd(req, res, next) {
 function dashinsertDCrop(req, res, next) {
   parameters ={
     "cropsName": req.body.Cropkind,
-    "uid" : 1234,
+    "uid": 1234,
     "cropsCultivar" : req.body.CropName,
     "cropsImage" : req.files.attachments[0].filename,
     "cropsMemo" : req.body.cropmemo,
@@ -209,15 +210,30 @@ function dashPest(req, res, next) {
 function dashNotice(req, res, next) {
   DashDAO.select_notice().then((db_data)=> {
     res.render('dash/notice',{db_data, n_num : req.params.num , max_value : 7, username : req.session.userName});
-  })
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashNoticeDetail(req, res, next) {
-	res.render('dash/notice_detail',{username : req.session.userName});
+  var parameters = {
+    "nid": req.params.num
+  }
+  DashDAO.select_noticeDetail(parameters).then((db_data)=> {
+	  res.render('dash/notice_detail',{db_data, username : req.session.userName});
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashNoticeInsert(req, res, next) {
 	res.render('dash/notice_write',{username : req.session.userName});
+}
+function dashNoticeInsertData(req,res,next){
+  var parameters = {
+    "nTitle" : req.body.nTitle,
+    "nContent" : req.body.nContent,
+    "nWriter" : 1234,
+  }
+  DashDAO.insert_notice(parameters).then((db_data)=> {
+    res.redirect('/dash/notice/1')
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashTalk(req, res, next) {
@@ -246,10 +262,9 @@ function dashHeader(req, res, next){
   var totalDiseaseCount = 0
   var damagedCropsCount = 0
   var parameters = {
-    "userid": req.session.userid,
+    "userid": 1234,
     "cropsName" : req.body.cropsName
   }
-  console.log(req.body.cropsName)
   DashDAO.select_totalGrowPercent(parameters).then(function(db_data){
     var totalPercent = 0
     //선택 농작물 총 성장률 구하기
@@ -312,6 +327,7 @@ module.exports = {
     dashNotice,
     dashNoticeDetail,
     dashNoticeInsert,
+    dashNoticeInsertData,
     dashPest,
     dashTalk,
     dashHeader

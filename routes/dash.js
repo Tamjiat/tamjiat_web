@@ -29,8 +29,9 @@ router.post('/dcropInsert',upload.fields([{name:'attachments', maxCount:1}]), da
 router.get('/cropCulture/:num', dashController.dashCropPercent);
 router.get('/pest/:num',dashController.dashPest);
 router.get('/notice/:num',dashController.dashNotice);
-router.get('/noticeDetail',dashController.dashNoticeDetail);
+router.get('/noticeDetail/:num',dashController.dashNoticeDetail);
 router.get('/noticeInsert',dashController.dashNoticeInsert);
+router.post('/noticeInsert',dashController.dashNoticeInsertData);
 router.get('/talk',dashController.dashTalk);
 
 router.post('/Header',dashController.dashHeader);

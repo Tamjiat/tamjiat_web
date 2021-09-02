@@ -10,12 +10,12 @@
               <p class="card-description" style = "margin: 0.8rem 0 0 0">
                 탐지앗의 공지사항을 등록해주세요.
               </p>
-
+              <form class="forms-sample" style="margin: 50px 0 0 0;" action="/dash/noticeInsert" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="Croplocation" placeholder="제목" style="height: 50px; margin: 30px 0 0 0">
+                    <input type="text" class="form-control" id="Croplocation"  name = "nTitle" placeholder="제목" style="height: 50px; margin: 30px 0 0 0">
                 </div>
 
-                <textarea id="summernote" name="summernote"></textarea>
+                <textarea id="summernote" name="nContent"></textarea>
 
                 <script>
                     $('#summernote').summernote({
@@ -35,10 +35,12 @@
                 </script>
             </div>
             <div style="float: right; margin: 10px 0 25px 0">
-                <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 0 20px 0 15px;">
+                <button type="submit" class="btn btn-success btn-icon-text"style="float: right; margin: 0 20px 0 15px;">
                   <i class="mdi mdi-hospital"></i>                                                    
                   &nbsp; 등록하기
                 </button>
+
+          </form>
                 <button type="button" class="btn btn-danger btn-icon-text"style="float: right; margin: 0 0 0 15px">
                   <i class="mdi mdi-minus"></i>                                                    
                   &nbsp; 취소하기

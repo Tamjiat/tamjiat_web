@@ -12,21 +12,13 @@
                       <li class="nav-item dropdown d-none d-lg-block">
                         <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">농작물</a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-                          <a class="dropdown-item py-3" >
-                            <p class="mb-0 font-weight-medium float-left">농작물</p>
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          
-                          <% for (var i = 0; i < db_data.length; i++ ) { %>
-                            <a class="dropdown-item preview-item">
-                            <div class="preview-item-content flex-grow py-2">
-                              <p class="preview-subject ellipsis font-weight-medium text-dark"><%= db_data[i].categoryName %></p>
-                              <p class="fw-light small-text mb-0"><%= db_data[i].cropsName %></p>
-                            </div>
-                          </a>
-                          <% } %>
-                        
-                        </div>
+                          <select id = "cropSelecor"class="form-select" aria-label="Default select example">
+                            <option selected>선택하시오</option>
+                            <% for (var i = 0; i < db_data.length; i++ ) { %>
+                              <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
+                            <% } %>
+                          </select>
+                        </li>
                       </li>
                     </li>
                   </ul>
@@ -45,28 +37,23 @@
                         <div class="statistics-details d-flex align-items-center justify-content-between">
                           <div>
                             <p class="statistics-title">총 성장 진행률</p>
-                            <h3 class="rate-percentage">32.53%</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                            <h3 class="rate-percentage" id="avgPercent"> - </h3>
                           </div>
                           <div>
                             <p class="statistics-title">수확 예정일</p>
-                            <h3 class="rate-percentage">21. 08. 18</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>1일 증가</span></p>
+                            <h3 class="rate-percentage" id="nearHavestDate"> - </h3>
                           </div>
                           <div>
                             <p class="statistics-title">총 수확 진행률</p>
-                            <h3 class="rate-percentage">68.8</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                            <h3 class="rate-percentage" id="totalYieldPercent"> - </h3>
                           </div>
                           <div class="d-none d-md-block">
                             <p class="statistics-title">병 해충 발생 건수</p>
-                            <h3 class="rate-percentage">2</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+                            <h3 class="rate-percentage" id="totalDiseaseCount"> - </h3>
                           </div>
                           <div class="d-none d-md-block">
                             <p class="statistics-title">총 피해 농작물</p>
-                            <h3 class="rate-percentage">8.8</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>2.8</span></p>
+                            <h3 class="rate-percentage" id="damagedCropsCount"> - </h3>
                           </div>
                           <div class="d-none d-md-block">
                             <p class="statistics-title"></p>
@@ -534,12 +521,14 @@
                 type:"POST",
                 data: {cropsName : this.value},
                 success:function(db_data){
-                    /*makeElement(db_data[0]) //함수에 대한 정보를 넘겨준다.
-                    setEventSelect(db_data[0])*/
-                    console.log(db_data.result)
-              }
-            })
+                  $("#avgPercent").text(db_data.result.avgPercent+ "%");
+                  $("#nearHavestDate").text(db_data.result.nearHavestDate);
+                  $("#totalYieldPercent").text(db_data.result.totalYieldPercent+"%");
+                  $("#totalDiseaseCount").text(db_data.result.totalDiseaseCount);
+                  $("#damagedCropsCount").text(db_data.result.damagedCropsCount);
+            }
           })
+        })
         </script>
 
 
