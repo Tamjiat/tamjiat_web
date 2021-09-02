@@ -61,22 +61,12 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">농작물</a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a class="dropdown-item py-3" >
-                <p class="mb-0 font-weight-medium float-left">농작물</p>
-              </a>
-              <div class="dropdown-divider"></div>
-              
+            <select id = "cropSelecor"class="form-select" aria-label="Default select example">
+              <option selected>선택하시오</option>
               <% for (var i = 0; i < db_data.length; i++ ) { %>
-                <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark"><%= db_data[i].categoryName %></p>
-                  <p class="fw-light small-text mb-0"><%= db_data[i].cropsName %></p>
-                </div>
-              </a>
+                <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
               <% } %>
-            </div>
+            </select>
           </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date navbar-date-picker">

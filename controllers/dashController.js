@@ -87,7 +87,7 @@ function dash_cropCategory(req, res, next) {
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
   var parameters = {
-    "uid": 1234
+    "uid": req.session.userid
   }
   DashDAO.select_dashMenuList(parameters).then((db_data)=>{
     console.log(db_data)
@@ -249,7 +249,7 @@ function dashHeader(req, res, next){
     "userid": req.session.userid,
     "cropsName" : req.body.cropsName
   }
-
+  console.log(req.body.cropsName)
   DashDAO.select_totalGrowPercent(parameters).then(function(db_data){
     var totalPercent = 0
     //선택 농작물 총 성장률 구하기
@@ -270,19 +270,21 @@ function dashHeader(req, res, next){
         DashDAO.select_countDisease_totalCrops(parameters).then(function(db_data){
           totalDiseaseCount = db_data[db_data.length-1].result
           damagedCropsCount = db_data.length -1
+
+          var headerInfo = {
+            "avgPercent" : avgPercent,
+            "nearHavestDate" : nearHavestDate,
+            "totalYieldPercent" : totalYieldPercent,
+            "totalDiseaseCount" : totalDiseaseCount,
+            "damagedCropsCount" : damagedCropsCount
+          }
+          res.send({"result": headerInfo})
         })
       })
     })
   })
 
-  var headerInfo = {
-    "avgPercent" : avgPercent,
-    "nearHavestDate" : nearHavestDate,
-    "totalYieldPercent" : totalYieldPercent,
-    "totalDiseaseCount" : totalDiseaseCount,
-    "damagedCropsCount" : damagedCropsCount
-  }
-  res.send({"result" : headerInfo})
+  
 }
 
 
