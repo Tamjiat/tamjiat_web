@@ -33,6 +33,10 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="/../../dash_assets/images/favicon.png" />
 
+  <!-- 실시간 통신 -->
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
+
 </head>
 <body>   
   <div class="container-scroller"> 
@@ -60,24 +64,6 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">농작물</a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a class="dropdown-item py-3" >
-                <p class="mb-0 font-weight-medium float-left">농작물</p>
-              </a>
-              <div class="dropdown-divider"></div>
-              
-              <% for (var i = 0; i < db_data.length; i++ ) { %>
-                <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark"><%= db_data[i].categoryName %></p>
-                  <p class="fw-light small-text mb-0"><%= db_data[i].cropsName %></p>
-                </div>
-              </a>
-              <% } %>
-            </div>
-          </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date navbar-date-picker">
               <span class="input-group-addon input-group-prepend border-right">
