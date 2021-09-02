@@ -1,38 +1,231 @@
-<% include ./include/dash_header %>
-<!-- partial -->
-<div class="main-panel">
-    <div class="content-wrapper">
-      <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-          <div class="card" style = "margin: 50px 0 10px 0">
-            <div class="card-body">
-              <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px;color: green;">공지사항&nbsp;<i class="mdi mdi-clipboard-text"></i></h4>
-                <p class="card-description" style = "margin: 0.8rem 0 0 0">
-                  탐지앗의 공지사항을 확인해주세요.
-                </p>
-                <div style="margin: 50px 0 0;">
-                  <hr class="my-4">
-                    <h3 style="margin: 0 0 0 30px; font-weight: bold;">[ 공지 ]  탐지앗이 새롭게 출시 되었습니다.</h3>
-                  <hr class="my-4">
-                  <p class="card-description" style = "float: right;">
-                    2021-08-31 작성자 : 운영자
-                  </p>
-                </div>
-            </div>
-            <blockquote class="blockquote" style="margin: 20px 30px 30px 30px; height: 500px;">
-              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            </blockquote>
-            <div style="float: right; margin: 10px 0 25px 0">
-                <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 0 20px 0 15px;">
-                  <i class="mdi mdi-hospital"></i>                                                    
-                  &nbsp; 등록하기
-                </button>
-                <button type="button" class="btn btn-danger btn-icon-text"style="float: right; margin: 0 0 0 15px">
-                  <i class="mdi mdi-minus"></i>                                                    
-                  &nbsp; 취소하기
-                </button>
-              </div>
-          </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+  <script defer src="/socket.io/socket.io.js"></script>
+  <script defer src="/../../socket/script.js"></script>
+  <style>
+    html {
+  min-width: 350px;
+}
+
+body {
+  background-color: aliceblue;
+}
+
+.container {
+  height: 100vh;
+  padding: 20px;
+  text-align: -webkit-center;
+}
+
+.chat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  height: 100%;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 1em;
+}
+
+#message-container {
+  flex-basis: 90%;
+  width: 100%;
+  min-height: 100px;
+  overflow: auto;
+  text-align: -webkit-center;
+  background-color: rgb(178, 199, 217);
+  border-radius: 1em 1em 0 0;
+}
+
+#message-container > div {
+  display: table;
+  max-width: 60%;
+  margin: 10px;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+#message-container > div.me {
+  margin-left: auto;
+  background-color: rgb(255, 235, 51);
+  border: 1px solid #dee2e6;
+}
+
+#message-container > div.other {
+  position: relative;
+  margin-right: auto;
+}
+
+.other .namentime {
+  position: relative;
+  left: 60px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+#message-container div.info {
+  padding: 5px;
+  color: gray;
+  font-size: 9px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.671);
+  border-radius: 3px;
+}
+
+.other .profileimg {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  font-size: xx-large;
+  text-align: -webkit-center;
+  border-radius: 1em;
+  place-content: center;
+}
+
+.other .time {
+  position: absolute;
+  right: -30px;
+  bottom: 0px;
+  font-size: 0.2em;
+}
+
+.me,
+.other .namentime {
+  border-radius: 5px;
+}
+
+.me {
+  position: relative;
+  padding: 5px;
+  background-color: rgb(255, 235, 51);
+  border: 1px solid #dee2e6;
+}
+
+.me .time {
+  position: absolute;
+  bottom: 0px;
+  left: -30px;
+  font-size: 0.2em;
+}
+
+.other .uname {
+  font-weight: bold;
+}
+
+#send-container {
+  display: flex;
+  flex-basis: 10%;
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+}
+
+#send-container input,
+#send-container button {
+  height: 100%;
+}
+
+#send-container input {
+  flex-basis: 90%;
+}
+#send-container button {
+  flex-basis: 10%;
+}
+
+/* scroll bar */
+
+#message-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#message-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#message-container::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+#message-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 프사 없애기 */
+
+@media (max-width: 400px) {
+  .other .namentime {
+    left: 0;
+  }
+
+  .other .profileimg {
+    display: none;
+  }
+}
+
+/* user_list */
+
+#user-list {
+  position: absolute;
+  left: -210px;
+  width: 200px;
+}
+
+#user-list .list-group-item {
+  padding: 1px;
+}
+
+#user-list .list-group-item.head {
+  padding: 3px;
+  color: gray;
+  font-weight: bold;
+  background-color: rgb(230 237 242);
+}
+
+@media (max-width: 927px) {
+  #user-list {
+    display: none;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="chat">
+      <div id="user-list">
+        <ul class="list-group">
+          <li class="list-group-item head">User List</li>
+        </ul>
       </div>
-<% include ./include/dash_footer %>
+      <div id="message-container"></div>
+
+      <form id="send-container">
+        <input
+          type="text"
+          id="message-input"
+          class="form-control"
+          maxlength="400"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="send-button" class="btn btn-warning">
+          Send
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
