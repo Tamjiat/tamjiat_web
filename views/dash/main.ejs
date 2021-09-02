@@ -9,19 +9,18 @@
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">진행 사항</a>
-                      <li class="nav-item dropdown d-none d-lg-block">
-                        <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">농작물</a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-                          <select id = "cropSelecor"class="form-select" aria-label="Default select example">
-                            <option selected>선택하시오</option>
-                            <% for (var i = 0; i < db_data.length; i++ ) { %>
-                              <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
-                            <% } %>
-                          </select>
-                        </li>
                       </li>
-                    </li>
+                      <li class="nav-item">
+                        <select id = "cropSelecor" class="form-select" aria-label="Default select example" style="border: 1px solid transparent;; background-color: transparent; font-size: 14px;">
+                          <option selected>선택하시오</option>
+                          <% for (var i = 0; i < db_data.length; i++ ) { %>
+                            <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
+                          <% } %>
+                        </select>
+                      </li>
+
                   </ul>
+                  
                   <div>
                     <div class="btn-wrapper">
                       <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> 공유</a>
