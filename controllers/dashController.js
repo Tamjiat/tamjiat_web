@@ -95,7 +95,7 @@ function dashCrop(req, res, next) {
     "uid": 1234
   }
 	DashDAO.select_crop(parameters).then((db_data)=> {
-      res.render('dash/Crop', {db_data: db_data, c_num : req.params.num, max_value : 9});
+      res.render('dash/Crop', {db_data: db_data, c_num : req.params.num, max_value : 9,username : req.session.userName});
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
@@ -104,7 +104,7 @@ function dashCropAdd(req, res, next) {
     codeData = db_data
     DashDAO.select_cropCategory().then((db_data)=> {
       categoryData = db_data
-      res.render('dash/Crop_add',{codeData, categoryData});
+      res.render('dash/Crop_add',{codeData, categoryData,username : req.session.userName});
     }).catch(err=>res.send("<script>alert('err')</script>"));
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
@@ -119,7 +119,7 @@ function dashCropDetail(req, res, next) {
     DashDAO.select_cropCategory().then((db_data)=> {
       categoryData = db_data
       DashDAO.select_cropDetail(parameters).then((db_data)=> {
-        res.render('dash/Crop_detail',{codeData, categoryData, db_data});
+        res.render('dash/Crop_detail',{codeData, categoryData, db_data,username : req.session.userName});
       }).catch(err=>res.send("<script>alert('err')</script>"));
     }).catch(err=>res.send("<script>alert('err')</script>"));
   }).catch(err=>res.send("<script>alert('err')</script>"));
@@ -148,7 +148,7 @@ function dashCropPercent(req, res, next) {
     "uid": 1234
   }
 	DashDAO.select_cropPercent(parameters).then((db_data)=> {
-      res.render('dash/Crop_culture', {db_data: db_data , c_num : req.params.num, max_value : 5});
+      res.render('dash/Crop_culture', {db_data: db_data , c_num : req.params.num, max_value : 5,username : req.session.userName});
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 function dashDCrop(req, res, next) {
@@ -156,14 +156,14 @@ function dashDCrop(req, res, next) {
     "uid":1234
   }
   DashDAO.select_dcrop(parameters).then((db_data)=>{
-    res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 , dayjs});
+    res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 , dayjs,username : req.session.userName});
   }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashDCropAdd(req, res, next) {
 	DashDAO.select_cropCode().then((db_data)=> {
     codeData = db_data
-      res.render('dash/DCrop_add',{codeData});
+      res.render('dash/DCrop_add',{codeData,username : req.session.userName});
     }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
@@ -189,8 +189,8 @@ function dashDCropDetail(req, res, next) {
   }
   DashDAO.select_dcropDetail(parameters).then((db_data)=> {
     console.log(db_data)
-    res.render('dash/dcrop_detail',{db_data})
-}).catch(err=>res.send("<script>alert('err')</script>"));
+    res.render('dash/dcrop_detail',{db_data,username : req.session.userName})
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 
@@ -215,11 +215,11 @@ function dashNoticeInsert(req, res, next) {
 }
 
 function dashTalk(req, res, next) {
-	res.render('dash/talk');
+	res.render('dash/talk',{username : req.session.userName});
 }
 
 function dashCropCulture(req, res, next) {
-	res.render('dash/Crop_culture');
+	res.render('dash/Crop_culture',{username : req.session.userName});
 }
 
 function dash_cropMulter(req, res, next) {
