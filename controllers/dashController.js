@@ -86,8 +86,14 @@ function dash_cropCategory(req, res, next) {
 
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
-  console.log(req.session.userName);
-  res.render('dash/main',{ username : req.session.userName});
+  var parameters = {
+    "uid": 1234
+  }
+  DashDAO.select_dashMenuList(parameters).then((db_data)=>{
+    console.log(db_data)
+    console.log(req.session.userName);
+    res.render('dash/main',{ db_data, username : req.session.userName});
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashCrop(req, res, next) {
@@ -278,6 +284,8 @@ function dashHeader(req, res, next){
   }
   res.send({"result" : headerInfo})
 }
+
+
 
 
 module.exports = {

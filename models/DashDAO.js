@@ -279,7 +279,23 @@ function insert_crop(parameters) {
           });
       });
   }
-
+  function select_dashMenuList(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT DISTINCT categoryName, cropsName FROM userCrop WHERE uid = '${parameters.uid}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT categoryName, cropsName FROM userCrop WHERE uid = '${parameters.uid}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
 module.exports = {
   select_crop,
   select_cropDetail,
@@ -295,5 +311,6 @@ module.exports = {
   select_totalGrowPercent,
   select_nearHarvestDate,
   select_totalYieldPercent,
-  select_countDisease_totalCrops
+  select_countDisease_totalCrops,
+  select_dashMenuList
 }
