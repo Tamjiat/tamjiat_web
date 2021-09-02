@@ -14,8 +14,8 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
                           <select id = "cropSelecor"class="form-select" aria-label="Default select example">
                             <option selected>선택하시오</option>
-                            <% for (var i = 0; i < db_data.length; i++ ) { %>
-                              <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
+                            <% for (var i = 0; i < ListData.length; i++ ) { %>
+                              <option value="<%= ListData[i].cropsName %>"><%= ListData[i].cropsName %> [<%= ListData[i].categoryName %>]</option>
                             <% } %>
                           </select>
                         </li>
@@ -169,6 +169,7 @@
                                       </tr>
                                     </thead>
                                     <tbody>
+                                      <% for (var i = 0; i < PercentData.length; i++) { %>
                                       <tr>
                                         <td>
                                           <div class="form-check form-check-flat mt-0">
@@ -178,147 +179,33 @@
                                         </td>
                                         <td>
                                           <div class="d-flex ">
-                                            <img src="../dash_assets/images/faces/face1.jpg" alt="">
                                             <div>
-                                              <h6>양배추</h6>
+                                              <h6><%= PercentData[i].cropsName %></h6>
                                             </div>
                                           </div>
                                         </td>
                                         <td>
-                                          <h6>2021. 08. 18</h6>
+                                          <h6><%= PercentData[i].cropsStart %></h6>
                                         </td>
                                         <td>
                                           <div>
                                             <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                              <p class="text-success">80%</p>
+                                              <p class="text-success"><%= PercentData[i].percent %></p>
                                             </div>
                                             <div class="progress progress-md">
-                                              <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                              <div class="progress-bar bg-success" role="progressbar" style="width: <%= PercentData[i].percent %>%" aria-valuenow="<%= PercentData[i].percent %>" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                           </div>
                                         </td>
-                                        <td><div class="badge badge-opacity-warning">진행중</div></td>
+                                        <td> 
+                                          <% if (PercentData[i].percent >= 100) {%>
+                                            <div class="badge badge-opacity-warning">완료</div>                                         \
+                                          <% } else { %>
+                                            <div class="badge badge-opacity-warning">진행중</div>
+                                          <% } %>
+                                        </td>
                                       </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="form-check form-check-flat mt-0">
-                                            <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <div class="d-flex">
-                                            <img src="../dash_assets/images/faces/face2.jpg" alt="">
-                                            <div>
-                                              <h6>토마토</h6>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>2021. 08. 21</h6>
-                                        </td>
-                                        <td>
-                                          <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                              <p class="text-success">65%</p>
-                                            </div>
-                                            <div class="progress progress-md">
-                                              <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">진행중</div></td>
-                                      </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="form-check form-check-flat mt-0">
-                                            <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <div class="d-flex">
-                                            <img src="../dash_assets/images/faces/face3.jpg" alt="">
-                                            <div>
-                                              <h6>콩</h6>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>2021. 08. 30</h6>
-                                        </td>
-                                        <td>
-                                          <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                              <p class="text-success">65%</p>
-                                            </div>
-                                            <div class="progress progress-md">
-                                              <div class="progress-bar bg-warning" role="progressbar" style="width: 38%" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">진행중</div></td>
-                                      </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="form-check form-check-flat mt-0">
-                                            <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <div class="d-flex">
-                                            <img src="../dash_assets/images/faces/face4.jpg" alt="">
-                                            <div>
-                                              <h6>방울 토마토</h6>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>2021. 08. 25</h6>
-                                        </td>
-                                        <td>
-                                          <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                              <p class="text-success">65%</p>
-                                            </div>
-                                            <div class="progress progress-md">
-                                              <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td><div class="badge badge-opacity-danger">취소</div></td>
-                                      </tr>
-                                      <tr>
-                                        <td>
-                                          <div class="form-check form-check-flat mt-0">
-                                            <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <div class="d-flex">
-                                            <img src="../dash_assets/images/faces/face5.jpg" alt="">
-                                            <div>
-                                              <h6>상추</h6>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>2021. 09. 01</h6>
-                                        </td>
-                                        <td>
-                                          <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                              <p class="text-success">65%</p>
-                                            </div>
-                                            <div class="progress progress-md">
-                                              <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td><div class="badge badge-opacity-success">완료</div></td>
-                                      </tr>
+                                      <% } %>
                                     </tbody>
                                   </table>
                                 </div>
