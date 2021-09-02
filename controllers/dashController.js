@@ -98,7 +98,7 @@ function dash_main(req, res, next) {
 
 function dashCrop(req, res, next) {
   var parameters = {
-    "uid": 1234
+    "uid": req.session.userid
   }
 	DashDAO.select_crop(parameters).then((db_data)=> {
       res.render('dash/Crop', {db_data: db_data, c_num : req.params.num, max_value : 9,username : req.session.userName});
@@ -118,7 +118,7 @@ function dashCropAdd(req, res, next) {
 function dashCropDetail(req, res, next) {
   var parameters = {
     "cid" : req.params.num,
-    "uid" : 1234
+    "uid": req.session.userid
   }
   DashDAO.select_cropCode().then((db_data)=> {
     codeData = db_data
@@ -134,7 +134,7 @@ function dashCropDetail(req, res, next) {
 function dashinsertCrop(req, res, next) {
   parameters ={
     "cropsName": req.body.Cropkind,
-    "uid" : 1234,
+    "uid": req.session.userid,
     "cropsCultivar" : req.body.CropName,
     "categoryName" : req.body.CropcategoryName,
     "useCompost" : req.body.useCompost,
@@ -151,7 +151,7 @@ function dashinsertCrop(req, res, next) {
 }
 function dashCropPercent(req, res, next) {
   var parameters = {
-    "uid": 1234
+    "uid": req.session.userid
   }
 	DashDAO.select_cropPercent(parameters).then((db_data)=> {
       res.render('dash/Crop_culture', {db_data: db_data , c_num : req.params.num, max_value : 5,username : req.session.userName});
@@ -159,7 +159,7 @@ function dashCropPercent(req, res, next) {
 }
 function dashDCrop(req, res, next) {
 	var parameters = {
-    "uid":1234
+    "uid": req.session.userid
   }
   DashDAO.select_dcrop(parameters).then((db_data)=>{
     res.render('dash/DCrop',{db_data,d_num : req.params.num, max_value:5 , dayjs,username : req.session.userName});
@@ -176,7 +176,7 @@ function dashDCropAdd(req, res, next) {
 function dashinsertDCrop(req, res, next) {
   parameters ={
     "cropsName": req.body.Cropkind,
-    "uid" : 1234,
+    "uid": req.session.userid,
     "cropsCultivar" : req.body.CropName,
     "cropsImage" : req.files.attachments[0].filename,
     "cropsMemo" : req.body.cropmemo,
@@ -190,7 +190,7 @@ function dashinsertDCrop(req, res, next) {
 
 function dashDCropDetail(req, res, next) {
   var parameters = {
-    "uid": 1234,
+    "uid": req.session.userid,
     "did": req.params.num
   }
   DashDAO.select_dcropDetail(parameters).then((db_data)=> {

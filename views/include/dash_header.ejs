@@ -63,8 +63,12 @@
           <li class="nav-item dropdown d-none d-lg-block">
             <select id = "cropSelecor"class="form-select" aria-label="Default select example">
               <option selected>선택하시오</option>
-              <% for (var i = 0; i < db_data.length; i++ ) { %>
-                <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
+              <% if ( db_data.length != 0) { %>
+                <% for (var i = 0; i < db_data.length; i++ ) { %>
+                  <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
+                <% } %>
+              <% } else {%>
+                  <option value="없다">데이터가 없습니다.</option>
               <% } %>
             </select>
           </li>
@@ -234,4 +238,3 @@
           </li>
         </ul>
       </nav>
-      </script>
