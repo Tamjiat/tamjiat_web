@@ -75,13 +75,13 @@ function select_cropCategory() {
 
 function insert_crop(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropCultivar}',
+        db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropsCultivar}',
          locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
          currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]"+
-                    "\n \t" + `INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsNum = '${parameters.cropsNum}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropseCultivar}',
+                    "\n \t" + `INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropCultivar}',
                     locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
                     currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}'` +
                     "\n \t" + error);
@@ -207,6 +207,41 @@ function insert_crop(parameters) {
         });
     })
   }
+  function select_noticeDetail(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT * FROM notice WHERE nid = '${parameters.nid}'; `, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [notice]"+
+                    "\n \t" + `SELECT * FROM notice WHERE nid = '${parameters.nid}';` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
+
+  function insert_notice(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`INSERT INTO notice SET nTitle = '${parameters.nTitle}',nContent = '${parameters.nContent}',nWriter = '${parameters.nWriter}',nDate = NOW()`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [notice]"+
+                    "\n \t" + `SELECT * FROM notice` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
 
   function select_totalGrowPercent(parameters){
     return new Promise(function(resolve, reject){
@@ -308,6 +343,8 @@ module.exports = {
   select_dcrop,
   select_dcropDetail,
   select_notice,
+  insert_notice,
+  select_noticeDetail,
   select_totalGrowPercent,
   select_nearHarvestDate,
   select_totalYieldPercent,

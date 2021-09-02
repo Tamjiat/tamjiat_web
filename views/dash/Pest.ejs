@@ -35,7 +35,7 @@
                       <tbody>
                         <% for(var i =(p_num - 1) * max_value; i < p_num * max_value; i++){ %>
                           <% var data_value=db_data[i]; if(data_value===undefined){ continue; } %>
-                          <tr onclick="location.href='/dash/pest/<%= data_value.pid %>'">
+                          <tr>
                           <td>
                             <%= data_value.pid %>
                           </td>
