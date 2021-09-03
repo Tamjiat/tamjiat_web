@@ -1,5 +1,4 @@
 <% include ../include/dash_header %>
-<<<<<<< HEAD
 <!-- partial -->
 <div class="main-panel">
   <div class="content-wrapper">
@@ -12,14 +11,7 @@
                 <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">진행 사항</a>
               </li>
               <li class="nav-item">
-                <select id = "cropSelecor" class="form-select" aria-label="Default select example" style="border: 1px solid transparent;; background-color: transparent; font-size: 14px;">
-                  <option selected>선택하시오</option>
-                  <% for (var i = 0; i < db_data.length; i++ ) { %>
-                    <option value="<%= db_data[i].cropsName %>"><%= db_data[i].cropsName %> [<%= db_data[i].categoryName %>]</option>
-                  <% } %>
-                </select>
               </li>
-
             </ul>
 
             <div>
@@ -59,7 +51,6 @@
                       <p class="statistics-title"></p>
                       <h3 class="rate-percentage"></h3>
                       <p class="text-success d-flex"><span></span></p>
-=======
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -72,12 +63,12 @@
                       <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">진행 사항</a>
                     </li>
                     <li class="nav-item">
-                      <select id = "cropSelecor"class="form-select" aria-label="Default select example" style="background-color:transparent;  border-width: 0;"">
+                      <select id = "cropSelecor"class="form-select" aria-label="Default select example" style="background-color:transparent;  border-width: 0;">
                         <option selected>선택하시오</option>
                         <% for (var i = 0; i < ListData.length; i++ ) { %>
-                          <option value="<%= ListData[i].cropsName %>"><%= ListData[i].cropsName %> [<%= ListData[i].categoryName %>]</option>
+                          <option value="<%= ListData[i].cropsName %>"><%= ListData[i].cropsName %></option>
                         <% } %>
-                      </select>                    
+                      </select>
                     </li>
                   </ul>
                   <div>
@@ -85,7 +76,6 @@
                       <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> 공유</a>
                       <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> 프린트</a>
                       <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> 사진</a>
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
                     </div>
                   </div>
                 </div>
@@ -161,7 +151,6 @@
                         </div>
                       </div>
                     </div>
-<<<<<<< HEAD
                   </div>
                 </div>
               </div>
@@ -404,7 +393,7 @@
                                             </div>
                                           </div>
                                         </td>
-                                        <td> 
+                                        <td>
                                           <% if (PercentData[i].percent >= 100) {%>
                                             <div class="badge badge-opacity-warning">완료</div>                                         \
                                           <% } else { %>
@@ -425,7 +414,7 @@
                             <div class="card card-rounded">
                               <div class="card-body card-rounded">
                                 <h4 class="card-title  card-title-dash">농작물 재배 현황</h4>
-                                
+
                                 <% for (var i = 0; i < FinishData.length; i++ ) { %>
                                   <div class="list align-items-center border-bottom py-2">
                                   <div class="wrapper w-100">
@@ -472,7 +461,6 @@
                                     <p class="mb-0">
                                       <a href="#" class="fw-bold text-primary">전체 보기<i class="mdi mdi-arrow-right ms-2"></i></a>
                                     </p>
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
                                   </div>
                                 </td>
                                 <td><div class="badge badge-opacity-success">완료</div></td>
@@ -669,7 +657,6 @@
             </div>
           </div>
         </div>
-<<<<<<< HEAD
       </div>
     </div>
   </div>
@@ -727,25 +714,5 @@
       })
     })
   </script>
-=======
-        <script>
-          $("#cropSelecor").on("change", function(){
-            $.ajax({
-                url:"/dash/Header",
-                type:"POST",
-                data: {cropsName : this.value},
-                success:function(db_data){
-                  $("#avgPercent").text(db_data.result.avgPercent+ "%");
-                  $("#nearHavestDate").text(db_data.result.nearHavestDate);
-                  $("#totalYieldPercent").text(db_data.result.totalYieldPercent+"%");
-                  $("#totalDiseaseCount").text(db_data.result.totalDiseaseCount);
-                  $("#damagedCropsCount").text(db_data.result.damagedCropsCount);
-            }
-          })
-        })
-        
-        </script>
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
-
 
 <% include ../include/dash_footer_main %>
