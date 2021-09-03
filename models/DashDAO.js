@@ -304,11 +304,11 @@ function select_totalYieldPercent(parameters) {
 
 function select_countDisease_totalCrops(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT ifnull(COUNT(*), '-') AS result FROM userCropDisease WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cdOccurDate GROUP BY cropsCultivar WITH rollup`, function (error, db_data) {
+        db.query(`SELECT ifnull(COUNT(*), '-') AS result FROM userDcrop WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cropsDate GROUP BY cropsCultivar WITH rollup`, function (error, db_data) {
             if (error) {
                 logger.error(
-                    "DB error [countDisease_totalCrops]" +
-                    "\n \t" + `SELECT COUNT(*) AS result FROM userCropDisease WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cdOccurDate GROUP BY cropsCultivar WITH rollup` +
+                    "DB error [userDcrop]" +
+                    "\n \t" + `SELECT ifnull(COUNT(*), '-') AS result FROM userDcrop WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cropsDate GROUP BY cropsCultivar WITH rollup` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -417,13 +417,29 @@ function select_dashcropDisease() {
         })
     }        
     
+    function select_countDisease_date(parameters) {
+        return new Promise(function (resolve, reject) {
+            db.query(`SELECT cropsDate, COUNT(cropsDate) AS count  FROM userDcrop WHERE uid = '${parameters.userid}' AND cropsName = '${parameters.cropsName}' GROUP BY cropsDate`, function (error, db_data) {
+                if (error) {
+                    logger.error(
+                        "DB error [userDcrop]"+
+                        "\n \t" + `SELECT cropsDate, COUNT(cropsDate) AS count  FROM userDcrop WHERE uid = "1234" AND cropsName = "고추"  GROUP BY cropsDate` +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                    //throw error;
+                } else {
+                    resolve(db_data);
+                }
+            });
+        })
+    }
   function select_dashDonut(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName WITH ROLLUP`, function (error, db_data) {
+        db.query(`SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]"+
-                    "\n \t" + `SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName WITH ROLLUP` +
+                    "\n \t" + `SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -456,5 +472,7 @@ module.exports = {
     select_userLocate,
     select_userLatLon,
     select_dashcropFinish,
-    select_dashcropDisease
+    select_dashcropDisease,
+    select_countDisease_date,
+    select_dashDonut
 }

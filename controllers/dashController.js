@@ -85,7 +85,7 @@ function dash_cropCategory(req, res, next) {
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
     var parameters = {
-        "uid": 1234
+        "uid": 1884152197
     }
     DashDAO.select_dashMenuList(parameters).then((db_data)=>{
         ListData = db_data;
@@ -95,11 +95,14 @@ function dash_main(req, res, next) {
             FinishData = db_data
             DashDAO.select_dashcropDisease().then((db_data)=>{
                 DiseaseData = db_data
-                    res.render('dash/main',{ListData, PercentData,FinishData, DiseaseData ,username : req.session.userName});
-                })
-            })
-        })
-    }).catch(err=>res.send("<script>alert('menu err')</script>"));
+                DashDAO.select_dashDonut(parameters).then((db_data)=>{
+                    DonutData = db_data
+                        res.render('dash/main',{ListData, PercentData,FinishData, DiseaseData,DonutData ,username : req.session.userName});
+                    }).catch(err=>res.send("<script>alert('err')</script>"));
+                }).catch(err=>res.send("<script>alert('err ')</script>"));
+            }).catch(err=>res.send("<script>alert('err')</script>"));
+        }).catch(err=>res.send("<script>alert('err')</script>"));
+    }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashCrop(req, res, next) {
@@ -259,10 +262,6 @@ function dashTalk(req, res, next) {
     res.render('dash/talk', {username: req.session.userName});
 }
 
-function dashCropCulture(req, res, next) {
-    res.render('dash/Crop_culture', {username: req.session.userName});
-}
-
 function dash_cropMulter(req, res, next) {
     var parameters = {
         "imagefile": req.files
@@ -283,7 +282,7 @@ function dashHeader(req, res, next) {
     var lat = 0
     var lon = 0
     var parameters = {
-        "userid": req.session.userid,
+        "userid": 1884152197,
         "cropsName": req.body.cropsName
     }
     console.log("dash header 진입")
@@ -322,32 +321,35 @@ function dashHeader(req, res, next) {
                                 totalDiseaseCount = db_data[db_data.length - 1].result
                                 damagedCropsCount = db_data.length - 1
                             }
-
-                            weather.getWeatherAPI(lat, lon).then((body) => {
-                                let info = JSON.parse(body);
-
-                                weathers.temp = Math.ceil(info['current']['temp'])
-                                if (info['current']['rain'] === undefined) {
-                                    weathers.rain = 0
-                                } else {
-                                    weathers.rain = Math.ceil(info['current']['rain'])
-                                }
-                                weathers.windSpeed = Math.ceil(info['current']['wind_speed'])
-                                console.log(weathers.temp)
-                                var headerInfo = {
-                                    "avgPercent": avgPercent,
-                                    "nearHavestDate": nearHavestDate,
-                                    "totalYieldPercent": totalYieldPercent,
-                                    "totalDiseaseCount": totalDiseaseCount,
-                                    "damagedCropsCount": damagedCropsCount,
-                                    "locate": weathers.locate,
-                                    "temp": weathers.temp,
-                                    "rain": weathers.rain,
-                                    "windspeed": weathers.windSpeed
-                                }
-                                console.log("ok")
-                                res.send({"result": headerInfo})
-                            }).catch(err => res.send("<script>alert('weather err')</script>"));
+                            DashDAO.select_countDisease_date(parameters).then(function(db_data){
+                                console.log(db_data)
+                                weather.getWeatherAPI(lat, lon).then((body) => {
+                                    let info = JSON.parse(body);
+    
+                                    weathers.temp = Math.ceil(info['current']['temp'])
+                                    if (info['current']['rain'] === undefined) {
+                                        weathers.rain = 0
+                                    } else {
+                                        weathers.rain = Math.ceil(info['current']['rain'])
+                                    }
+                                    weathers.windSpeed = Math.ceil(info['current']['wind_speed'])
+                                    console.log(weathers.temp)
+    
+                                    var headerInfo = {
+                                        "avgPercent": avgPercent,
+                                        "nearHavestDate": nearHavestDate,
+                                        "totalYieldPercent": totalYieldPercent,
+                                        "totalDiseaseCount": totalDiseaseCount,
+                                        "damagedCropsCount": damagedCropsCount,
+                                        "locate": weathers.locate,
+                                        "temp": weathers.temp,
+                                        "rain": weathers.rain,
+                                        "windspeed": weathers.windSpeed
+                                    }
+                                    console.log(headerInfo)
+                                    res.send({"result": headerInfo})
+                                }).catch(err => res.send("<script>alert('weather err')</script>"));
+                            }).catch(err => res.send("<script>alert('select err')</script>"));
                         }).catch(err => res.send("<script>alert('err')</script>"));
                     }).catch(err => res.send("<script>alert('err')</script>"));
                 }).catch(err => res.send("<script>alert('err')</script>"));
