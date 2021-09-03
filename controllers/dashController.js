@@ -82,9 +82,6 @@ function dash_cropCategory(req, res, next) {
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
-//---------------------------------웹
-
-
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
     var parameters = {
@@ -276,7 +273,6 @@ function dash_cropMulter(req, res, next) {
     res.send({"message": "success"})
 }
 
-
 function dashHeader(req, res, next) {
     const weathers = new Object();
     var avgPercent = 0
@@ -290,14 +286,17 @@ function dashHeader(req, res, next) {
         "userid": req.session.userid,
         "cropsName": req.body.cropsName
     }
+    console.log("dash header 진입")
     DashDAO.select_userLocate(parameters).then(function (db_data) {
         var parameterLocate = {
             "locate": db_data[0].locate
         }
+        console.log(db_data[0].locate)
         weathers.locate = db_data[0].locate
         DashDAO.select_userLatLon(parameterLocate).then(function (db_data) {
             lat = db_data[0].latitude
             lon = db_data[0].longitude
+            console.log(db_data[0].latitude)
             DashDAO.select_totalGrowPercent(parameters).then(function (db_data) {
                 var totalPercent = 0
                 //선택 농작물 총 성장률 구하기
@@ -334,7 +333,7 @@ function dashHeader(req, res, next) {
                                     weathers.rain = Math.ceil(info['current']['rain'])
                                 }
                                 weathers.windSpeed = Math.ceil(info['current']['wind_speed'])
-
+                                console.log(weathers.temp)
                                 var headerInfo = {
                                     "avgPercent": avgPercent,
                                     "nearHavestDate": nearHavestDate,
@@ -346,7 +345,7 @@ function dashHeader(req, res, next) {
                                     "rain": weathers.rain,
                                     "windspeed": weathers.windSpeed
                                 }
-
+                                console.log("ok")
                                 res.send({"result": headerInfo})
                             }).catch(err => res.send("<script>alert('weather err')</script>"));
                         }).catch(err => res.send("<script>alert('err')</script>"));
@@ -357,7 +356,7 @@ function dashHeader(req, res, next) {
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
-function getWayWeather(req,res, next){
+function getWayWeather(req, res, next) {
     var parameters = {
         "lat": req.body.lat,
         "lon": req.body.lon
@@ -403,7 +402,6 @@ module.exports = {
     dashDCropAdd,
     dashDCropDetail,
     dashinsertDCrop,
-    dashCropCulture,
     dashNotice,
     dashNoticeDetail,
     dashNoticeInsert,
