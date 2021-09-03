@@ -40,14 +40,16 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/company">회사소개</a></li>
-          <li><a class="nav-link scrollto" href="/business">사업소개</a></li>
-          <li><a class="nav-link scrollto" href="/notice">공지사항</a></li>
-          <li><a class="nav-link scrollto " href="/service">문의하기</a></li>
-          <li></li><li></li><li></li><li></li><li></li>
+          <li><a class="nav-link scrollto" style="margin-right: 25px;" href="/company">회사소개</a></li>
+          <li><a class="nav-link scrollto" style="margin-right: 25px;" href="/business">사업소개</a></li>
+          <li><a class="nav-link scrollto " style="margin-right: 350px;" href="/service">문의하기</a></li>
+          <% if (username != undefined) { %>
+          <li><a class="nav-link scrollto"><%= username %> 님</a></li>
+          <li><a class="nav-link scrollto" href="/auth/logout">로그아웃</a></li>
+          <% } else { %>
           <li><a class="nav-link scrollto" href="/auth/kakao">로그인</a></li>
-          <li><a class="nav-link scrollto" href="/signup">동료되기</a></li>
-          <li><a class="getstarted scrollto" href="/start">시작하기</a></li>
+          <% } %>
+          <li><a class="getstarted scrollto" href="/dash">시작하기</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
