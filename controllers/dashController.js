@@ -97,7 +97,7 @@ function dash_main(req, res, next) {
                 DiseaseData = db_data
                 DashDAO.select_dashDonut(parameters).then((db_data)=>{
                     DonutData = db_data
-                        res.render('dash/main',{ListData, PercentData,FinishData, DiseaseData,DonutData ,username : req.session.userName});
+                        res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData,username : req.session.userName});
                     }).catch(err=>res.send("<script>alert('err')</script>"));
                 }).catch(err=>res.send("<script>alert('err ')</script>"));
             }).catch(err=>res.send("<script>alert('err')</script>"));
