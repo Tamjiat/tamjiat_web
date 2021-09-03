@@ -87,33 +87,22 @@ function dash_cropCategory(req, res, next) {
 
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
-<<<<<<< HEAD
     var parameters = {
-        "uid": req.session.userid,
+        "uid": 1234
     }
-    DashDAO.select_dashMenuList(parameters).then((db_data) => {
-        console.log(db_data)
-        console.log(req.session.userName);
-        res.render('dash/main', {db_data, username: req.session.userName});
-    }).catch(err => res.send("<script>alert('err')</script>"));
-=======
-  var parameters = {
-    "uid": 1234
-  }
-  DashDAO.select_dashMenuList(parameters).then((db_data)=>{
-    ListData = db_data
-    DashDAO.select_cropPercent(parameters).then((db_data)=>{
-      PercentData = db_data
-      DashDAO.select_dashcropFinish().then((db_data)=>{
-        FinishData = db_data
-        DashDAO.select_dashcropDisease().then((db_data)=>{
-          DiseaseData = db_data
-          res.render('dash/main',{ListData, PercentData,FinishData, DiseaseData ,username : req.session.userName});
+    DashDAO.select_dashMenuList(parameters).then((db_data)=>{
+        ListData = db_data;
+        DashDAO.select_cropPercent(parameters).then((db_data)=>{
+        PercentData = db_data
+        DashDAO.select_dashcropFinish().then((db_data)=>{
+            FinishData = db_data
+            DashDAO.select_dashcropDisease().then((db_data)=>{
+                DiseaseData = db_data
+                    res.render('dash/main',{ListData, PercentData,FinishData, DiseaseData ,username : req.session.userName});
+                })
+            })
         })
-      })
-    })
-  }).catch(err=>res.send("<script>alert('menu err')</script>"));
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
+    }).catch(err=>res.send("<script>alert('menu err')</script>"));
 }
 
 function dashCrop(req, res, next) {
@@ -288,7 +277,6 @@ function dash_cropMulter(req, res, next) {
 }
 
 
-<<<<<<< HEAD
 function dashHeader(req, res, next) {
     const weathers = new Object();
     var avgPercent = 0
@@ -367,55 +355,6 @@ function dashHeader(req, res, next) {
             }).catch(err => res.send("<script>alert('err')</script>"));
         }).catch(err => res.send("<script>alert('err')</script>"));
     }).catch(err => res.send("<script>alert('err')</script>"));
-=======
-function dashHeader(req, res, next){
-  var avgPercent = 0
-  var nearHavestDate = ""
-  var totalYieldPercent = ""
-  var totalDiseaseCount = 0
-  var damagedCropsCount = 0
-  var parameters = {
-    "userid": 1234,
-    "cropsName" : req.body.cropsName
-  }
-  DashDAO.select_totalGrowPercent(parameters).then(function(db_data){
-    var totalPercent = 0
-    //선택 농작물 총 성장률 구하기
-    db_data.forEach(element => {
-      totalPercent += element.percent;
-    });
-    avgPercent = Math.round((totalPercent / db_data.length) * 100) / 100
-
-    //가장 가까운 작물 수확예정일
-    DashDAO.select_nearHarvestDate(parameters).then(function(db_data){
-      nearHavestDate = db_data[0].cropsEnd;
-      
-      //작물별 총 수확 진행률
-      DashDAO.select_totalYieldPercent(parameters).then(function(db_data){
-        totalYieldPercent = db_data[0].avgYield;
-
-        //작물별 병 해충 발행건수 및 피해 농작물 종 개수
-        DashDAO.select_countDisease_totalCrops(parameters).then(function(db_data){
-          if(db_data[db_data.length-1] == undefined){
-            totalDiseaseCount = 0
-            damagedCropsCount = 0
-          }else {
-            totalDiseaseCount = db_data[db_data.length - 1].result
-            damagedCropsCount = db_data.length - 1
-          }
-            var headerInfo = {
-            "avgPercent" : avgPercent,
-            "nearHavestDate" : nearHavestDate,
-            "totalYieldPercent" : totalYieldPercent,
-            "totalDiseaseCount" : totalDiseaseCount,
-            "damagedCropsCount" : damagedCropsCount
-          }
-          res.send({"result": headerInfo})
-        }).catch(err=>res.send("<script>alert('err')</script>"));
-      }).catch(err=>res.send("<script>alert('err')</script>"));
-    }).catch(err=>res.send("<script>alert('err')</script>"));
-  }).catch(err=>res.send("<script>alert('err')</script>"));
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
 }
 
 function getWayWeather(req,res, next){
