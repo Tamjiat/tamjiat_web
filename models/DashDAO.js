@@ -316,7 +316,7 @@ function insert_crop(parameters) {
   }
   function select_dashMenuList(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT DISTINCT categoryName, cropsName FROM userCrop WHERE uid = '${parameters.uid}'`, function (error, db_data) {
+        db.query(`SELECT DISTINCT categoryName, cropsName, cropsCultivar FROM userCrop WHERE uid = '${parameters.uid}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]"+
@@ -331,6 +331,44 @@ function insert_crop(parameters) {
         });
     })
   }
+//------------------------------------------------------------------------------------------------------------------------------------
+function select_userLatLon(parameterLocate) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT latitude, longitude FROM userCrop where locate = '${parameterLocate.locate}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT latitude, longitude FROM userCrop where locate = '${parameterLocate.locate}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+}
+
+function select_userLocate(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT locate FROM userCrop where uid = '${parameters.userid}' and cropsName = '${parameters.cropsName}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT locate FROM userCrop where uid = '${parameters.userid}' and cropsName= '${parameters.cropsName}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+}
+//------------------------------------------------------------------------------------------------------------------------------------
+
 module.exports = {
   select_crop,
   select_cropDetail,
@@ -349,5 +387,7 @@ module.exports = {
   select_nearHarvestDate,
   select_totalYieldPercent,
   select_countDisease_totalCrops,
-  select_dashMenuList
+  select_dashMenuList,
+  select_userLocate,
+  select_userLatLon
 }

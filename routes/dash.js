@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const upload = require('../middleware/multer');
 var dashController = require('../controllers/dashController')
+var weatherController = require('../controllers/weatherController')
 
 //안드로이드-----------------------------------------
 router.post('/crop', dashController.dash_cropCategoryCount);
@@ -35,5 +36,10 @@ router.post('/noticeInsert',dashController.dashNoticeInsertData);
 router.get('/talk',dashController.dashTalk);
 
 router.post('/Header',dashController.dashHeader);
+router.post('/getWayWeather',dashController.getWayWeather);
+
+router.get('/weather/today',weatherController.todayWeather);
+
+
 
 module.exports = router

@@ -1,6 +1,7 @@
 var express = require('express');
 var weather = require('../models/weather');
 
+
 function todayWeather(req, res, next) {
     var lat = req.query.lat;
     var lon = req.query.lon;
