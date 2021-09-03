@@ -279,11 +279,16 @@ function dashHeader(req, res, next) {
     var totalYieldPercent = ""
     var totalDiseaseCount = 0
     var damagedCropsCount = 0
+    var pestoutbreakCount = 0
     var lat = 0
     var lon = 0
     var parameters = {
         "userid": 1884152197,
         "cropsName": req.body.cropsName
+    }
+    var pestData = {
+        "cropsDate" : 0,
+        "count": 0
     }
     console.log("dash header 진입")
     DashDAO.select_userLocate(parameters).then(function (db_data) {
@@ -303,17 +308,15 @@ function dashHeader(req, res, next) {
                     totalPercent += element.percent;
                 });
                 avgPercent = Math.round((totalPercent / db_data.length) * 100) / 100
-
                 //가장 가까운 작물 수확예정일
                 DashDAO.select_nearHarvestDate(parameters).then(function (db_data) {
                     nearHavestDate = db_data[0].cropsEnd;
-
                     //작물별 총 수확 진행률
                     DashDAO.select_totalYieldPercent(parameters).then(function (db_data) {
                         totalYieldPercent = db_data[0].avgYield;
-
                         //작물별 병 해충 발행건수 및 피해 농작물 종 개수
                         DashDAO.select_countDisease_totalCrops(parameters).then(function (db_data) {
+
                             if (db_data[db_data.length - 1] == undefined) {
                                 totalDiseaseCount = 0
                                 damagedCropsCount = 0
@@ -323,9 +326,14 @@ function dashHeader(req, res, next) {
                             }
                             DashDAO.select_countDisease_date(parameters).then(function(db_data){
                                 console.log(db_data)
+                                if(db_data === []){
+                                    pestoutbreakCount = pestData
+                                }else {
+                                    pestoutbreakCount = db_data
+                                }
                                 weather.getWeatherAPI(lat, lon).then((body) => {
                                     let info = JSON.parse(body);
-    
+                                    console.log(totalDiseaseCount)
                                     weathers.temp = Math.ceil(info['current']['temp'])
                                     if (info['current']['rain'] === undefined) {
                                         weathers.rain = 0
@@ -333,14 +341,13 @@ function dashHeader(req, res, next) {
                                         weathers.rain = Math.ceil(info['current']['rain'])
                                     }
                                     weathers.windSpeed = Math.ceil(info['current']['wind_speed'])
-                                    console.log(weathers.temp)
-    
                                     var headerInfo = {
                                         "avgPercent": avgPercent,
                                         "nearHavestDate": nearHavestDate,
                                         "totalYieldPercent": totalYieldPercent,
                                         "totalDiseaseCount": totalDiseaseCount,
                                         "damagedCropsCount": damagedCropsCount,
+                                        "pestoutbreakCount": pestoutbreakCount,
                                         "locate": weathers.locate,
                                         "temp": weathers.temp,
                                         "rain": weathers.rain,
