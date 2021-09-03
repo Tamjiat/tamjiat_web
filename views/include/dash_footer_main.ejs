@@ -41,6 +41,10 @@
 
 
 <script>
+    function getRandomColor() {
+        return "#" + Math.floor(Math.random() * 16777215).toString(16);
+    }
+
     $(function () {
         $("#datepicker").datepicker(); // yyyy-mm-dd 형식으로 date타입 포멧
         $("#datepicker2").datepicker(); // yyyy-mm-dd 형식으로 date타입 포멧
@@ -166,16 +170,14 @@
                     <% } %>
                 ],
                 backgroundColor: [
-                    "#1F3BB3",
-                    "#FDD0C7",
-                    "#52CDFF",
-                    "#81DADA"
+                    <% for(var i = 0; i < DonutData.length; i++){ %>
+                        getRandomColor(),
+                    <% } %>
                 ],
                 borderColor: [
-                    "#1F3BB3",
-                    "#FDD0C7",
-                    "#52CDFF",
-                    "#81DADA"
+                    <% for(var i = 0; i < DonutData.length; i++){ %>
+                    "#00ff0000",
+                    <% } %>
                 ],
             }],
 
