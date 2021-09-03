@@ -331,7 +331,6 @@ function insert_crop(parameters) {
         });
     })
   }
-<<<<<<< HEAD
 //------------------------------------------------------------------------------------------------------------------------------------
 function select_userLatLon(parameterLocate) {
     return new Promise(function (resolve, reject) {
@@ -340,7 +339,17 @@ function select_userLatLon(parameterLocate) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `SELECT latitude, longitude FROM userCrop where locate = '${parameterLocate.locate}'` +
-=======
+                    "\n \t" + error);
+                    reject('DB ERR');
+                    //throw error;
+                }
+                else{
+                    resolve(db_data);
+                }
+            });
+        })
+    }
+
   function select_dashcropFinish() {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT cropsName , cropsEnd FROM userCrop WHERE cropsFinish = 'true' ORDER BY cropsEnd DESC LIMIT 4;`, function (error, db_data) {
@@ -348,7 +357,6 @@ function select_userLatLon(parameterLocate) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `SELECT cropsName , cropsEnd FROM userCrop WHERE cropsFinish = 'true' ORDER BY cropsEnd DESC LIMIT 4;'` +
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -358,7 +366,6 @@ function select_userLatLon(parameterLocate) {
             }
         });
     })
-<<<<<<< HEAD
 }
 
 function select_userLocate(parameters) {
@@ -368,8 +375,16 @@ function select_userLocate(parameters) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `SELECT locate FROM userCrop where uid = '${parameters.userid}' and cropsName= '${parameters.cropsName}'` +
-=======
-  }
+                     "\n \t" + error);
+                    reject('DB ERR');
+                    //throw error;
+                }
+                else{
+                    resolve(db_data);
+                }
+            });
+        })
+    }              
   function select_dashcropDisease() {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT cdName , cropsDate FROM userDcrop WHERE iscdCheck = 'true' ORDER BY cropsDate DESC LIMIT 7;`, function (error, db_data) {
@@ -377,7 +392,6 @@ function select_userLocate(parameters) {
                 logger.error(
                     "DB error [userDcrop]"+
                     "\n \t" + `SELECT cdName , cropsDate FROM userDCrop WHERE iscdCheck = 'true' ORDER BY cropsDate DESC LIMIT 7;` +
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -387,13 +401,7 @@ function select_userLocate(parameters) {
             }
         });
     })
-<<<<<<< HEAD
 }
-//------------------------------------------------------------------------------------------------------------------------------------
-=======
-  }
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
-
 module.exports = {
   select_crop,
   select_cropDetail,
@@ -413,11 +421,8 @@ module.exports = {
   select_totalYieldPercent,
   select_countDisease_totalCrops,
   select_dashMenuList,
-<<<<<<< HEAD
   select_userLocate,
-  select_userLatLon
-=======
+  select_userLatLon,
   select_dashcropFinish,
   select_dashcropDisease
->>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
 }
