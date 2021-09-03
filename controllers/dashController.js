@@ -92,8 +92,14 @@ function dash_main(req, res, next) {
   DashDAO.select_dashMenuList(parameters).then((db_data)=>{
     ListData = db_data
     DashDAO.select_cropPercent(parameters).then((db_data)=>{
-      PercentData = db_data 
-      res.render('dash/main',{ListData, PercentData, username : req.session.userName});
+      PercentData = db_data
+      DashDAO.select_dashcropFinish().then((db_data)=>{
+        FinishData = db_data
+        DashDAO.select_dashcropDisease().then((db_data)=>{
+          DiseaseData = db_data
+          res.render('dash/main',{ListData, PercentData,FinishData, DiseaseData ,username : req.session.userName});
+        })
+      })
     })
   }).catch(err=>res.send("<script>alert('menu err')</script>"));
 }
