@@ -7,30 +7,18 @@ body {
 }
 
 .container {
-  height: 100vh;
-  padding: 20px;
+  height: 70vh;
+  padding: 10px;
   text-align: -webkit-center;
-}
-
-.chat {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  height: 100%;
-  background-color: white;
-  border: 1px solid #dee2e6;
-  border-radius: 1em;
 }
 
 #message-container {
   flex-basis: 90%;
   width: 100%;
-  min-height: 100px;
-  overflow: auto;
-  text-align: -webkit-center;
-  background-color: rgb(178, 199, 217);
-  border-radius: 1em 1em 0 0;
+  min-height: 600px;
+  max-height: 600px;
+  background-color: rgb(236, 214, 165);
+  border-radius: 1em 1em 1em 1em;
 }
 
 #message-container > div {
@@ -39,13 +27,12 @@ body {
   margin: 10px;
   text-align: left;
   word-wrap: break-word;
-  word-break: break-all;
 }
 
 #message-container > div.me {
   margin-left: auto;
   background-color: rgb(255, 235, 51);
-  border: 1px solid #dee2e6;
+  
 }
 
 #message-container > div.other {
@@ -58,13 +45,13 @@ body {
   left: 60px;
   padding: 5px;
   background-color: #fff;
-  border: 1px solid #dee2e6;
+  
 }
 
 #message-container div.info {
-  padding: 5px;
+  padding: 10px;
   color: gray;
-  font-size: 9px;
+  font-size: 12px;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.671);
   border-radius: 3px;
@@ -98,7 +85,7 @@ body {
   position: relative;
   padding: 5px;
   background-color: rgb(255, 235, 51);
-  border: 1px solid #dee2e6;
+  
 }
 
 .me .time {
@@ -123,13 +110,14 @@ body {
 #send-container input,
 #send-container button {
   height: 100%;
+  margin-right: 10px;
 }
 
 #send-container input {
   flex-basis: 90%;
 }
 #send-container button {
-  flex-basis: 10%;
+  flex-basis: 8%;
 }
 
 /* scroll bar */

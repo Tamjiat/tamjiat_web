@@ -77,13 +77,13 @@ function insert_crop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropsCultivar}',
          locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
-         currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}'`, function (error, db_data) {
+         currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}, cropsFinish = 'false'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropCultivar}',
                     locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
-                    currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}'` +
+                    currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}',cropsFinish = 'false' ` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -175,11 +175,11 @@ function insert_crop(parameters) {
 
   function select_cropDisease() {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT * FROM userCropDisease`, function (error, db_data) {
+        db.query(`SELECT * FROM userDcrop WHERE iscdCheck = 'true'`, function (error, db_data) {
             if (error) {
                 logger.error(
-                    "DB error [userCropDisease]"+
-                    "\n \t" + `SELECT * FROM userCropDisease` +
+                    "DB error [userDCrop]"+
+                    "\n \t" + `SELECT * FROM userDcrop WHERE iscdCheck = 'true'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -299,7 +299,7 @@ function insert_crop(parameters) {
 
   function select_countDisease_totalCrops(parameters){
       return new Promise(function(resolve, reject){
-          db.query(`SELECT COUNT(*) AS result FROM userCropDisease WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cdOccurDate GROUP BY cropsCultivar WITH rollup`, function(error, db_data){
+          db.query(`SELECT ifnull(COUNT(*), '-') AS result FROM userCropDisease WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cdOccurDate GROUP BY cropsCultivar WITH rollup`, function(error, db_data){
             if (error) {
                 logger.error(
                     "DB error [countDisease_totalCrops]"+
@@ -331,6 +331,7 @@ function insert_crop(parameters) {
         });
     })
   }
+<<<<<<< HEAD
 //------------------------------------------------------------------------------------------------------------------------------------
 function select_userLatLon(parameterLocate) {
     return new Promise(function (resolve, reject) {
@@ -339,6 +340,15 @@ function select_userLatLon(parameterLocate) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `SELECT latitude, longitude FROM userCrop where locate = '${parameterLocate.locate}'` +
+=======
+  function select_dashcropFinish() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT cropsName , cropsEnd FROM userCrop WHERE cropsFinish = 'true' ORDER BY cropsEnd DESC LIMIT 4;`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT cropsName , cropsEnd FROM userCrop WHERE cropsFinish = 'true' ORDER BY cropsEnd DESC LIMIT 4;'` +
+>>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -348,6 +358,7 @@ function select_userLatLon(parameterLocate) {
             }
         });
     })
+<<<<<<< HEAD
 }
 
 function select_userLocate(parameters) {
@@ -357,6 +368,16 @@ function select_userLocate(parameters) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `SELECT locate FROM userCrop where uid = '${parameters.userid}' and cropsName= '${parameters.cropsName}'` +
+=======
+  }
+  function select_dashcropDisease() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT cdName , cropsDate FROM userDcrop WHERE iscdCheck = 'true' ORDER BY cropsDate DESC LIMIT 7;`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userDcrop]"+
+                    "\n \t" + `SELECT cdName , cropsDate FROM userDCrop WHERE iscdCheck = 'true' ORDER BY cropsDate DESC LIMIT 7;` +
+>>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -366,8 +387,12 @@ function select_userLocate(parameters) {
             }
         });
     })
+<<<<<<< HEAD
 }
 //------------------------------------------------------------------------------------------------------------------------------------
+=======
+  }
+>>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
 
 module.exports = {
   select_crop,
@@ -388,6 +413,11 @@ module.exports = {
   select_totalYieldPercent,
   select_countDisease_totalCrops,
   select_dashMenuList,
+<<<<<<< HEAD
   select_userLocate,
   select_userLatLon
+=======
+  select_dashcropFinish,
+  select_dashcropDisease
+>>>>>>> 6a8359d4c9d20553699a0b62fae6b9574c82b162
 }

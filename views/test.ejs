@@ -1,38 +1,50 @@
-<% include ./include/dash_header %>
-<!-- partial -->
-<div class="main-panel">
-    <div class="content-wrapper">
-      <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-          <div class="card" style = "margin: 50px 0 10px 0">
-            <div class="card-body">
-              <h4 class="card-title" style = "margin: 30px 0 0 0; font-size: 30px;color: green;">공지사항&nbsp;<i class="mdi mdi-clipboard-text"></i></h4>
-                <p class="card-description" style = "margin: 0.8rem 0 0 0">
-                  탐지앗의 공지사항을 확인해주세요.
-                </p>
-                <div style="margin: 50px 0 0;">
-                  <hr class="my-4">
-                    <h3 style="margin: 0 0 0 30px; font-weight: bold;">[ 공지 ]  탐지앗이 새롭게 출시 되었습니다.</h3>
-                  <hr class="my-4">
-                  <p class="card-description" style = "float: right;">
-                    2021-08-31 작성자 : 운영자
-                  </p>
-                </div>
-            </div>
-            <blockquote class="blockquote" style="margin: 20px 30px 30px 30px; height: 500px;">
-              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            </blockquote>
-            <div style="float: right; margin: 10px 0 25px 0">
-                <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 0 20px 0 15px;">
-                  <i class="mdi mdi-hospital"></i>                                                    
-                  &nbsp; 등록하기
-                </button>
-                <button type="button" class="btn btn-danger btn-icon-text"style="float: right; margin: 0 0 0 15px">
-                  <i class="mdi mdi-minus"></i>                                                    
-                  &nbsp; 취소하기
-                </button>
-              </div>
-          </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat app</title>
+    <link rel="icon" href="../public/favicon-bold-color201202.svg" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/442fa0184e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/../../src/default.css" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="/../../src/main.js" type="module"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="chat">
+        <div id="user-list">
+          <ul class="list-group">
+            <li class="list-group-item head">User List</li>
+          </ul>
         </div>
+        <div id="message-container"></div>
+
+        <form id="send-container">
+          <input
+            type="text"
+            id="message-input"
+            class="form-control"
+            maxlength="400"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="send-button" class="btn btn-warning">
+            Send
+          </button>
+        </form>
       </div>
-<% include ./include/dash_footer %>
+    </div>
+  </body>
+</html>

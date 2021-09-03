@@ -31,13 +31,12 @@
     "passport-local": "^1.0.0",
     "request": "^2.88.2",
     "session-file-store": "^1.5.0",
-    "socket.io": "^4.2.0",
+    "socket.io": "^2.2.0",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
   },
   "description": "��#\u0000 \u0000t\u0000a\u0000m\u0000j\u0000i\u0000a\u0000t\u0000_\u0000w\u0000e\u0000b\u0000\r\u0000 \u0000",
   "main": "app.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tamjiat/tamjiat_web.git"
