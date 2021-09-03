@@ -160,7 +160,11 @@
           var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
           var doughnutPieData = {
             datasets: [{
-              data: [40, 20, 30, 10],
+              data: [
+                  <% for(var i = 0; i < DonutData.length; i++){ %>
+                  '<%= DonutData[i].count%>',
+                  <% } %>
+              ],
               backgroundColor: [
                 "#1F3BB3",
                 "#FDD0C7",
@@ -177,10 +181,9 @@
       
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: [
-              '<%= ListData[0].cropsName%>',
-              '박우식',
-              '김득회',
-              '김민수',
+              <% for(var i = 0; i < DonutData.length; i++){ %>
+                '<%= DonutData[i].crops%>',
+              <% } %>
             ]
           };
           var doughnutPieOptions = {

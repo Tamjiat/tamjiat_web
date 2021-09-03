@@ -87,25 +87,25 @@ function dash_main(req, res, next) {
     var parameters = {
         "uid": req.session.userid,
     }
-    DashDAO.select_dashMenuList(parameters).then((db_data) => {
-        ListData = db_data
-        DashDAO.select_cropPercent(parameters).then((db_data) => {
+    DashDAO.select_dashMenuList(parameters).then((db_data)=>{
+        ListData = db_data;
+        DashDAO.select_cropPercent(parameters).then((db_data)=>{
             PercentData = db_data
-            DashDAO.select_dashcropFinish().then((db_data) => {
+            DashDAO.select_dashcropFinish().then((db_data)=>{
                 FinishData = db_data
-                DashDAO.select_dashcropDisease().then((db_data) => {
+                DashDAO.select_dashcropDisease().then((db_data)=>{
                     DiseaseData = db_data
-                    res.render('dash/main', {
-                        ListData,
-                        PercentData,
-                        FinishData,
-                        DiseaseData,
-                        username: req.session.userName
-                    });
-                })
-            })
-        })
-    }).catch(err => res.send("<script>alert('menu err')</script>"));
+                    DashDAO.select_dashDonut(parameters).then((db_data)=>{
+                        DonutData = db_data
+                        console.log("대쉬도넛:" + DonutData[0].crops)
+                        console.log("대쉬도넛:" + DonutData[1].crops)
+
+                        res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, username : req.session.userName});
+                    }).catch(err=>res.send("<script>alert('err')</script>"));
+                }).catch(err=>res.send("<script>alert('err ')</script>"));
+            }).catch(err=>res.send("<script>alert('err')</script>"));
+        }).catch(err=>res.send("<script>alert('err')</script>"));
+    }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 function dashCrop(req, res, next) {

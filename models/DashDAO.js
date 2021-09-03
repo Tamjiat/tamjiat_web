@@ -393,6 +393,23 @@ function select_userLocate(parameters) {
     })
 }
 
+function select_dashDonut(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
+
 function select_dashcropDisease() {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT cdName, cropsDate
@@ -438,5 +455,6 @@ module.exports = {
     select_userLocate,
     select_userLatLon,
     select_dashcropFinish,
-    select_dashcropDisease
+    select_dashcropDisease,
+    select_dashDonut
 }
