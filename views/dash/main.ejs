@@ -146,7 +146,7 @@
                                    <p class="card-subtitle card-subtitle-dash">현재 재배 종목 진행률을 파악하세요.</p>
                                   </div>
                                   <div>
-                                    <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-leaf"></i>농작물 추가</button>
+                                    <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-leaf"></i>농작물 더보기</button>
                                   </div>
                                 </div>
                                 <div class="table-responsive  mt-1">
@@ -215,59 +215,22 @@
                             <div class="card card-rounded">
                               <div class="card-body card-rounded">
                                 <h4 class="card-title  card-title-dash">농작물 재배 현황</h4>
-                                <div class="list align-items-center border-bottom py-2">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-2 font-weight-medium">
-                                      토마토 재배
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                      <div class="d-flex align-items-center">
-                                        <i class="mdi mdi-calendar text-muted me-1"></i>
-                                        <p class="mb-0 text-small text-muted">2021년 8월 18일</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="list align-items-center border-bottom py-2">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-2 font-weight-medium">
-                                      양배추 재배
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                      <div class="d-flex align-items-center">
-                                        <i class="mdi mdi-calendar text-muted me-1"></i>
-                                        <p class="mb-0 text-small text-muted">2021년 8월 11일</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="list align-items-center border-bottom py-2">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-2 font-weight-medium">
-                                      양상추 재배
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                      <div class="d-flex align-items-center">
-                                        <i class="mdi mdi-calendar text-muted me-1"></i>
-                                        <p class="mb-0 text-small text-muted">2021년 8월 13일</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="list align-items-center border-bottom py-2">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-2 font-weight-medium">
-                                      콩 재배
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                      <div class="d-flex align-items-center">
-                                        <i class="mdi mdi-calendar text-muted me-1"></i>
-                                        <p class="mb-0 text-small text-muted">2021년 8월 21일</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                                 
+                                <% for (var i = 0; i < FinishData.length; i++ ) { %>
+                                  <div class="list align-items-center border-bottom py-2">
+                                  <div class="wrapper w-100">
+                                    <p class="mb-2 font-weight-medium">
+                                      <%= FinishData[i].cropsName %>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                      <div class="d-flex align-items-center">
+                                        <i class="mdi mdi-calendar text-muted me-1"></i>
+                                        <p class="mb-0 text-small text-muted"><%= FinishData[i].cropsEnd %></p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <% } %>
                                 <div class="list align-items-center pt-3">
                                   <div class="wrapper w-100">
                                     <p class="mb-0">
@@ -285,48 +248,14 @@
                                   <h4 class="card-title card-title-dash">병ㆍ해충 발생 현황</h4>
                                 </div>
                                 <ul class="bullet-line-list">
+                                  <% for (var i = 0; i < DiseaseData.length; i++) { %>
                                   <li>
                                     <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">고추 탄저병</span></div>
-                                      <p>21. 07. 18</p>
+                                      <div><span class="text-light-green"><%= DiseaseData[i].cdName %></span></div>
+                                      <p><%= DiseaseData[i].cropsDate %></p>
                                     </div>
                                   </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">애호박 노균병</span></div>
-                                      <p>21. 08. 18</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">양배추 균핵병</span></div>
-                                      <p>21. 07. 18</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">오이 노균병</span></div>
-                                      <p>21. 09. 28</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">콩불 마른병</span></div>
-                                      <p>21. 11. 18</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">토마토 잎마름병</span></div>
-                                      <p>21. 03. 18</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">호박 노균병</span></div>
-                                      <p>21. 02. 18</p>
-                                    </div>
-                                  </li>
+                                  <% } %>
                                 </ul>
                                 <div class="list align-items-center pt-3">
                                   <div class="wrapper w-100">
@@ -417,4 +346,4 @@
         </script>
 
 
-<% include ../include/dash_footer %>
+<% include ../include/dash_footer_main %>

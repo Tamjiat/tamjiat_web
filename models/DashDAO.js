@@ -175,11 +175,11 @@ function insert_crop(parameters) {
 
   function select_cropDisease() {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT * FROM userCropDisease`, function (error, db_data) {
+        db.query(`SELECT * FROM userDcrop WHERE iscdCheck = 'true'`, function (error, db_data) {
             if (error) {
                 logger.error(
-                    "DB error [userCropDisease]"+
-                    "\n \t" + `SELECT * FROM userCropDisease` +
+                    "DB error [userDCrop]"+
+                    "\n \t" + `SELECT * FROM userDcrop WHERE iscdCheck = 'true'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -331,6 +331,41 @@ function insert_crop(parameters) {
         });
     })
   }
+  function select_dashcropFinish() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT cropsName , cropsEnd FROM userCrop WHERE cropsFinish = 'true' ORDER BY cropsEnd DESC LIMIT 4;`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT cropsName , cropsEnd FROM userCrop WHERE cropsFinish = 'true' ORDER BY cropsEnd DESC LIMIT 4;'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
+  function select_dashcropDisease() {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT cdName , cropsDate FROM userDcrop WHERE iscdCheck = 'true' ORDER BY cropsDate DESC LIMIT 7;`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userDcrop]"+
+                    "\n \t" + `SELECT cdName , cropsDate FROM userDCrop WHERE iscdCheck = 'true' ORDER BY cropsDate DESC LIMIT 7;` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            }
+            else{
+                resolve(db_data);
+            }
+        });
+    })
+  }
+
 module.exports = {
   select_crop,
   select_cropDetail,
@@ -349,5 +384,7 @@ module.exports = {
   select_nearHarvestDate,
   select_totalYieldPercent,
   select_countDisease_totalCrops,
-  select_dashMenuList
+  select_dashMenuList,
+  select_dashcropFinish,
+  select_dashcropDisease
 }
