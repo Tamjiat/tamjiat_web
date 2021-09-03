@@ -334,7 +334,7 @@ function select_dashMenuList(parameters) {
             }
         });
     })
-}
+  }
 
 function select_userLatLon(parameterLocate) {
     return new Promise(function (resolve, reject) {
@@ -406,6 +406,24 @@ function select_dashcropDisease() {
                                FROM userDCrop
                                WHERE iscdCheck = 'true'
                                ORDER BY cropsDate DESC LIMIT 7;` +
+                    "\n \t" + error);
+                    reject('DB ERR');
+                    //throw error;
+                }
+                else{
+                    resolve(db_data);
+                }
+            });
+        })
+    }        
+    
+  function select_dashDonut(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName WITH ROLLUP`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT if(cropsName IS NULL, "total", cropsName) AS crops, COUNT(cropsName) AS count  FROM userCrop WHERE uid = '${parameters.uid}' GROUP BY cropsName WITH ROLLUP` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
