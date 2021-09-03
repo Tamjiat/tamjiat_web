@@ -91,9 +91,9 @@ function dash_main(req, res, next) {
         ListData = db_data;
         DashDAO.select_cropPercent(parameters).then((db_data)=>{
         PercentData = db_data
-        DashDAO.select_dashcropFinish().then((db_data)=>{
+        DashDAO.select_dashcropFinish(parameters).then((db_data)=>{
             FinishData = db_data
-            DashDAO.select_dashcropDisease().then((db_data)=>{
+            DashDAO.select_dashcropDisease(parameters).then((db_data)=>{
                 DiseaseData = db_data
                 DashDAO.select_dashDonut(parameters).then((db_data)=>{
                     DonutData = db_data
@@ -226,9 +226,12 @@ function dashDCropDetail(req, res, next) {
 
 
 function dashPest(req, res, next) {
-    DashDAO.select_cropDisease().then((db_data) => {
+    var parameters = {
+        "uid": 1884152197
+    }
+    DashDAO.select_cropDisease(parameters).then((db_data) => {
         res.render('dash/Pest', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
-    })
+    }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
 function dashNotice(req, res, next) {
