@@ -90,10 +90,12 @@ function dash_main(req, res, next) {
     "uid": 1234
   }
   DashDAO.select_dashMenuList(parameters).then((db_data)=>{
-    console.log(db_data)
-    console.log(req.session.userName);
-    res.render('dash/main',{ db_data, username : req.session.userName});
-  }).catch(err=>res.send("<script>alert('err')</script>"));
+    ListData = db_data
+    DashDAO.select_cropPercent(parameters).then((db_data)=>{
+      PercentData = db_data 
+      res.render('dash/main',{ListData, PercentData, username : req.session.userName});
+    })
+  }).catch(err=>res.send("<script>alert('menu err')</script>"));
 }
 
 function dashCrop(req, res, next) {
@@ -283,10 +285,14 @@ function dashHeader(req, res, next){
 
         //작물별 병 해충 발행건수 및 피해 농작물 종 개수
         DashDAO.select_countDisease_totalCrops(parameters).then(function(db_data){
-          totalDiseaseCount = db_data[db_data.length-1].result
-          damagedCropsCount = db_data.length -1
-
-          var headerInfo = {
+          if(db_data[db_data.length-1] == undefined){
+            totalDiseaseCount = 0
+            damagedCropsCount = 0
+          }else {
+            totalDiseaseCount = db_data[db_data.length - 1].result
+            damagedCropsCount = db_data.length - 1
+          }
+            var headerInfo = {
             "avgPercent" : avgPercent,
             "nearHavestDate" : nearHavestDate,
             "totalYieldPercent" : totalYieldPercent,
@@ -294,12 +300,10 @@ function dashHeader(req, res, next){
             "damagedCropsCount" : damagedCropsCount
           }
           res.send({"result": headerInfo})
-        })
-      })
-    })
-  })
-
-  
+        }).catch(err=>res.send("<script>alert('err')</script>"));
+      }).catch(err=>res.send("<script>alert('err')</script>"));
+    }).catch(err=>res.send("<script>alert('err')</script>"));
+  }).catch(err=>res.send("<script>alert('err')</script>"));
 }
 
 
