@@ -91,9 +91,9 @@ function dash_main(req, res, next) {
         ListData = db_data;
         DashDAO.select_cropPercent(parameters).then((db_data)=>{
         PercentData = db_data
-        DashDAO.select_dashcropFinish().then((db_data)=>{
+        DashDAO.select_dashcropFinish(parameters).then((db_data)=>{
             FinishData = db_data
-            DashDAO.select_dashcropDisease().then((db_data)=>{
+            DashDAO.select_dashcropDisease(parameters).then((db_data)=>{
                 DiseaseData = db_data
                 DashDAO.select_dashDonut(parameters).then((db_data)=>{
                     DonutData = db_data
@@ -107,7 +107,7 @@ function dash_main(req, res, next) {
 
 function dashCrop(req, res, next) {
     var parameters = {
-        "uid": 1234
+        "uid": 1884152197
     }
     DashDAO.select_crop(parameters).then((db_data) => {
         res.render('dash/Crop', {
@@ -132,7 +132,7 @@ function dashCropAdd(req, res, next) {
 function dashCropDetail(req, res, next) {
     var parameters = {
         "cid": req.params.num,
-        "uid": 1234
+        "uid": 1884152197
     }
     DashDAO.select_cropCode().then((db_data) => {
         codeData = db_data
@@ -148,7 +148,7 @@ function dashCropDetail(req, res, next) {
 function dashinsertCrop(req, res, next) {
     parameters = {
         "cropsName": req.body.Cropkind,
-        "uid": 1234,
+        "uid": 1884152197,
         "cropsCultivar": req.body.CropName,
         "categoryName": req.body.CropcategoryName,
         "useCompost": req.body.useCompost,
@@ -157,9 +157,12 @@ function dashinsertCrop(req, res, next) {
         "cropsEnd": req.body.cropsEnd,
         "goalYield": req.body.goalYield,
         "currentYield": req.body.currentYield,
-        "cropsMemo": req.body.cropmemo
+        "cropsMemo": req.body.cropmemo,
+        "send_lat":req.body.send_lat,
+        "send_lng":req.body.send_lng
     }
-    console.log(parameters.cropsCultivar)
+    console.log(parameters.send_lat)
+    console.log(parameters.send_lng)
     DashDAO.insert_crop(parameters).then((db_data) => {
         res.redirect('/dash/crop/1')
     }).catch(err => res.send("<script>alert('err')</script>"));
@@ -167,7 +170,7 @@ function dashinsertCrop(req, res, next) {
 
 function dashCropPercent(req, res, next) {
     var parameters = {
-        "uid": 1234
+        "uid": 1884152197
     }
     DashDAO.select_cropPercent(parameters).then((db_data) => {
         res.render('dash/Crop_culture', {
@@ -181,7 +184,7 @@ function dashCropPercent(req, res, next) {
 
 function dashDCrop(req, res, next) {
     var parameters = {
-        "uid": 1234
+        "uid": 1884152197
     }
     DashDAO.select_dcrop(parameters).then((db_data) => {
         res.render('dash/DCrop', {db_data, d_num: req.params.num, max_value: 5, dayjs, username: req.session.userName});
@@ -198,7 +201,7 @@ function dashDCropAdd(req, res, next) {
 function dashinsertDCrop(req, res, next) {
     parameters = {
         "cropsName": req.body.Cropkind,
-        "uid": 1234,
+        "uid": 1884152197,
         "cropsCultivar": req.body.CropName,
         "cropsImage": req.files.attachments[0].filename,
         "cropsMemo": req.body.cropmemo,
@@ -212,7 +215,7 @@ function dashinsertDCrop(req, res, next) {
 
 function dashDCropDetail(req, res, next) {
     var parameters = {
-        "uid": 1234,
+        "uid": 1884152197,
         "did": req.params.num
     }
     DashDAO.select_dcropDetail(parameters).then((db_data) => {
@@ -223,9 +226,12 @@ function dashDCropDetail(req, res, next) {
 
 
 function dashPest(req, res, next) {
-    DashDAO.select_cropDisease().then((db_data) => {
+    var parameters = {
+        "uid": 1884152197
+    }
+    DashDAO.select_cropDisease(parameters).then((db_data) => {
         res.render('dash/Pest', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
-    })
+    }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
 function dashNotice(req, res, next) {
@@ -251,7 +257,7 @@ function dashNoticeInsertData(req, res, next) {
     var parameters = {
         "nTitle": req.body.nTitle,
         "nContent": req.body.nContent,
-        "nWriter": 1234,
+        "nWriter": 1884152197,
     }
     DashDAO.insert_notice(parameters).then((db_data) => {
         res.redirect('/dash/notice/1')

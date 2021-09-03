@@ -81,7 +81,7 @@ function insert_crop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropsCultivar}',
          locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
-         currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}, cropsFinish = 'false'`, function (error, db_data) {
+         currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}',latitude='${parameters.send_lat}', longitude='${parameters.send_lng}' , cropsFinish = 'false'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]" +
@@ -119,10 +119,10 @@ function select_cropPercent(parameters) {
     })
 }
 
-function select_dcrop() {
+function select_dcrop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT *
-                  FROM userDcrop`, function (error, db_data) {
+                  FROM userDcrop where uid = '${parameters.uid}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
@@ -160,12 +160,12 @@ function select_dcropDetail(parameters) {
 function insert_dcrop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
-          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}'`, function (error, db_data) {
+          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}', iscdCheck = 'false'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
                     "\n \t" + `INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
-                    cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}'` +
+                    cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}', iscdCheck = 'false'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -176,17 +176,13 @@ function insert_dcrop(parameters) {
     })
 }
 
-function select_cropDisease() {
+function select_cropDisease(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT *
-                  FROM userDcrop
-                  WHERE iscdCheck = 'true'`, function (error, db_data) {
+        db.query(`SELECT * FROM userDcrop WHERE iscdCheck = 'true' and uid = '${parameters.uid}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDCrop]" +
-                    "\n \t" + `SELECT *
-                               FROM userDcrop
-                               WHERE iscdCheck = 'true'` +
+                    "\n \t" + `SELECT * FROM userDcrop WHERE iscdCheck = 'true' and uid = '${parameters.uid}'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -353,19 +349,19 @@ function select_userLatLon(parameterLocate) {
     })
 }
 
-function select_dashcropFinish() {
+function select_dashcropFinish(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT cropsName, cropsEnd
                   FROM userCrop
-                  WHERE cropsFinish = 'true'
+                  WHERE cropsFinish = 'true' and uid = '${parameters.uid}'
                   ORDER BY cropsEnd DESC LIMIT 4;`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]" +
-                    "\n \t" + `SELECT cropsName, cropsEnd
-                               FROM userCrop
-                               WHERE cropsFinish = 'true'
-                               ORDER BY cropsEnd DESC LIMIT 4;` +
+                    "\n \t" +`SELECT cropsName, cropsEnd
+                    FROM userCrop
+                    WHERE cropsFinish = 'true' and uid = '${parameters.uid}'
+                    ORDER BY cropsEnd DESC LIMIT 4;` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -393,19 +389,19 @@ function select_userLocate(parameters) {
     })
 }
 
-function select_dashcropDisease() {
+function select_dashcropDisease(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT cdName, cropsDate
                   FROM userDcrop
-                  WHERE iscdCheck = 'true'
+                  WHERE iscdCheck = 'true' and uid = '${parameters.uid}'
                   ORDER BY cropsDate DESC LIMIT 7;`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
                     "\n \t" + `SELECT cdName, cropsDate
-                               FROM userDCrop
-                               WHERE iscdCheck = 'true'
-                               ORDER BY cropsDate DESC LIMIT 7;` +
+                    FROM userDcrop
+                    WHERE iscdCheck = 'true' and uid = '${parameters.uid}'
+                    ORDER BY cropsDate DESC LIMIT 7;` +
                     "\n \t" + error);
                     reject('DB ERR');
                     //throw error;
