@@ -81,7 +81,7 @@ function insert_crop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`INSERT INTO userCrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', categoryName = '${parameters.categoryName}', cropsCultivar = '${parameters.cropsCultivar}',
          locate = '${parameters.locate}', useCompost = '${parameters.useCompost}', cropsStart='${parameters.cropsStart}', cropsEnd = '${parameters.cropsEnd}', goalYield = '${parameters.goalYield}',
-         currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}, cropsFinish = 'false'`, function (error, db_data) {
+         currentYield = '${parameters.currentYield}', cropsMemo = '${parameters.cropsMemo}',latitude='${parameters.send_lat}', longitude='${parameters.send_lng}' , cropsFinish = 'false'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]" +

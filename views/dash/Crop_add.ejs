@@ -84,6 +84,8 @@
                     <i class="mdi mdi-minus"></i>                                                    
                     &nbsp; 취소하기
                   </button>
+                  <input type="hidden" id="send_lat" name="send_lat" value="">
+                  <input type="hidden" id="send_lng" name="send_lng" value="">
                 </form>
               </div>
             </div>
@@ -141,6 +143,9 @@
                               send_lng = mouseEvent.latLng.getLng()
                               console.log("클릭한 위치" + send_lat);
                               console.log("클릭한 위치" + send_lng);
+                              $("#send_lat").val(send_lat);
+                              $("#send_lng").val(send_lng);
+
                               marker.setMap(map);
 
                               // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
