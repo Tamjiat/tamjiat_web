@@ -109,14 +109,14 @@
       &.active {
         border-radius: 0px 20px 20px 0px;
         > .nav-link {
-            background: $sidebar-light-menu-active-bg;
+            background: $sidebar-light-menu-bg;
             position: relative;
             font-weight: bold;
             font-size: 13px;
             i,
             .menu-title,
             .menu-arrow {
-              color: $sidebar-light-menu-active-color;
+              color: #000;
             }
             .menu-title {
              font-size: 13px;

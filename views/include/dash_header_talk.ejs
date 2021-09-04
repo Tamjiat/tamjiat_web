@@ -161,52 +161,55 @@
           </li>
           <li class="nav-item nav-category">관리</li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-crop" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-leaf"></i>
               <span class="menu-title">농작물</span>
               <i class="menu-arrow"></i> 
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="ui-crop">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/dash/crop/1">농작물 상태</a></li>
+                <li class="nav-item"> <a class="nav-link" onclick="location.href='/dash/crop/1';">농작물 상태</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/dash/cropCulture/1">농작물 재배</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/dash/dcrop/1">피해 농작물 상태</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-dcrop" aria-expanded="false" aria-controls="ui-basic2">
               <i class="menu-icon mdi mdi-bug"></i>
               <span class="menu-title">병ㆍ해충</span>
               <i class="menu-arrow"></i> 
             </a>
-            <div class="collapse" id="ui-basic2">
-              <ul class="nav flex-column sub-menu">
+            <div class="collapse" id="ui-dcrop">
+              <ul class="nav flex-column sub-menu" >
                 <li class="nav-item"> <a class="nav-link" href="/dash/pest/1">병ㆍ해충 발생 현황</a></li>
               </ul>
             </div>
           </li>
+          <!--농작물 위치-->
           <li class="nav-item nav-category">위치</li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" data-bs-toggle="collapse" href="/location" aria-expanded="false" aria-controls="location">
               <i class="menu-icon mdi mdi-map-marker"></i>
               <span class="menu-title">내 농작물 위치</span>
             </a>
           </li>
+          <!-- 알림판 -->
           <li class="nav-item nav-category">알림</li>
           <li class="nav-item">
-            <a class="nav-link" href="/dash/notice/1" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" href="/dash/notice/1" aria-expanded="false" aria-controls="notice">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
               <span class="menu-title">공지사항</span>
             </a>
           </li>
           
           <li class="nav-item">
-            </a><a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" href="/dash/talk" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
               <span class="menu-title">토론방</span>
             </a>
           </li>
+          <!-- 프로필 -->
           <li class="nav-item nav-category">프로필</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
