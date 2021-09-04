@@ -399,6 +399,14 @@ function getWayWeather(req, res, next) {
     }).catch(err => res.send("<script>alert('weather err')</script>"));
 }
 
+function dashLocation(req, res, next) {
+    var parameters = {
+        "uid": 1884152197
+    }
+    DashDAO.select_cropDisease(parameters).then((db_data) => {
+        res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
 module.exports = {
     dash_cropCategoryCount,
     dash_main,
@@ -424,5 +432,6 @@ module.exports = {
     dashPest,
     dashTalk,
     dashHeader,
-    getWayWeather
+    getWayWeather,
+    dashLocation
 }
