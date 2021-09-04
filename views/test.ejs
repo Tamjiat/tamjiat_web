@@ -1,50 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat app</title>
-    <link rel="icon" href="../public/favicon-bold-color201202.svg" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+<% include include/header %>
 
-    <script
-      src="https://kit.fontawesome.com/442fa0184e.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="/../../src/default.css" />
+<section id="faq" class="faq">
+  <div class="container aos-init aos-animate" data-aos="fade-up">
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script defer src="/../../src/main.js" type="module"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="chat">
-        <div id="user-list">
-          <ul class="list-group">
-            <li class="list-group-item head">User List</li>
-          </ul>
-        </div>
-        <div id="message-container"></div>
-
-        <form id="send-container">
-          <input
-            type="text"
-            id="message-input"
-            class="form-control"
-            maxlength="400"
-            autocomplete="off"
-            required
-          />
-          <button type="submit" id="send-button" class="btn btn-warning">
-            Send
-          </button>
-        </form>
-      </div>
+    <div class="section-title">
+      <h2>탐지앗 FAQ</h2>
+      <p>탐지앗에 대해 궁금한 점을 알려드립니다.</p>
     </div>
-  </body>
-</html>
+
+    <div class="faq-list">
+      <ul>
+        <li data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+            <p>
+              Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="200" class="aos-init aos-animate">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="300" class="aos-init aos-animate">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="400" class="aos-init aos-animate">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="500" class="aos-init aos-animate">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+            </p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+  <% include include/footer %>
