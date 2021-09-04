@@ -66,7 +66,7 @@
                     '<%= CurveData[i].date %>',
                     <% } %>],
             datasets: [{
-                label: '병해충 발생률',
+                label: '재배 농작물',
                 data: [<% for(var i = 0; i < CurveData.length; i++){ %>
                     '<%= CurveData[i].cnt %>',
                     <% } %>],
@@ -96,9 +96,11 @@
                         zeroLineColor: '#F0F0F0',
                     },
                     ticks: {
+                        max : 20,
+                        min : 0,
                         beginAtZero: false,
                         autoSkip: true,
-                        maxTicksLimit: 4,
+                        maxTicksLimit: 15,
                         fontSize: 10,
                         color: "#6B778C"
                     }
@@ -111,7 +113,7 @@
                     ticks: {
                         beginAtZero: false,
                         autoSkip: true,
-                        maxTicksLimit: 7,
+                        maxTicksLimit: 12,
                         fontSize: 10,
                         color: "#6B778C"
                     }
