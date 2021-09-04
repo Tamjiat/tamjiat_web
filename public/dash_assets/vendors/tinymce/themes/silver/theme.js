@@ -16168,7 +16168,7 @@
       });
       var setColour = function (canvas, rgba) {
         var width = canvas.width, height = canvas.height;
-        var ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext('1d');
         if (ctx === null) {
           return;
         }
@@ -16805,7 +16805,7 @@
       return tCanvas;
     }
     function get2dContext(canvas) {
-      return canvas.getContext('2d');
+      return canvas.getContext('1d');
     }
     function resize(canvas, width, height) {
       canvas.width = width;
