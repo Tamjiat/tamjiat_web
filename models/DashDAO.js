@@ -445,6 +445,26 @@ function select_dashcropDisease(parameters) {
         });
     })
 }
+function select_dashBar(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT *	FROM ( SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsDate) as cnt FROM 
+        temp_date aa LEFT JOIN userDcrop c on (c.cropsDate = aa.temp_date AND c.uid = '${parameters.uid}') GROUP BY date) a
+      WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT *	FROM ( SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsDate) as cnt FROM 
+                    temp_date aa LEFT JOIN userDcrop c on (c.cropsDate = aa.temp_date AND c.uid = '${parameters.uid}') GROUP BY date) a
+                  WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
 
 module.exports = {
     select_crop,
@@ -470,5 +490,6 @@ module.exports = {
     select_dashcropFinish,
     select_dashcropDisease,
     select_countDisease_date,
-    select_dashDonut
+    select_dashDonut,
+    select_dashBar
 }

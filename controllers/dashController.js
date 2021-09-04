@@ -85,8 +85,9 @@ function dash_cropCategory(req, res, next) {
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
     var parameters = {
-        "uid": 1884152197
+        "uid": 1234,
     }
+    console.log(parameters.year)
     DashDAO.select_dashMenuList(parameters).then((db_data)=>{
         ListData = db_data;
         DashDAO.select_cropPercent(parameters).then((db_data)=>{
@@ -97,9 +98,12 @@ function dash_main(req, res, next) {
                 DiseaseData = db_data
                 DashDAO.select_dashDonut(parameters).then((db_data)=>{
                     DonutData = db_data
-                        res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData,username : req.session.userName});
+                    DashDAO.select_dashBar(parameters).then((db_data)=>{
+                        BarData = db_data
+                        res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, username : req.session.userName});
                     }).catch(err=>res.send("<script>alert('err')</script>"));
-                }).catch(err=>res.send("<script>alert('err ')</script>"));
+                }).catch(err=>res.send("<script>alert('err')</script>"));
+            }).catch(err=>res.send("<script>alert('err ')</script>"));
             }).catch(err=>res.send("<script>alert('err')</script>"));
         }).catch(err=>res.send("<script>alert('err')</script>"));
     }).catch(err=>res.send("<script>alert('err')</script>"));
@@ -407,6 +411,7 @@ function dashLocation(req, res, next) {
         res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
+  	
 module.exports = {
     dash_cropCategoryCount,
     dash_main,
