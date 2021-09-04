@@ -236,9 +236,7 @@
     if ($("#leaveReport").length) {
         var leaveReportChart = document.getElementById("leaveReport").getContext('2d');
         var leaveReportData = {
-            labels: [ <% for(var i = 0; i < BarData.length; i++){ %>
-                    '<%= BarData[i].date %>',
-                    <% } %>],
+            labels: [ "1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
             datasets: [{
                 label: 'Last week',
                 data: [
@@ -267,9 +265,11 @@
                         zeroLineColor: "rgba(255,255,255,.05)",
                     },
                     ticks: {
+                        max:10,
+                        min:0,
                         beginAtZero: true,
                         autoSkip: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 10,
                         fontSize: 10,
                         color: "#6B778C"
                     }
@@ -283,7 +283,7 @@
                     ticks: {
                         beginAtZero: false,
                         autoSkip: true,
-                        maxTicksLimit: 7,
+                        maxTicksLimit: 12,
                         fontSize: 10,
                         color: "#6B778C"
                     }
