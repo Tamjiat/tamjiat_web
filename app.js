@@ -11,7 +11,7 @@ var businessRouter = require('./routes/business');
 var companyRouter = require('./routes/company');
 var dashRouter = require('./routes/dash');
 var aiFlask =require('./routes/aiFlask');
-
+var questionRouter = require('./routes/question');
 var mysql = require('mysql');
 const passport = require('passport');
 const morgan = require('morgan');
@@ -44,6 +44,7 @@ app.use('/business', businessRouter);
 app.use('/company', companyRouter);
 app.use('/dash', dashRouter);
 app.use('/aiFlask', aiFlask);
+app.use('/question', questionRouter);
 
 
 // catch 404 and forward to error handler

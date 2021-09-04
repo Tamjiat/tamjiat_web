@@ -34,6 +34,7 @@ router.get('/noticeDetail/:num',dashController.dashNoticeDetail);
 router.get('/noticeInsert',dashController.dashNoticeInsert);
 router.post('/noticeInsert',dashController.dashNoticeInsertData);
 router.get('/talk',dashController.dashTalk);
+router.get('/location', dashController.dashLocation)
 
 router.post('/Header',dashController.dashHeader);
 router.post('/getWayWeather',dashController.getWayWeather);
