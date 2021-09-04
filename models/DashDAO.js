@@ -160,12 +160,12 @@ function select_dcropDetail(parameters) {
 function insert_dcrop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
-          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}', iscdCheck = 'false'`, function (error, db_data) {
+          cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}', cduuid = '${parameters.cduuid}', AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}', iscdCheck = 'false'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
                     "\n \t" + `INSERT INTO userDcrop SET uid = '${parameters.uid}' , cropsName = '${parameters.cropsName}', cropsCultivar = '${parameters.cropsCultivar}',
-                    cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}', iscdCheck = 'false'` +
+                    cropsImage = '${parameters.cropsImage}', cropsDate=NOW(), cropsMemo = '${parameters.cropsMemo}' , cduuid = '${parameters.cduuid}', AICheck = '${parameters.AICheck}', cdName = '${parameters.cdName}', iscdCheck = 'false'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -452,7 +452,7 @@ function select_dashBar(parameters) {
       WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')`, function (error, db_data) {
             if (error) {
                 logger.error(
-                    "DB error [userCrop]"+
+                    "DB error [userDcrop]"+
                     "\n \t" + `SELECT *	FROM ( SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsDate) as cnt FROM 
                     temp_date aa LEFT JOIN userDcrop c on (c.cropsDate = aa.temp_date AND c.uid = '${parameters.uid}') GROUP BY date) a
                   WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')` +
@@ -466,6 +466,26 @@ function select_dashBar(parameters) {
     })
 }
 
+function select_dashCurve(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT *	FROM (SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsStart) as cnt FROM 
+        temp_date aa LEFT JOIN userCrop c on (c.cropsStart = aa.temp_date AND c.uid = 1234) GROUP BY date) a
+      WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `SELECT *	FROM (SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsStart) as cnt FROM 
+                    temp_date aa LEFT JOIN userCrop c on (c.cropsStart = aa.temp_date AND c.uid = 1234) GROUP BY date) a
+                  WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
 module.exports = {
     select_crop,
     select_cropDetail,
@@ -491,5 +511,6 @@ module.exports = {
     select_dashcropDisease,
     select_countDisease_date,
     select_dashDonut,
-    select_dashBar
+    select_dashBar,
+    select_dashCurve
 }

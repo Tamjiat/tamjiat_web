@@ -100,7 +100,10 @@ function dash_main(req, res, next) {
                     DonutData = db_data
                     DashDAO.select_dashBar(parameters).then((db_data)=>{
                         BarData = db_data
-                        res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, username : req.session.userName});
+                            DashDAO.select_dashCurve(parameters).then((db_data)=>{
+                                CurveData = db_data
+                                res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, CurveData, username : req.session.userName});
+                        }).catch(err=>res.send("<script>alert('err')</script>"));
                     }).catch(err=>res.send("<script>alert('err')</script>"));
                 }).catch(err=>res.send("<script>alert('err')</script>"));
             }).catch(err=>res.send("<script>alert('err ')</script>"));
@@ -203,6 +206,12 @@ function dashDCropAdd(req, res, next) {
 }
 
 function dashinsertDCrop(req, res, next) {
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+    }
     parameters = {
         "cropsName": req.body.Cropkind,
         "uid": 1884152197,
@@ -210,7 +219,8 @@ function dashinsertDCrop(req, res, next) {
         "cropsImage": req.files.attachments[0].filename,
         "cropsMemo": req.body.cropmemo,
         "AICheck": "진행중",
-        "cdName": "검사중"
+        "cdName": "검사중",
+        "cduuid" : uuidv4()
     }
     DashDAO.insert_dcrop(parameters).then((db_data) => {
         res.redirect('/dash/dcrop/1')
