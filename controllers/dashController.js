@@ -473,7 +473,13 @@ function cropLocation(req, res, next){
     }
     DashDAO.select_userLocateCrop(parameters).then((db_data) =>{
         CropLocations = db_data
-        res.render('dash/location', {CropLocations, username: req.session.userName});
+        if(db_data.length == 0) {
+            console.log("false")
+            res.send("<script>alert('농작물이 없습니다. 농작물을 추가 해 주세요 ^^');document.location.href='/dash/cropadd'</script>")
+        }else {
+            console.log("true")
+            res.render('dash/location', {CropLocations, username: req.session.userName});
+        }
     })
 }
   	
