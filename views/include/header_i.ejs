@@ -45,10 +45,10 @@
           <% if (username != undefined) { %>
           <li><a class="nav-link scrollto"><%= username %> 님</a></li>
           <li><a class="nav-link scrollto" href="/auth/logout">로그아웃</a></li>
-          <% } else { %>
-          <li><a class="nav-link scrollto" href="/auth/kakao">로그인</a></li>
-          <% } %>
           <li><a class="getstarted scrollto" href="/dash">시작하기</a></li>
+          <% } else { %>
+          <li><a class="nav-link scrollto" href="/auth/kakao"style="margin-right: 150px;">로그인</a></li>
+          <% } %>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
