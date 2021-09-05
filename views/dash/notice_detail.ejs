@@ -10,6 +10,7 @@
               <p class="card-description" style = "margin: 0.8rem 0 0 0">
                 탐지앗의 공지사항을 확인해주세요.
               </p>
+              <form class="forms-sample" style="margin: 50px 0 0 0;" action="/dash/noticeDelete" method="POST">
               <hr class="my-3">
               <h2 style="margin-left: 60px; font-weight: bold;"><%= db_data[0].nTitle%></h2>
               <hr class="my-3">
@@ -22,15 +23,17 @@
                 <p class="mb-0"><%- db_data[0].nContent%></p>
               </blockquote>
             </div>
+            <input type="hidden" name="nid" value="<%= db_data[0].nid %>">
             <div style="float: right; margin: 10px 0 25px 0">
                 <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 0 20px 0 15px;" onclick="location.href='/dash/notice/1'">
                   <i class="mdi mdi-checkbox-marked-circle-outline"></i>                                                    
                   &nbsp; 확인
                 </button>
-                <button type="button" class="btn btn-danger btn-icon-text"style="float: right; margin: 0 0 0 15px">
+                <button type="submit" class="btn btn-danger btn-icon-text"style="float: right; margin: 0 0 0 15px">
                   <i class="mdi mdi-minus"></i>                                                    
                   &nbsp; 삭제하기
                 </button>
+              </form>
               </div>
           </div>
         </div>

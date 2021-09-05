@@ -371,6 +371,22 @@ function select_dashcropFinish(parameters) {
         });
     })
 }
+function update_dashcropFinish(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`UPDATE userCrop SET cropsFinish = 'true' WHERE uid = '${parameters.uid}' and cid ='${parameters.cid}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]" +
+                    "\n \t" +`UPDATE userCrop SET cropsFinish = 'true' WHERE uid = '${parameters.uid}' and cid ='${parameters.cid}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
 
 function select_userLocate(parameters) {
     return new Promise(function (resolve, reject) {
@@ -469,14 +485,62 @@ function select_dashBar(parameters) {
 function select_dashCurve(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT *	FROM (SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsStart) as cnt FROM 
-        temp_date aa LEFT JOIN userCrop c on (c.cropsStart = aa.temp_date AND c.uid = 1234) GROUP BY date) a
+        temp_date aa LEFT JOIN userCrop c on (c.cropsStart = aa.temp_date AND c.uid = '${parameters.uid}') GROUP BY date) a
       WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]"+
                     "\n \t" + `SELECT *	FROM (SELECT DATE_FORMAT(aa.temp_date, '%Y-%m') date, COUNT(c.cropsStart) as cnt FROM 
-                    temp_date aa LEFT JOIN userCrop c on (c.cropsStart = aa.temp_date AND c.uid = 1234) GROUP BY date) a
+                    temp_date aa LEFT JOIN userCrop c on (c.cropsStart = aa.temp_date AND c.uid = '${parameters.uid}') GROUP BY date) a
                   WHERE date LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%')` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
+function delete_crop(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`Delete from userCrop where cid = '${parameters.cid}' and uid = '${parameters.uid}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `Delete from userCrop where cid = '${parameters.cid}' and uid = '${parameters.uid}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
+function delete_dcrop(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`Delete from userDcrop where did = '${parameters.did}' and uid = '${parameters.uid}' `, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `Delete from userDcrop where did = '${parameters.did}' and uid = '${parameters.uid}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
+function delete_notice(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`Delete from notice where nid = '${parameters.nid}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]"+
+                    "\n \t" + `Delete from notice where nid = '${parameters.nid}'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -493,6 +557,9 @@ module.exports = {
     select_cropDisease,
     insert_crop,
     insert_dcrop,
+    delete_crop,
+    delete_dcrop,
+    delete_notice,
     select_cropCategory,
     select_cropPercent,
     select_dcrop,
@@ -508,6 +575,7 @@ module.exports = {
     select_userLocate,
     select_userLatLon,
     select_dashcropFinish,
+    update_dashcropFinish,
     select_dashcropDisease,
     select_countDisease_date,
     select_dashDonut,

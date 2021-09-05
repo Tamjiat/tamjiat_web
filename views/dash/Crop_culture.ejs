@@ -11,7 +11,8 @@
                     <p class="card-description" style = "margin: 0.8rem 0 0 0">
                       수확 시기를 확인하여 진행률 100%인 농작물을 재배 해주세요!
                     </p>
-                    <div class="table-responsive" style = "margin: 25px 0 20px 0">
+                    <div class="table-responsive" style = "margin: 25px 0 20px 0"> 
+                      <form class="forms-sample" style="margin: 50px 0 0 0;" action="/dash/cropFinish" method="POST">
                         <table class="table table-bordered" style="text-align: center;">
                             <thead>
                               <tr>
@@ -65,10 +66,11 @@
                                 </td>
                                 <td>
                                     <% if (data_value.percent >= 100) {%>
-                                      <button type="button" class="btn btn-outline-primary btn-icon-text">
+                                      <button type="submit" class="btn btn-outline-primary btn-icon-text">
                                         <i class="ti-reload btn-icon-prepend"></i>                                                    
                                         수확 완료
                                       </button>
+                                      <input type="hidden" name="cid" value="<%= data_value.cid %>">
                                     <% } else { %>
                                       <button type="button" class="btn btn-outline-warning btn-icon-text">
                                         <i class="ti-alert btn-icon-prepend"></i>                                                    
@@ -77,9 +79,12 @@
                                     <% } %>
                                 </td>
                               </tr>
+                              
+                          
                               <% } %>
                             </tbody>
                           </table>
+                          </form>
                           <nav>
                             <ul class="pagination justify-content-center mt-5">
                               <% if(c_num == 1) { %>
