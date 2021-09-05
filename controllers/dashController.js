@@ -3,6 +3,7 @@ var CropDAO = require('../models/CropDAO');
 var DashDAO = require('../models/DashDAO');
 var weather = require('../models/weather');
 var dayjs = require('dayjs')
+const request = require("request");
 
 //파라미터값에 해당하는 위치의 작물 개수값
 function dash_cropCategoryCount(req, res, next) {
@@ -216,14 +217,44 @@ function dashinsertDCrop(req, res, next) {
         "cropsName": req.body.Cropkind,
         "uid": req.session.userid,
         "cropsCultivar": req.body.CropName,
-        "cropsImage": req.files.attachments[0].filename,
+        "cropsImage": req.file.filename,
         "cropsMemo": req.body.cropmemo,
         "AICheck": "진행중",
         "cdName": "검사중",
         "cduuid" : uuidv4()
     }
     DashDAO.insert_dcrop(parameters).then((db_data) => {
-        res.redirect('/dash/dcrop/1')
+        var file = req.file.filename
+        console.log(file)
+        
+        const YoloResult = (callback) => {
+            const options = {
+                method: 'POST',
+                uri: "http://tamjiat.iptime.org:5000/test_post",
+                qs: {
+                    file_name: file,
+                    cduuid : parameters.cduuid
+                }
+            }
+            request(options, function (err, res, body) {
+                callback(undefined, {
+                    result: body
+                });
+            });
+
+        }
+        YoloResult((err, { result } = {}) => {
+            if (err) {
+                console.log("error!!!!");
+                res.send({
+                    message: "fail",
+                    status: "fail"
+                });
+            }
+            let json = result;
+            console.log(json)
+            res.redirect('/dash/dcrop/1')
+        })
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
