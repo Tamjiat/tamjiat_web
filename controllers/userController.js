@@ -12,7 +12,7 @@ function signUp(req, res, next) {
 
     userDao.insert_userInfo(parameters).then(function (db_data){
         console.log(db_data)
-        res.render('index',{username : req.session.userName})
+        res.redirect('/')
     }).catch(err=>res.send("<script>alert('err')</script>"));
 
 }
@@ -30,7 +30,7 @@ function updateUser(req, res, next) {
     userDao.update_userInfo(parameters).then(function (db_data){
         console.log(db_data)
         console.log("업데이트 성공");
-        res.render('index',{username : req.session.userName})
+        res.redirect('/')
     }).catch(err=>res.send("<script>alert('err')</script>"));
 
 }
