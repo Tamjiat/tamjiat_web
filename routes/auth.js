@@ -53,7 +53,7 @@ router.get('/kakao/callback', passport.authenticate('kakao', {
     req.session.userName = req.user.properties.nickname
     req.session.img = req.user.properties.profile_image
     req.session.email = req.user.kakao_account.email
-    res.redirect('/')
+    res.redirect('/auth/findUser')
 });
 
 router.get('/logout', (req,res)=> {
