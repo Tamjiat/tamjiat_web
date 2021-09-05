@@ -381,7 +381,7 @@
         type:"POST",
         data: {cropsName : this.value},
         success:function(db_data){
-          console.log(db_data.result.pestoutbreakCount);
+          console.log(db_data)
           $("#avgPercent").text(db_data.result.avgPercent+ "%");
           $("#nearHavestDate").text(db_data.result.nearHavestDate);
           $("#totalYieldPercent").text(db_data.result.totalYieldPercent+"%");

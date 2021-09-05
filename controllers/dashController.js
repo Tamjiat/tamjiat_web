@@ -320,7 +320,8 @@ function dashHeader(req, res, next) {
         DashDAO.select_userLatLon(parameterLocate).then(function (db_data) {
             lat = db_data[0].latitude
             lon = db_data[0].longitude
-            console.log(db_data[0].latitude)
+            console.log(lat)
+            console.log(lon)
             DashDAO.select_totalGrowPercent(parameters).then(function (db_data) {
                 var totalPercent = 0
                 //선택 농작물 총 성장률 구하기
@@ -336,7 +337,6 @@ function dashHeader(req, res, next) {
                         totalYieldPercent = db_data[0].avgYield;
                         //작물별 병 해충 발행건수 및 피해 농작물 종 개수
                         DashDAO.select_countDisease_totalCrops(parameters).then(function (db_data) {
-
                             if (db_data[db_data.length - 1] == undefined) {
                                 totalDiseaseCount = 0
                                 damagedCropsCount = 0
@@ -345,15 +345,13 @@ function dashHeader(req, res, next) {
                                 damagedCropsCount = db_data.length - 1
                             }
                             DashDAO.select_countDisease_date(parameters).then(function(db_data){
-                                console.log(db_data)
-                                if(db_data === []){
+                                if(db_data == []){
                                     pestoutbreakCount = pestData
                                 }else {
                                     pestoutbreakCount = db_data
                                 }
                                 weather.getWeatherAPI(lat, lon).then((body) => {
                                     let info = JSON.parse(body);
-                                    console.log(totalDiseaseCount)
                                     weathers.temp = Math.ceil(info['current']['temp'])
                                     if (info['current']['rain'] === undefined) {
                                         weathers.rain = 0
@@ -373,7 +371,6 @@ function dashHeader(req, res, next) {
                                         "rain": weathers.rain,
                                         "windspeed": weathers.windSpeed
                                     }
-                                    console.log(headerInfo)
                                     res.send({"result": headerInfo})
                                 }).catch(err => res.send("<script>alert('weather err')</script>"));
                             }).catch(err => res.send("<script>alert('select err')</script>"));
