@@ -39,7 +39,7 @@ router.post('/noticeInsert',dashController.dashNoticeInsertData);
 router.post('/noticeDelete',dashController.dashNoticeDelete);
 
 router.get('/talk',dashController.dashTalk);
-router.get('/location', dashController.dashLocation);
+router.get('/location', dashController.cropLocation);
 router.post('/cropFinish',dashController.dashcropFinish);
 
 router.post('/Header',dashController.dashHeader);

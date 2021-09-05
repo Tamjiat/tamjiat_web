@@ -388,6 +388,23 @@ function update_dashcropFinish(parameters) {
     })
 }
 
+function select_userLocateCrop(parameters){
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT locate, cropsName, cropsCultivar, latitude, longitude FROM userCrop WHERE uid = '${parameters.uid}'`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userCrop]" +
+                    "\n \t" + `SELECT locate, cropsName, cropsCultivar, latitude, longitude FROM userCrop WHERE uid = '${parameters.uid}'` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
+
 function select_userLocate(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT locate FROM userCrop where uid = '${parameters.userid}' and cropsName = '${parameters.cropsName}'`, function (error, db_data) {
@@ -580,5 +597,6 @@ module.exports = {
     select_countDisease_date,
     select_dashDonut,
     select_dashBar,
-    select_dashCurve
+    select_dashCurve,
+    select_userLocateCrop
 }

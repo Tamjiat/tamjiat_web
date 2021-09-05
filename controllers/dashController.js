@@ -353,12 +353,13 @@ function dashHeader(req, res, next) {
                                 weather.getWeatherAPI(lat, lon).then((body) => {
                                     let info = JSON.parse(body);
                                     weathers.temp = Math.ceil(info['current']['temp'])
-                                    if (info['current']['rain'] === undefined) {
+                                    if (info['daily'][0]['rain'] === undefined) {
                                         weathers.rain = 0
                                     } else {
-                                        weathers.rain = Math.ceil(info['current']['rain'])
+                                        weathers.rain = info['daily'][0]['rain']
                                     }
                                     weathers.windSpeed = Math.ceil(info['current']['wind_speed'])
+
                                     var headerInfo = {
                                         "avgPercent": avgPercent,
                                         "nearHavestDate": nearHavestDate,
@@ -465,6 +466,16 @@ function dashNoticeDelete(req, res, next) {
         res.redirect('/dash/notice/1')
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
+
+function cropLocation(req, res, next){
+    var parameters = {
+        "uid": req.session.userid
+    }
+    DashDAO.select_userLocateCrop(parameters).then((db_data) =>{
+        CropLocations = db_data
+        res.render('dash/location', {CropLocations, username: req.session.userName});
+    })
+}
   	
 module.exports = {
     dash_cropCategoryCount,
@@ -496,5 +507,6 @@ module.exports = {
     dashHeader,
     getWayWeather,
     dashLocation,
-    dashcropFinish
+    dashcropFinish,
+    cropLocation
 }
