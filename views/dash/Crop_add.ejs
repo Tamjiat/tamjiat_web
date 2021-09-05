@@ -84,6 +84,8 @@
                     <i class="mdi mdi-minus"></i>                                                    
                     &nbsp; 취소하기
                   </button>
+                  
+                  <input type="hidden" id="Croplocation" name="Croplocation" value="">
                   <input type="hidden" id="send_lat" name="send_lat" value="">
                   <input type="hidden" id="send_lng" name="send_lng" value="">
                 </form>
@@ -143,8 +145,10 @@
                               send_lng = mouseEvent.latLng.getLng()
                               console.log("클릭한 위치" + send_lat);
                               console.log("클릭한 위치" + send_lng);
+                              console.log(result[0].address.address_name);
                               $("#send_lat").val(send_lat);
                               $("#send_lng").val(send_lng);
+                              $("#Croplocation").val(result[0].address.address_name);
 
                               marker.setMap(map);
 

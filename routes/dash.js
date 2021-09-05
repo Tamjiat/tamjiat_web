@@ -21,20 +21,26 @@ router.get('/crop/:num',dashController.dashCrop);
 router.get('/cropAdd',dashController.dashCropAdd);
 router.get('/cropDetail/:num',dashController.dashCropDetail);
 router.post('/cropInsert',dashController.dashinsertCrop);
+router.post('/cropDelete',dashController.dashCropDelete);
 
 router.get('/dcrop/:num',dashController.dashDCrop);
 router.get('/dcropAdd', dashController.dashDCropAdd);
 router.get('/dcropDetail/:num',dashController.dashDCropDetail);
 router.post('/dcropInsert',upload.fields([{name:'attachments', maxCount:1}]), dashController.dashinsertDCrop);
+router.post('/dcropDelete',dashController.dashDCropDelete);
 
 router.get('/cropCulture/:num', dashController.dashCropPercent);
 router.get('/pest/:num',dashController.dashPest);
+
 router.get('/notice/:num',dashController.dashNotice);
 router.get('/noticeDetail/:num',dashController.dashNoticeDetail);
 router.get('/noticeInsert',dashController.dashNoticeInsert);
 router.post('/noticeInsert',dashController.dashNoticeInsertData);
+router.post('/noticeDelete',dashController.dashNoticeDelete);
+
 router.get('/talk',dashController.dashTalk);
-router.get('/location', dashController.dashLocation)
+router.get('/location', dashController.dashLocation);
+router.post('/cropFinish',dashController.dashcropFinish);
 
 router.post('/Header',dashController.dashHeader);
 router.post('/getWayWeather',dashController.getWayWeather);

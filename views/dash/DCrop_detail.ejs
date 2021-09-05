@@ -11,6 +11,7 @@
                           <p class="card-description" style = "margin: 0.8rem 0 0 0">
                             피해 농작물에 대한 상태를 확인해보세요.
                           </p>
+                          <form class="forms-sample" style="margin: 50px 0 0 0;" action="/dash/dcropDelete" method="POST">
                           <div class="form-group row" style = "margin: 30px 0 0 0;">
                               <div class="card col" style="margin: 0 50px 0 0;">
                                   <div class="card-body">
@@ -68,15 +69,17 @@
                                   <hr class="my-4">
                                   <P><%= db_data[0].cropsMemo%></P>
                                 </div>
+                                <input type="hidden" name="did" value="<%= db_data[0].did %>">
                             </div>
                             <button type="button" class="btn btn-success btn-icon-text"style="float: right; margin: 25px 0 0 0;" onclick="location.href='/dash/dcrop/1'">
                               <i class="mdi mdi-checkbox-marked-circle-outline"></i>                                                    
                               &nbsp; 확인
                             </button>
-                            <button type="button" class="btn btn-danger btn-icon-text"style="float: right; margin: 25px 15px 0 0;" onclick="location.href='/dash/crop/1'">
+                            <button type="submit" class="btn btn-danger btn-icon-text"style="float: right; margin: 25px 15px 0 0;">
                               <i class="mdi mdi-block-helper"></i>                                                    
                               &nbsp; 삭제
                             </button>
+                          </form>
                           </div>
                         </div>
                     </div>

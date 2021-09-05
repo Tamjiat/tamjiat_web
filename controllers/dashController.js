@@ -85,7 +85,7 @@ function dash_cropCategory(req, res, next) {
 //대쉬보드 메인페이지
 function dash_main(req, res, next) {
     var parameters = {
-        "uid": 1234,
+        "uid": req.session.userid,
     }
     console.log(parameters.year)
     DashDAO.select_dashMenuList(parameters).then((db_data)=>{
@@ -114,7 +114,7 @@ function dash_main(req, res, next) {
 
 function dashCrop(req, res, next) {
     var parameters = {
-        "uid": 1884152197
+        "uid": req.session.userid
     }
     DashDAO.select_crop(parameters).then((db_data) => {
         res.render('dash/Crop', {
@@ -139,7 +139,7 @@ function dashCropAdd(req, res, next) {
 function dashCropDetail(req, res, next) {
     var parameters = {
         "cid": req.params.num,
-        "uid": 1884152197
+        "uid": req.session.userid
     }
     DashDAO.select_cropCode().then((db_data) => {
         codeData = db_data
@@ -155,7 +155,7 @@ function dashCropDetail(req, res, next) {
 function dashinsertCrop(req, res, next) {
     parameters = {
         "cropsName": req.body.Cropkind,
-        "uid": 1884152197,
+        "uid": req.session.userid,
         "cropsCultivar": req.body.CropName,
         "categoryName": req.body.CropcategoryName,
         "useCompost": req.body.useCompost,
@@ -177,7 +177,7 @@ function dashinsertCrop(req, res, next) {
 
 function dashCropPercent(req, res, next) {
     var parameters = {
-        "uid": 1884152197
+        "uid": req.session.userid
     }
     DashDAO.select_cropPercent(parameters).then((db_data) => {
         res.render('dash/Crop_culture', {
@@ -191,7 +191,7 @@ function dashCropPercent(req, res, next) {
 
 function dashDCrop(req, res, next) {
     var parameters = {
-        "uid": 1884152197
+        "uid": req.session.userid
     }
     DashDAO.select_dcrop(parameters).then((db_data) => {
         res.render('dash/DCrop', {db_data, d_num: req.params.num, max_value: 5, dayjs, username: req.session.userName});
@@ -214,7 +214,7 @@ function dashinsertDCrop(req, res, next) {
     }
     parameters = {
         "cropsName": req.body.Cropkind,
-        "uid": 1884152197,
+        "uid": req.session.userid,
         "cropsCultivar": req.body.CropName,
         "cropsImage": req.files.attachments[0].filename,
         "cropsMemo": req.body.cropmemo,
@@ -229,7 +229,7 @@ function dashinsertDCrop(req, res, next) {
 
 function dashDCropDetail(req, res, next) {
     var parameters = {
-        "uid": 1884152197,
+        "uid": req.session.userid,
         "did": req.params.num
     }
     DashDAO.select_dcropDetail(parameters).then((db_data) => {
@@ -241,7 +241,7 @@ function dashDCropDetail(req, res, next) {
 
 function dashPest(req, res, next) {
     var parameters = {
-        "uid": 1884152197
+        "uid": req.session.userid
     }
     DashDAO.select_cropDisease(parameters).then((db_data) => {
         res.render('dash/Pest', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
@@ -271,7 +271,7 @@ function dashNoticeInsertData(req, res, next) {
     var parameters = {
         "nTitle": req.body.nTitle,
         "nContent": req.body.nContent,
-        "nWriter": 1884152197,
+        "nWriter": req.session.userName,
     }
     DashDAO.insert_notice(parameters).then((db_data) => {
         res.redirect('/dash/notice/1')
@@ -303,7 +303,7 @@ function dashHeader(req, res, next) {
     var lat = 0
     var lon = 0
     var parameters = {
-        "userid": 1884152197,
+        "userid": req.session.userid,
         "cropsName": req.body.cropsName
     }
     var pestData = {
@@ -415,10 +415,57 @@ function getWayWeather(req, res, next) {
 
 function dashLocation(req, res, next) {
     var parameters = {
-        "uid": 1884152197
+        "uid": req.session.userid
     }
     DashDAO.select_cropDisease(parameters).then((db_data) => {
         res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
+
+
+function dashcropFinish(req, res, next) {
+    var parameters = {
+        "uid": req.session.userid,
+        "cid":req.body.cid
+    }
+    DashDAO.update_dashcropFinish(parameters).then((db_data) => {
+        res.redirect('/dash')
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
+function dashcropFinish(req, res, next) {
+    var parameters = {
+        "uid": req.session.userid,
+        "cid":req.body.cid
+    }
+    DashDAO.update_dashcropFinish(parameters).then((db_data) => {
+        res.redirect('/dash')
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
+function dashCropDelete(req, res, next) {
+    var parameters = {
+        "uid": req.session.userid,
+        "cid":req.body.cid
+    }
+    DashDAO.delete_crop(parameters).then((db_data) => {
+        res.redirect('/dash/crop/1')
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
+function dashDCropDelete(req, res, next) {
+    var parameters = {
+        "uid": req.session.userid,
+        "did":req.body.did
+    }
+    DashDAO.delete_dcrop(parameters).then((db_data) => {
+        res.redirect('/dash/dcrop/1')
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
+function dashNoticeDelete(req, res, next) {
+    var parameters = {
+        "uid": req.session.userid,
+        "nid":req.body.nid
+    }
+    DashDAO.delete_notice(parameters).then((db_data) => {
+        res.redirect('/dash/notice/1')
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
   	
@@ -434,19 +481,23 @@ module.exports = {
     dashCrop,
     dashCropAdd,
     dashCropDetail,
+    dashCropDelete,
     dashCropPercent,
     dashinsertCrop,
     dashDCrop,
     dashDCropAdd,
     dashDCropDetail,
+    dashDCropDelete,
     dashinsertDCrop,
     dashNotice,
     dashNoticeDetail,
+    dashNoticeDelete,
     dashNoticeInsert,
     dashNoticeInsertData,
     dashPest,
     dashTalk,
     dashHeader,
     getWayWeather,
-    dashLocation
+    dashLocation,
+    dashcropFinish
 }
