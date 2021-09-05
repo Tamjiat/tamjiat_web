@@ -234,7 +234,7 @@ function dashDCropDetail(req, res, next) {
     }
     DashDAO.select_dcropDetail(parameters).then((db_data) => {
         console.log(db_data)
-        res.render('dash/dcrop_detail', {db_data, username: req.session.userName})
+        res.render('dash/DCrop_detail', {db_data, username: req.session.userName})
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
