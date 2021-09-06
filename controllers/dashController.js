@@ -4,6 +4,7 @@ var DashDAO = require('../models/DashDAO');
 var weather = require('../models/weather');
 var dayjs = require('dayjs')
 const request = require("request");
+require('dotenv').config({ path : ".env" });
 
 //파라미터값에 해당하는 위치의 작물 개수값
 function dash_cropCategoryCount(req, res, next) {
@@ -132,7 +133,8 @@ function dashCropAdd(req, res, next) {
         codeData = db_data
         DashDAO.select_cropCategory().then((db_data) => {
             categoryData = db_data
-            res.render('dash/Crop_add', {codeData, categoryData, username: req.session.userName});
+            var key = process.env.KAKAO_MAP_API_KEY
+            res.render('dash/Crop_add', {codeData, categoryData, username: req.session.userName, key: key});
         }).catch(err => res.send("<script>alert('err')</script>"));
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -508,8 +510,9 @@ function cropLocation(req, res, next){
             console.log("false")
             res.send("<script>alert('농작물이 없습니다. 농작물을 추가 해 주세요 ^^');document.location.href='/dash/cropadd'</script>")
         }else {
+            var key = process.env.KAKAO_MAP_API_KEY
             console.log("true")
-            res.render('dash/location', {CropLocations, username: req.session.userName});
+            res.render('dash/location', {CropLocations, username: req.session.userName, key: key});
         }
     })
 }
