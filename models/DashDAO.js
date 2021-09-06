@@ -283,7 +283,7 @@ function select_nearHarvestDate(parameters) {
 
 function select_totalYieldPercent(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT ROUND(AVG(((goalYield - currentYield) / goalYield) *100),2) AS avgYield FROM userCrop WHERE uid = "${parameters.userid}" AND cropsName = "${parameters.cropsName}"`, function (error, db_data) {
+        db.query(`SELECT ROUND(AVG((currentYield / goalYield) *100),2) AS avgYield FROM userCrop WHERE uid = "${parameters.userid}" AND cropsName = "${parameters.cropsName}"`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [totalYieldPercent]" +

@@ -8,6 +8,7 @@ const db = mysql.createConnection({
   user: process.env.DB_user,
   password: process.env.DB_password,
   database: process.env.DB_database,
+
   dateStrings: true
 })
 
