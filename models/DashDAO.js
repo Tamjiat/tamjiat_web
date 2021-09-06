@@ -300,7 +300,7 @@ function select_totalYieldPercent(parameters) {
 
 function select_countDisease_totalCrops(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT ifnull(CAST(COUNT(*) AS CHAR), '-') AS result FROM userDcrop WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cropsDate GROUP BY cropsCultivar WITH rollup`, function (error, db_data) {
+        db.query(`SELECT ifnull(CAST(COUNT(*) AS CHAR), '-') AS result FROM userDcrop WHERE uid = "${parameters.userid}" and cropsName = "${parameters.cropsName}" AND CURDATE() = cropsDate AND iscdCheck="true" GROUP BY cropsCultivar WITH rollup`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
