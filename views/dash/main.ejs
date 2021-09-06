@@ -42,15 +42,15 @@
                       <h3 class="rate-percentage" id="nearHavestDate"> - </h3>
                     </div>
                     <div>
-                      <p class="statistics-title">총 수확 진행률</p>
+                      <p class="statistics-title"> 총 수확 진행률</p>
                       <h3 class="rate-percentage" id="totalYieldPercent"> - </h3>
                     </div>
                     <div class="d-none d-md-block">
-                      <p class="statistics-title">병 해충 발생 건수</p>
+                      <p class="statistics-title">당일 병 해충 발생 건수</p>
                       <h3 class="rate-percentage" id="totalDiseaseCount"> - </h3>
                     </div>
                     <div class="d-none d-md-block">
-                      <p class="statistics-title">총 피해 농작물</p>
+                      <p class="statistics-title">누적 총 피해 농작물</p>
                       <h3 class="rate-percentage" id="damagedCropsCount"> - </h3>
                     </div>
                     <div class="d-none d-md-block">
@@ -315,7 +315,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=20a7b309a310827233d1145c6526b7cf&libraries=services,clusterer,drawing"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=key%>&libraries=services,clusterer,drawing"></script>
   <script type = "text/javascript"
           src = "http://maps.googleapis.com/maps/api/js?sensor=true">
   </script>
@@ -358,16 +358,18 @@
                     data: {lat: lat, lon: lon,},
                     success: function (data) {
                       $("#temp").text(data.result.temp + " ℃");
-                      $("#rain").text(data.result.rain + " %");
+                      $("#rain").text(data.result.rain + "mm");
                       $("#windspeed").text(data.result.windspeed + " m/s");
                     }
                   });
                 },
                 function (error) {
                   //fail - 유저가 차단버튼을 클릭하여 값을 가져올 수 없는 상태
+                  console.log("error1")
                 }
         );
       } else {
+        console.log("error2")
         //fail - 애초에 GPS 정보를 사용할 수 없는 상태
       }
 
@@ -389,7 +391,7 @@
           $("#damagedCropsCount").text(db_data.result.damagedCropsCount);
           $("#locate").text(db_data.result.locate);
           $("#temp").text(db_data.result.temp + " ℃");
-          $("#rain").text(db_data.result.rain + " %");
+          $("#rain").text(db_data.result.rain + " mm");
           $("#windspeed").text(db_data.result.windspeed + " m/s");
         }
       })

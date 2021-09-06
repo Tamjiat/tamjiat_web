@@ -2,8 +2,11 @@ var express = require('express');
 var CropDAO = require('../models/CropDAO');
 var DashDAO = require('../models/DashDAO');
 var weather = require('../models/weather');
-var dayjs = require('dayjs')
+var dayjs = require('dayjs');
 const request = require("request");
+const https = require("https");
+const fs = require("fs");
+const querystring = require('querystring')
 require('dotenv').config({ path : ".env" });
 
 //파라미터값에 해당하는 위치의 작물 개수값
@@ -90,6 +93,7 @@ function dash_main(req, res, next) {
         "uid": req.session.userid,
     }
     console.log(parameters.year)
+    var key = process.env.KAKAO_MAP_API_KEY
     DashDAO.select_dashMenuList(parameters).then((db_data)=>{
         ListData = db_data;
         DashDAO.select_cropPercent(parameters).then((db_data)=>{
@@ -104,7 +108,7 @@ function dash_main(req, res, next) {
                         BarData = db_data
                             DashDAO.select_dashCurve(parameters).then((db_data)=>{
                                 CurveData = db_data
-                                res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, CurveData, username : req.session.userName});
+                                res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, CurveData, username : req.session.userName, key:key});
                         }).catch(err=>res.send("<script>alert('err')</script>"));
                     }).catch(err=>res.send("<script>alert('err')</script>"));
                 }).catch(err=>res.send("<script>alert('err')</script>"));
@@ -208,6 +212,34 @@ function dashDCropAdd(req, res, next) {
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
+function test12(){
+    const data = JSON.stringify({
+        todo: "tst"
+    })
+
+    const options = {
+        method: 'GET',
+        hostname: "14.50.67.208",
+        port:5000,
+        path:"/test",
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
+        },
+    }
+
+    https.request(options, res => {
+        console.log('statusCode:' +  res.statusCode)
+    })
+
+    req.on('error', error =>{
+        console.log(error)
+    })
+
+    req.write(data)
+    req.end()
+}
+
 function dashinsertDCrop(req, res, next) {
     function uuidv4() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -228,23 +260,44 @@ function dashinsertDCrop(req, res, next) {
     DashDAO.insert_dcrop(parameters).then((db_data) => {
         var file = req.file.filename
         console.log(file)
-        
+
         const YoloResult = (callback) => {
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+            
+            var jdata = querystring.stringify({
+                'file_name': file,
+                'cduuid': parameters.cduuid
+            })
+
             const options = {
                 method: 'POST',
-                uri: "http://tamjiat.iptime.org:5000/test_post",
-                qs: {
-                    file_name: file,
-                    cduuid : parameters.cduuid
-                }
+                hostname: "14.50.67.208",
+                port:5000,
+                path:"/ai_post",
+                agent: false,
+                headers : {
+                    'Content-Type':'application/x-www-form-urlencoded',
+                    'Content-Length': Buffer.byteLength(jdata)   
+                },
+                 rejectUnhauthorized : false,
+                 requestCert: true,
+                 strictSSL: false,
+                 json:true
             }
-            request(options, function (err, res, body) {
+            var req = https.request(options, function (err, res, body) {
                 callback(undefined, {
                     result: body
                 });
             });
+            req.write(jdata)
 
+            req.on('error', (e)=> {
+                console.error(e);
+            })
+            
+            req.end();
         }
+         
         YoloResult((err, { result } = {}) => {
             if (err) {
                 console.log("error!!!!");
@@ -257,7 +310,8 @@ function dashinsertDCrop(req, res, next) {
             console.log(json)
             res.redirect('/dash/dcrop/1')
         })
-    }).catch(err => res.send("<script>alert('err')</script>"));
+        
+    });
 }
 
 function dashDCropDetail(req, res, next) {
@@ -266,7 +320,7 @@ function dashDCropDetail(req, res, next) {
         "did": req.params.num
     }
     DashDAO.select_dcropDetail(parameters).then((db_data) => {
-        console.log(db_data)
+       
         res.render('dash/DCrop_detail', {db_data, username: req.session.userName})
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -427,10 +481,10 @@ function getWayWeather(req, res, next) {
         let info = JSON.parse(body);
 
         weathers.temp = Math.ceil(info['current']['temp'])
-        if (info['current']['rain'] === undefined) {
+        if (info['daily'][0]['rain'] === undefined) {
             weathers.rain = 0
         } else {
-            weathers.rain = Math.ceil(info['current']['rain'])
+            weathers.rain = Math.ceil(info['daily'][0]['rain'])
         }
         weathers.windSpeed = Math.ceil(info['current']['wind_speed'])
 
@@ -548,5 +602,6 @@ module.exports = {
     getWayWeather,
     dashLocation,
     dashcropFinish,
-    cropLocation
+    cropLocation,
+    test12
 }
