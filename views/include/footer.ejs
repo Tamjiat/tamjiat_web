@@ -104,6 +104,7 @@
             // these IDs from the previous steps
             emailjs.sendForm('service_xyibiln', 'template_qgs1i8m', this)
                 .then(function() {
+                    alert("전송되었습니다.");
                     console.log('SUCCESS!');
                 }, function(error) {
                     console.log('FAILED...', error);

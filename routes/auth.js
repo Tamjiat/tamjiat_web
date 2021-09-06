@@ -12,6 +12,7 @@ const router = express.Router();
 const passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy;
 var userController = require('../controllers/userController')
+require('dotenv').config({ path : ".env" });
 
 /*
     * @brief : 카카오 서버로 검증 부분
@@ -21,8 +22,7 @@ var userController = require('../controllers/userController')
     * callbackURL : 카카오 디벨로퍼에서 설정한 Redirect URI
 */
 passport.use('kakao', new KakaoStrategy({
-    //clientID: 'ebaf9e6022288f5b6781f31e644e0314',
-    clientID: '3ffce141de5af4a5630f168695fa9658',
+    clientID: process.env.KAKAO_AUTH_API_KEY,
     callbackURL: '/auth/kakao/callback',
 }, async (accessToken, refreshToken, profile, done) => {
     return done(null, profile._json);
