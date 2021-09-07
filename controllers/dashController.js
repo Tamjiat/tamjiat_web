@@ -129,7 +129,7 @@ function dashCrop(req, res, next) {
             c_num: req.params.num,
             max_value: 9,
             username: req.session.userName,
-            userimg:req.session.img
+            userimg:req.session.img        
         });
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
