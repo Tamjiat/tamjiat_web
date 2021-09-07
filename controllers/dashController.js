@@ -4,6 +4,11 @@ var DashDAO = require('../models/DashDAO');
 var weather = require('../models/weather');
 var dayjs = require('dayjs')
 const request = require("request");
+var https = require('https');
+const fs = require("fs");
+const { json } = require('body-parser');
+const querystring = require('querystring');
+const { query } = require('../config/logger');
 require('dotenv').config({ path : ".env" });
 
 //파라미터값에 해당하는 위치의 작물 개수값
@@ -228,23 +233,45 @@ function dashinsertDCrop(req, res, next) {
     DashDAO.insert_dcrop(parameters).then((db_data) => {
         var file = req.file.filename
         console.log(file)
+
         
         const YoloResult = (callback) => {
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
+           
+            var jdata = querystring.stringify({
+                'file_name': file,
+                'cduuid' : parameters.cduuid
+            })
+
             const options = {
                 method: 'POST',
-                uri: "http://tamjiat.iptime.org:5000/test_post",
-                qs: {
-                    file_name: file,
-                    cduuid : parameters.cduuid
-                }
+                hostname: "14.50.67.208",
+                path:"/ai_post",
+                port:5000,
+                agent: false,
+                rejectUnauthorized: false,
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded',
+                    'Content-Length': Buffer.byteLength(jdata)
+                },
+                json : true,
+                setTimeout:10000
             }
-            request(options, function (err, res, body) {
+            var req = https.request(options, function (err, res, body) {
                 callback(undefined, {
                     result: body
                 });
             });
+            
+            req.write(jdata);
+            
+            req.on('error', (e)=> {
+                console.error(e);
+            })
 
+            req.end();
         }
+
         YoloResult((err, { result } = {}) => {
             if (err) {
                 console.log("error!!!!");
@@ -257,7 +284,7 @@ function dashinsertDCrop(req, res, next) {
             console.log(json)
             res.redirect('/dash/dcrop/1')
         })
-    }).catch(err => res.send("<script>alert('err')</script>"));
+    })
 }
 
 function dashDCropDetail(req, res, next) {
@@ -344,6 +371,7 @@ function dashHeader(req, res, next) {
         "count": 0
     }
     console.log("dash header 진입")
+    console.log(req.body.cropsName)
     DashDAO.select_userLocate(parameters).then(function (db_data) {
         var parameterLocate = {
             "locate": db_data[0].locate
@@ -367,6 +395,7 @@ function dashHeader(req, res, next) {
                     nearHavestDate = db_data[0].cropsEnd;
                     //작물별 총 수확 진행률
                     DashDAO.select_totalYieldPercent(parameters).then(function (db_data) {
+                        console.log(db_data[0].avgYield)
                         totalYieldPercent = db_data[0].avgYield;
                         //작물별 병 해충 발행건수 및 피해 농작물 종 개수
                         DashDAO.select_countDisease_totalCrops(parameters).then(function (db_data) {
