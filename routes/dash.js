@@ -47,6 +47,8 @@ router.post('/getWayWeather',dashController.getWayWeather);
 
 router.get('/weather/today',weatherController.todayWeather);
 
+router.get('/test', dashController.test12)
+
 
 
 module.exports = router
