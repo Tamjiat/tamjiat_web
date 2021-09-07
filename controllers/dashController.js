@@ -127,7 +127,8 @@ function dashCrop(req, res, next) {
             db_data: db_data,
             c_num: req.params.num,
             max_value: 9,
-            username: req.session.userName
+            username: req.session.userName,
+            userimg:req.session.img            
         });
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -191,7 +192,8 @@ function dashCropPercent(req, res, next) {
             db_data: db_data,
             c_num: req.params.num,
             max_value: 5,
-            username: req.session.userName
+            username: req.session.userName,
+            userimg:req.session.img
         });
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -201,7 +203,7 @@ function dashDCrop(req, res, next) {
         "uid": req.session.userid
     }
     DashDAO.select_dcrop(parameters).then((db_data) => {
-        res.render('dash/DCrop', {db_data, d_num: req.params.num, max_value: 5, dayjs, username: req.session.userName});
+        res.render('dash/DCrop', {db_data, d_num: req.params.num, max_value: 5, dayjs, username: req.session.userName,userimg:req.session.img});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
