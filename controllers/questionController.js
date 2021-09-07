@@ -1,7 +1,7 @@
 var express = require('express');
 
 function question(req, res, next) {
-	res.render('question',{username : req.session.userName });
+	res.render('question',{userimg:req.session.img,username : req.session.userName });
 }
 
 module.exports = {

@@ -51,7 +51,7 @@ function passport_auth(req, res, next) {
 }
 
 function test(req, res, next) {
-	res.render('test',{username : req.session.userName}) 
+	res.render('test',{userimg:req.session.img,username : req.session.userName}) 
 }
 module.exports = {
     loginFail,
