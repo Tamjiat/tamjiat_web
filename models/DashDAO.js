@@ -4,13 +4,13 @@ var logger = require('../config/logger');
 
 function select_crop(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT cid, cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop WHERE uid = '${parameters.uid}';`, function (error, db_data) {
+        db.query(`SELECT cid, cropsName, cropsCultivar,cropsStart, cropsEnd, cropsMemo FROM userCrop WHERE uid = '${parameters.uid}' ORDER BY cid DESC;`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userCrop]" +
                     "\n \t" + `SELECT cid, c.cropsName, cropsCultivar, cropsStart, cropsEnd, cropsMemo
                                FROM userCrop
-                               WHERE uid = 1234;` +
+                               WHERE  uid = '${parameters.uid}'  ORDER BY cropsEnd DESC;;` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -122,12 +122,13 @@ function select_cropPercent(parameters) {
 function select_dcrop(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT *
-                  FROM userDcrop where uid = '${parameters.uid}'`, function (error, db_data) {
+                  FROM userDcrop where uid = '${parameters.uid}' ORDER BY did DESC`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
                     "\n \t" + `SELECT *
-                               FROM userDcrop` +
+                               FROM userDcrop
+                               ORDER BY cropsDate DESC` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -196,12 +197,12 @@ function select_cropDisease(parameters) {
 function select_notice(parameters) {
     return new Promise(function (resolve, reject) {
         db.query(`SELECT *
-                  FROM notice`, function (error, db_data) {
+                  FROM notice ORDER BY nDate DESC`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [notice]" +
                     "\n \t" + `SELECT *
-                               FROM notice` +
+                               FROM notice ORDER BY nDate DESC` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;
@@ -283,11 +284,11 @@ function select_nearHarvestDate(parameters) {
 
 function select_totalYieldPercent(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT ROUND(AVG((currentYield / goalYield) *100),2) AS avgYield FROM userCrop WHERE uid = "${parameters.userid}" AND cropsName = "${parameters.cropsName}"`, function (error, db_data) {
+        db.query(`SELECT uid, ((sum(currentYield) / sum(goalYield)) * 100) AS avgYield FROM userCrop WHERE uid='${parameters.userid}' and cropsName ='${parameters.cropsName}'`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [totalYieldPercent]" +
-                    "\n \t" + `SELECT ROUND(AVG(((goalYield - currentYield) / goalYield) *100),2) AS avgYield FROM userCrop WHERE uid = "${parameters.userid}" AND cropsName = "${parameters.cropsName}"` +
+                    "\n \t" + `SELECT uid, ((sum(currentYield) / sum(goalYield)) * 100) AS avgYield FROM userCrop WHERE uid='${parameters.userid}' and cropsName = '${parameters.cropsName}'` +
                     "\n \t" + error);
                 reject('DB ERR');
                 //throw error;

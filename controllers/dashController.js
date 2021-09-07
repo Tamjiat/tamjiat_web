@@ -297,7 +297,7 @@ function dashinsertDCrop(req, res, next) {
             
             req.end();
         }
-         
+         \
         YoloResult((err, { result } = {}) => {
             if (err) {
                 console.log("error!!!!");
@@ -398,6 +398,7 @@ function dashHeader(req, res, next) {
         "count": 0
     }
     console.log("dash header 진입")
+    console.log(req.body.cropsName)
     DashDAO.select_userLocate(parameters).then(function (db_data) {
         var parameterLocate = {
             "locate": db_data[0].locate
@@ -421,6 +422,7 @@ function dashHeader(req, res, next) {
                     nearHavestDate = db_data[0].cropsEnd;
                     //작물별 총 수확 진행률
                     DashDAO.select_totalYieldPercent(parameters).then(function (db_data) {
+                        console.log(db_data[0].avgYield)
                         totalYieldPercent = db_data[0].avgYield;
                         //작물별 병 해충 발행건수 및 피해 농작물 종 개수
                         DashDAO.select_countDisease_totalCrops(parameters).then(function (db_data) {
