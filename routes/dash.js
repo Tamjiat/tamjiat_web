@@ -47,7 +47,7 @@ router.post('/getWayWeather',dashController.getWayWeather);
 
 router.get('/weather/today',weatherController.todayWeather);
 
-router.get('/test', dashController.test12)
+router.get('/tests', dashController.test12)
 
 
 

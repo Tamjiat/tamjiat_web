@@ -297,7 +297,6 @@ function dashinsertDCrop(req, res, next) {
             
             req.end();
         }
-         \
         YoloResult((err, { result } = {}) => {
             if (err) {
                 console.log("error!!!!");
