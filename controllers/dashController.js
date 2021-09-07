@@ -6,7 +6,8 @@ var dayjs = require('dayjs');
 const request = require("request");
 const https = require("https");
 const fs = require("fs");
-const querystring = require('querystring')
+const querystring = require('querystring');
+const { json } = require('body-parser');
 require('dotenv').config({ path : ".env" });
 
 //파라미터값에 해당하는 위치의 작물 개수값
@@ -127,7 +128,8 @@ function dashCrop(req, res, next) {
             db_data: db_data,
             c_num: req.params.num,
             max_value: 9,
-            username: req.session.userName
+            username: req.session.userName,
+            userimg:req.session.img
         });
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -191,7 +193,8 @@ function dashCropPercent(req, res, next) {
             db_data: db_data,
             c_num: req.params.num,
             max_value: 5,
-            username: req.session.userName
+            username: req.session.userName,
+            userimg:req.session.img
         });
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -201,7 +204,7 @@ function dashDCrop(req, res, next) {
         "uid": req.session.userid
     }
     DashDAO.select_dcrop(parameters).then((db_data) => {
-        res.render('dash/DCrop', {db_data, d_num: req.params.num, max_value: 5, dayjs, username: req.session.userName});
+        res.render('dash/DCrop', {db_data, d_num: req.params.num, max_value: 5, dayjs, username: req.session.userName,userimg:req.session.img});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
@@ -357,6 +360,7 @@ function dash_cropMulter(req, res, next) {
         "cdName": "검사중",
         "cduuid" : uuidv4()
     }
+
     DashDAO.insert_dcrop(parameters).then((db_data) => {
         var file = req.files.myFile[0]
         console.log(file)
@@ -405,9 +409,17 @@ function dash_cropMulter(req, res, next) {
                     status: "fail"
                 });
             }
-            let json = result;
-            console.log(json)
-            res.send({"message": "success"})
+            var jsondata = result;
+            console.log(jsondata)
+        })
+        var parameter = {
+            "uid":parameters.uid,
+            "cduuid":parameters.cduuid,
+            "result": jsondata,
+            "cropsImage": parameters.cropsImage,
+        }
+        DashDAO.select_appData(parameter).then((db_data)=>{
+            res.send({"result":db_data})
         })
     });
 }

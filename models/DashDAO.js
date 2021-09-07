@@ -141,12 +141,12 @@ function select_dcrop(parameters) {
 
 function select_dcropDetail(parameters) {
     return new Promise(function (resolve, reject) {
-        db.query(`SELECT ud.did, ud.cropsName, ud.cropsCultivar, ud.AICheck, ud.cdName, ud.cropsImage, cd.cdSolution, ud.cropsDate, ud.cropsMemo FROM userDcrop 
+        db.query(`SELECT ud.did, ud.cropsName, ud.cropsCultivar, ud.AICheck, ud.cdName, ud.cropsImage, cd.cdSolution, ud.cropsDate, ud.cropsMemo, cd.cdNameEng, cd.cdOccurDate, cd.cdSickness, cd.cdPathogen FROM userDcrop 
         as ud JOIN diseaseCode as cd ON cd.cdName = ud.cdName WHERE ud.uid = '${parameters.uid}' and ud.did = '${parameters.did}';`, function (error, db_data) {
             if (error) {
                 logger.error(
                     "DB error [userDcrop]" +
-                    "\n \t" + `SELECT ud.did, ud.cropsName, ud.cropsCultivar, ud.AICheck, ud.cdName, cd.cdSolution, ud.cropsDate, ud.cropsMemo FROM userDcrop
+                    "\n \t" + `SELECT ud.did, ud.cropsName, ud.cropsCultivar, ud.AICheck, ud.cdName, cd.cdSolution, ud.cropsDate, ud.cropsMemo, cd.cdNameEng, cd.cdOccurDate, cd.cdSickness, cd.cdPathogenFROM userDcrop
                      as ud JOIN diseaseCode as cd ON cd.cdName = ud.cdName WHERE ud.uid = '${parameters.uid}';` +
                     "\n \t" + error);
                 reject('DB ERR');
@@ -449,7 +449,7 @@ function select_dashcropDisease(parameters) {
     
     function select_countDisease_date(parameters) {
         return new Promise(function (resolve, reject) {
-            db.query(`SELECT cropsDate, COUNT(cropsDate) AS count  FROM userDcrop WHERE uid = '${parameters.userid}' AND cropsName = '${parameters.cropsName}' GROUP BY cropsDate`, function (error, db_data) {
+            db.query(`SELECT cropsDate, COUNT(cropsDate) AS count FROM userDcrop WHERE uid = '${parameters.userid}' AND cropsName = '${parameters.cropsName}' GROUP BY cropsDate`, function (error, db_data) {
                 if (error) {
                     logger.error(
                         "DB error [userDcrop]"+
@@ -568,6 +568,25 @@ function delete_notice(parameters) {
         });
     })
 }
+
+function select_appData(parameters) {
+    return new Promise(function (resolve, reject) {
+        db.query(`SELECT ud.cdName, ud.cropsImage, cd.cdSolution, cd.cdNameEng, cd.cdOccurDate, cd.cdSickness, cd.cdPathogen FROM userDcrop 
+        as ud JOIN diseaseCode as cd ON cd.cdName = ud.cdName WHERE ud.uid = '${parameters.uid}' and ud.cduuid = '${parameters.cduuid}' AND ud.cdName="${parameters.result}";`, function (error, db_data) {
+            if (error) {
+                logger.error(
+                    "DB error [userDCrop]"+
+                    "\n \t" + `SELECT ud.cdName, ud.cropsImage, cd.cdSolution, cd.cdNameEng, cd.cdOccurDate, cd.cdSickness, cd.cdPathogen FROM userDcrop 
+                    as ud JOIN diseaseCode as cd ON cd.cdName = ud.cdName WHERE ud.uid = '1883125542' and ud.cduuid = '${parameters.cduuid}';` +
+                    "\n \t" + error);
+                reject('DB ERR');
+                //throw error;
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
 module.exports = {
     select_crop,
     select_cropDetail,
@@ -599,5 +618,6 @@ module.exports = {
     select_dashDonut,
     select_dashBar,
     select_dashCurve,
-    select_userLocateCrop
+    select_userLocateCrop,
+    select_appData
 }
