@@ -108,7 +108,7 @@ function dash_main(req, res, next) {
                         BarData = db_data
                             DashDAO.select_dashCurve(parameters).then((db_data)=>{
                                 CurveData = db_data
-                                res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, CurveData, username : req.session.userName, key:key});
+                                res.render('dash/main',{ListData, PercentData, FinishData, DiseaseData, DonutData, BarData, CurveData, username : req.session.userName,userimg:req.session.img, key:key});
                         }).catch(err=>res.send("<script>alert('err')</script>"));
                     }).catch(err=>res.send("<script>alert('err')</script>"));
                 }).catch(err=>res.send("<script>alert('err')</script>"));
@@ -138,7 +138,7 @@ function dashCropAdd(req, res, next) {
         DashDAO.select_cropCategory().then((db_data) => {
             categoryData = db_data
             var key = process.env.KAKAO_MAP_API_KEY
-            res.render('dash/Crop_add', {codeData, categoryData, username: req.session.userName, key: key});
+            res.render('dash/Crop_add', {codeData, categoryData, username: req.session.userName,userimg:req.session.img, key: key});
         }).catch(err => res.send("<script>alert('err')</script>"));
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
@@ -153,7 +153,7 @@ function dashCropDetail(req, res, next) {
         DashDAO.select_cropCategory().then((db_data) => {
             categoryData = db_data
             DashDAO.select_cropDetail(parameters).then((db_data) => {
-                res.render('dash/Crop_detail', {codeData, categoryData, db_data, username: req.session.userName});
+                res.render('dash/Crop_detail', {codeData, categoryData, db_data, username: req.session.userName, userimg:req.session.img});
             }).catch(err => res.send("<script>alert('err')</script>"));
         }).catch(err => res.send("<script>alert('err')</script>"));
     }).catch(err => res.send("<script>alert('err')</script>"));
@@ -208,36 +208,8 @@ function dashDCrop(req, res, next) {
 function dashDCropAdd(req, res, next) {
     DashDAO.select_cropCode().then((db_data) => {
         codeData = db_data
-        res.render('dash/DCrop_add', {codeData, username: req.session.userName});
+        res.render('dash/DCrop_add', {codeData, username: req.session.userName,userimg:req.session.img});
     }).catch(err => res.send("<script>alert('err')</script>"));
-}
-
-function test12(){
-    const data = JSON.stringify({
-        todo: "tst"
-    })
-
-    const options = {
-        method: 'GET',
-        hostname: "14.50.67.208",
-        port:5000,
-        path:"/test",
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': data.length
-        },
-    }
-
-    https.request(options, res => {
-        console.log('statusCode:' +  res.statusCode)
-    })
-
-    req.on('error', error =>{
-        console.log(error)
-    })
-
-    req.write(data)
-    req.end()
 }
 
 function dashinsertDCrop(req, res, next) {
@@ -320,7 +292,7 @@ function dashDCropDetail(req, res, next) {
     }
     DashDAO.select_dcropDetail(parameters).then((db_data) => {
        
-        res.render('dash/DCrop_detail', {db_data, username: req.session.userName})
+        res.render('dash/DCrop_detail', {db_data, username: req.session.userName,userimg:req.session.img})
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
@@ -330,13 +302,13 @@ function dashPest(req, res, next) {
         "uid": req.session.userid
     }
     DashDAO.select_cropDisease(parameters).then((db_data) => {
-        res.render('dash/Pest', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
+        res.render('dash/Pest', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName,userimg:req.session.img});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
 function dashNotice(req, res, next) {
     DashDAO.select_notice().then((db_data) => {
-        res.render('dash/notice', {db_data, n_num: req.params.num, max_value: 7, username: req.session.userName});
+        res.render('dash/notice', {db_data, n_num: req.params.num, max_value: 7, username: req.session.userName,userimg:req.session.img});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
@@ -345,12 +317,12 @@ function dashNoticeDetail(req, res, next) {
         "nid": req.params.num
     }
     DashDAO.select_noticeDetail(parameters).then((db_data) => {
-        res.render('dash/notice_detail', {db_data, username: req.session.userName});
+        res.render('dash/notice_detail', {db_data, userimg:req.session.img,username: req.session.userName});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
 function dashNoticeInsert(req, res, next) {
-    res.render('dash/notice_write', {username: req.session.userName});
+    res.render('dash/notice_write', {userimg:req.session.img,username: req.session.userName});
 }
 
 function dashNoticeInsertData(req, res, next) {
@@ -365,17 +337,79 @@ function dashNoticeInsertData(req, res, next) {
 }
 
 function dashTalk(req, res, next) {
-    res.render('dash/talk', {username: req.session.userName});
+    res.render('dash/talk', {userimg:req.session.img,username: req.session.userName});
 }
 
 function dash_cropMulter(req, res, next) {
-    var parameters = {
-        "imagefile": req.files
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
     }
+    parameters = {
+        "cropsName": req.body.Cropkind,
+        "uid": req.body.userid,
+        "cropsCultivar": req.body.CropName,
+        "cropsImage": req.files.myFile[0],
+        "cropsMemo": "메모가 없어요!",
+        "AICheck": "진행중",
+        "cdName": "검사중",
+        "cduuid" : uuidv4()
+    }
+    DashDAO.insert_dcrop(parameters).then((db_data) => {
+        var file = req.files.myFile[0]
+        console.log(file)
 
-    var files = req.files
-    console.log(files.myFile[0])
-    res.send({"message": "success"})
+        const YoloResult = (callback) => {
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+            
+            var jdata = querystring.stringify({
+                'file_name': file,
+                'cduuid': parameters.cduuid
+            })
+
+            const options = {
+                method: 'POST',
+                hostname: "14.50.67.208",
+                port:5000,
+                path:"/ai_post",
+                agent: false,
+                headers : {
+                    'Content-Type':'application/x-www-form-urlencoded',
+                    'Content-Length': Buffer.byteLength(jdata)   
+                },
+                 rejectUnhauthorized : false,
+                 requestCert: true,
+                 strictSSL: false,
+                 json:true
+            }
+            var req = https.request(options, function (err, res, body) {
+                callback(undefined, {
+                    result: body
+                });
+            });
+            req.write(jdata)
+
+            req.on('error', (e)=> {
+                console.error(e);
+            })
+            
+            req.end();
+        }
+        YoloResult((err, { result } = {}) => {
+            if (err) {
+                console.log("error!!!!");
+                res.send({
+                    message: "fail",
+                    status: "fail"
+                });
+            }
+            let json = result;
+            console.log(json)
+            res.send({"message": "success"})
+        })
+    });
 }
 
 function dashHeader(req, res, next) {
@@ -504,7 +538,7 @@ function dashLocation(req, res, next) {
         "uid": req.session.userid
     }
     DashDAO.select_cropDisease(parameters).then((db_data) => {
-        res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, username: req.session.userName});
+        res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, userimg:req.session.img,username: req.session.userName});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
@@ -603,6 +637,5 @@ module.exports = {
     getWayWeather,
     dashLocation,
     dashcropFinish,
-    cropLocation,
-    test12
+    cropLocation
 }
