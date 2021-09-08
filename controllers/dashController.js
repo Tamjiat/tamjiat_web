@@ -7,7 +7,6 @@ const request = require("request");
 const https = require("https");
 const fs = require("fs");
 const querystring = require('querystring');
-const { json } = require('body-parser');
 require('dotenv').config({ path : ".env" });
 
 //파라미터값에 해당하는 위치의 작물 개수값
@@ -222,6 +221,7 @@ function dashinsertDCrop(req, res, next) {
           return v.toString(16);
         });
     }
+    var file = req.file.filename
     parameters = {
         "cropsName": req.body.Cropkind,
         "uid": req.session.userid,
@@ -233,58 +233,40 @@ function dashinsertDCrop(req, res, next) {
         "cduuid" : uuidv4()
     }
     DashDAO.insert_dcrop(parameters).then((db_data) => {
-        var file = req.file.filename
-        console.log(file)
-
-        const YoloResult = (callback) => {
-            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-            
-            var jdata = querystring.stringify({
-                'file_name': file,
-                'cduuid': parameters.cduuid
-            })
-
-            const options = {
-                method: 'POST',
-                hostname: "14.50.67.208",
-                port:5000,
-                path:"/ai_post",
-                agent: false,
-                headers : {
-                    'Content-Type':'application/x-www-form-urlencoded',
-                    'Content-Length': Buffer.byteLength(jdata)   
-                },
-                 rejectUnhauthorized : false,
-                 requestCert: true,
-                 strictSSL: false,
-                 json:true
-            }
-            var req = https.request(options, function (err, res, body) {
-                callback(undefined, {
-                    result: body
-                });
-            });
-            req.write(jdata)
-
-            req.on('error', (e)=> {
-                console.error(e);
-            })
-            
-            req.end();
-        }
-        YoloResult((err, { result } = {}) => {
-            if (err) {
-                console.log("error!!!!");
-                res.send({
-                    message: "fail",
-                    status: "fail"
-                });
-            }
-            let json = result;
-            console.log(json)
-            res.redirect('/dash/dcrop/1')
-        })
         
+        console.log(file)
+        var jdata = querystring.stringify({
+                    'file_name': file,
+                    'cduuid': parameters.cduuid
+                })
+        var options = {
+                    method: 'POST',
+                    hostname: "tamjiat.hopto.org",
+                    port:5000,
+                    path:"/ai_post",
+                    agent: false,
+                    headers : {
+                        'Content-Type':'application/x-www-form-urlencoded',
+                        'Content-Length': Buffer.byteLength(jdata)   
+                    },
+                     rejectUnhauthorized : false,
+                     requestCert: true,
+                     strictSSL: false,
+                     json:true
+            }
+        var req = https.request(options, (res) => {
+                res.setEncoding('utf-8');
+                res.on('data', (d) => {
+                    var resu = JSON.parse(d)
+                  console.log(resu['result']);
+                });
+        });
+        req.on('error', (e) => {
+            console.error(e);
+          });
+        req.write(jdata)
+        req.end();
+        res.redirect('/dash/dcrop/1')
     });
 }
 
@@ -354,74 +336,61 @@ function dash_cropMulter(req, res, next) {
         "cropsName": req.body.Cropkind,
         "uid": req.body.userid,
         "cropsCultivar": req.body.CropName,
-        "cropsImage": req.files.myFile[0],
-        "cropsMemo": "메모가 없어요!",
+        "cropsImage": req.files.myFile[0].filename,
         "AICheck": "진행중",
         "cdName": "검사중",
-        "cduuid" : uuidv4()
+        "cropsMemo" : "메모가 없어요!",
+        "cduuid":uuidv4()
     }
-
     DashDAO.insert_dcrop(parameters).then((db_data) => {
-        var file = req.files.myFile[0]
-        console.log(file)
-
-        const YoloResult = (callback) => {
-            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-            
-            var jdata = querystring.stringify({
-                'file_name': file,
-                'cduuid': parameters.cduuid
-            })
-
-            const options = {
-                method: 'POST',
-                hostname: "14.50.67.208",
-                port:5000,
-                path:"/ai_post",
-                agent: false,
-                headers : {
-                    'Content-Type':'application/x-www-form-urlencoded',
-                    'Content-Length': Buffer.byteLength(jdata)   
-                },
-                 rejectUnhauthorized : false,
-                 requestCert: true,
-                 strictSSL: false,
-                 json:true
-            }
-            var req = https.request(options, function (err, res, body) {
-                callback(undefined, {
-                    result: body
-                });
-            });
-            req.write(jdata)
-
-            req.on('error', (e)=> {
-                console.error(e);
-            })
-            
-            req.end();
-        }
-        YoloResult((err, { result } = {}) => {
-            if (err) {
-                console.log("error!!!!");
-                res.send({
-                    message: "fail",
-                    status: "fail"
-                });
-            }
-            var jsondata = result;
-            console.log(jsondata)
-        })
         var parameter = {
             "uid":parameters.uid,
             "cduuid":parameters.cduuid,
-            "result": jsondata,
             "cropsImage": parameters.cropsImage,
         }
-        DashDAO.select_appData(parameter).then((db_data)=>{
-            res.send({"result":db_data})
+        var i = requestqwe(parameters.cropsImage, parameter.cduuid , function(test_re){
+            parameter['result']= test_re
+            DashDAO.select_appData(parameter).then((db_data)=>{
+                console.log({"result":db_data[0]})
+                res.send({"result":db_data[0]})
+            })
         })
     });
+}
+
+function requestqwe(iName,iCduuid,callback){
+        var jdata = querystring.stringify({
+                    'file_name': iName,
+                    'cduuid': iCduuid
+                })
+        var options = {
+                    method: 'POST',
+                    hostname: "tamjiat.hopto.org",
+                    port:5000,
+                    path:"/ai_post",
+                    agent: false,
+                    headers : {
+                        'Content-Type':'application/x-www-form-urlencoded',
+                        'Content-Length': Buffer.byteLength(jdata)   
+                    },
+                     rejectUnhauthorized : false,
+                     requestCert: true,
+                     strictSSL: false,
+                     json:true
+            }
+        var req = https.request(options, (res) => {
+                res.setEncoding('utf-8');
+                res.on('data', (d) => {
+                    var resu = JSON.parse(d)
+                    callback(resu["result"]);
+                });
+        });
+        req.on('error', (e) => {
+            console.error(e);
+          });
+        req.write(jdata)
+        req.end();
+        return "test"
 }
 
 function dashHeader(req, res, next) {
@@ -550,7 +519,7 @@ function dashLocation(req, res, next) {
         "uid": req.session.userid
     }
     DashDAO.select_cropDisease(parameters).then((db_data) => {
-        res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, userimg:req.session.img,username: req.session.userName});
+        res.render('dash/location', {db_data, p_num: req.params.num, max_value: 7, dayjs, userimg:req.session.img, username: req.session.userName});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
 
@@ -613,7 +582,7 @@ function cropLocation(req, res, next){
         }else {
             var key = process.env.KAKAO_MAP_API_KEY
             console.log("true")
-            res.render('dash/location', {CropLocations, username: req.session.userName, key: key});
+            res.render('dash/location', {CropLocations, userimg:req.session.img, username: req.session.userName, key: key});
         }
     })
 }
