@@ -1,7 +1,29 @@
-[![Up to Date](https://github.com/ikatyang/emoji-cheat-sheet/workflows/Up%20to%20Date/badge.svg)](https://github.com/ikatyang/emoji-cheat-sheet/actions?query=workflow%3A%22Up+to+Date%22)
+# 탐지앗 프로젝트<br>
 
-# tamjiat_webhee
-hello
- [top](#smileys--emotion) | :grinning: | `:grinning:` | :smiley: | `:smiley:` | [top](#table-of-contents
+## :seedling: 개요
+AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개발<br><br><br>
 
-## 🌹 t e c h 🌹
+## :clapper: 유튜브 URL
+<유튜브 url 링크><br><br><br>
+
+## :deciduous_tree: Development Environmet
+|<center>Environment</center>|<center>Language</center>|
+|--------------|------------|
+|<center>OS</center>|Ubuntu Linux 20.04 LTS, Window 10, MAC|
+|<center>Sever</center>|Node.js, Flask|
+|<center>AI</center>|Python3.8, Anaconda, Tensorflow 2.6, Keras|
+|<center>Android</center>|Kotlin|
+|<center>WEB</center>|HTML5, CSS3, Javascript, Bootstrap Framework|
+|<center>Database</center>|MySQL|
+
+<br><br><br>
+
+.center {
+  display: block;
+  margin: auto;
+}
+
+## :wrench: System Architecture
+<p align="center">
+<img src="https://user-images.githubusercontent.com/60692339/132637267-5639199e-36c7-448c-a6d9-d01372577549.png" width="600" height="500">
+</p>
