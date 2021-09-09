@@ -1,4 +1,4 @@
-# 탐지앗 프로젝트<br>
+<p style="font-size:20px">탐지앗 프로젝트</p>
 
 ## :seedling: 개요
 AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개발<br><br><br>
