@@ -4,7 +4,7 @@
 AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개발<br><br><br>
 
 ## :clapper: 유튜브 URL
-https://www.youtube.com/watch?v=WBP8HXE4sOM<br><br><br>
+[![갓두렁팀 탐지앗 시연영상](https://img.youtube.com/vi/WBP8HXE4sOM/0.jpg)](https://www.youtube.com/watch?v=WBP8HXE4sOM)<br><br><br>
 
 ## :deciduous_tree: Development Environmet
 |<center>Environment</center>|<center>Tools</center>|
