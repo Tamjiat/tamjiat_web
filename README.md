@@ -44,8 +44,10 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 ## WEB
 
 ```markdown
+Main Homepage
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 
+DashBoard Homepage
 * Star Admin 2 Free is released under MIT license. This is a free Bootstrap 5 admin template developed from BootstrapDash. Feel free to download, use, share, and get creative with it.
 ```
