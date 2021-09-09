@@ -31,11 +31,12 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 서버를 실행하는 방법입니다.
 순서대로 진행해야 정상적으로 작동합니다.
 
+<br><br>
 ## 탐지앗 URL
-탐지앗 공식 홈페이지 : https://tamjiat.hopto.org:3365/<br>
+탐지앗 공식 홈페이지 : https://tamjiat.hopto.org:3365/<br><br>
 탐지앗 애플리케이션 : 구글 스토어 어플 심사중...
 
-<br><br><br>
+<br><br>
 
 ## NodeJS Web Server
 
