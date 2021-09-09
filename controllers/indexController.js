@@ -50,9 +50,10 @@ function passport_auth(req, res, next) {
     })
 }
 
-function test(req, res, next) {
-	res.render('test',{userimg:req.session.img,username : req.session.userName}) 
+function policy(req, res, next) {
+	res.render('policy',{userimg:req.session.img,username : req.session.userName}) 
 }
+
 module.exports = {
     loginFail,
     loginSuccess,
@@ -60,5 +61,5 @@ module.exports = {
     passport_auth,
     cropNumber,
     cropWeekDate,
-    test
+    policy
 }
