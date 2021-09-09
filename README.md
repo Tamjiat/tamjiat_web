@@ -51,7 +51,7 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 7. 웹 사이트가 동작한다면 성공입니다.
 
 <br><br><br>
-# 🙎‍♂️ Development People
+# ✴️ Development People
 |Developer|Tech Stack|
 |------|---|
 |Kim Deukhoi|Team Leader & Android
