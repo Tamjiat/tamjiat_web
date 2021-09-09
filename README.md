@@ -26,7 +26,7 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 
 <br><br><br>
 
-# 🌟 Getting Started
+# 🔥 Getting Started
 
 서버를 실행하는 방법입니다.
 순서대로 진행해야 정상적으로 작동합니다.
@@ -50,8 +50,8 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 6. 서버를 구동시킨 후 해당 링크로 접속하면 ```https://localhost:3365``` 메인페이지가 나옵니다.
 7. 웹 사이트가 동작한다면 성공입니다.
 
-
-# 👨 Development People
+<br><br><br>
+# 👨‍🦱 Development People
 |Developer|Tech Stack|
 |------|---|
 |Kim Deukhoi|Team Leader & Android
@@ -75,4 +75,17 @@ Main Homepage
 
 DashBoard Homepage
 * Star Admin 2 Free is released under MIT license. This is a free Bootstrap 5 admin template developed from BootstrapDash. Feel free to download, use, share, and get creative with it.
+```
+
+## Android
+
+```markdown
+
+```
+
+## AI
+
+```markdown
+AI HUB
+저작권 및 이용정책본 데이터는 과학기술정보통신부가 주관하고 한국지능정보사회진흥원이 지원하는 '인공지능 학습용 데이터 구축사업'으로 구축된 데이터입니다
 ```
