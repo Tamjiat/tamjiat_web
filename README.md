@@ -31,7 +31,7 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 서버를 실행하는 방법입니다.
 순서대로 진행해야 정상적으로 작동합니다.
 
-### NodeJS Web Server
+## NodeJS Web Server
 
 1. node 14.17.6 LTS 버젼(가장 최신 LTS 버전)과 Visual Studio Code를 설치해줍니다.
 2.  터미널에서 아래 코드를 사용하여 서버 파일을 다운받아줍니다.
@@ -51,7 +51,7 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 7. 웹 사이트가 동작한다면 성공입니다.
 
 <br><br><br>
-### 🙎‍♂️ Development People
+# 🙎‍♂️ Development People
 |Developer|Tech Stack|
 |------|---|
 |Kim Deukhoi|Team Leader & Android
