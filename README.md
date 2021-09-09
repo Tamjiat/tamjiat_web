@@ -7,9 +7,9 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 <유튜브 url 링크><br><br><br>
 
 ## :deciduous_tree: Development Environmet
-|<center>Environment</center>|<center>Language</center>|
+|<center>Environment</center>|<center>Tools</center>|
 |--------------|------------|
-|<center>OS</center>|Ubuntu Linux 20.04 LTS|
+|<center>OS</center>|Ubuntu Linux 20.04 LTS, Window10, MAC|
 |<center>Sever</center>|Node.js 14.17.6 LTS, Flask|
 |<center>AI</center>|Python 3.8, Anaconda 4.10, Tensorflow 2.6, Keras 2.6|
 |<center>Android</center>|Kotlin|
