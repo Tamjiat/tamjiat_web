@@ -12,7 +12,7 @@ https://www.youtube.com/watch?v=0qmvaAiVCrg<br><br><br>
 |<center>OS</center>|Ubuntu Linux 20.04 LTS, Window10, MAC|
 |<center>Sever</center>|Node.js 14.17.6 LTS, Flask|
 |<center>AI</center>|Python 3.8, Anaconda 4.10, Tensorflow 2.6, Keras 2.6|
-|<center>Android</center>|Kotlin|
+|<center>Android</center>|Kotlin 1.5.20|
 |<center>WEB</center>|HTML5, CSS3, Javascript, Bootstrap Framework|
 |<center>Database</center>|MySQL|
 
@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=0qmvaAiVCrg<br><br><br>
 <br><br>
 ## 탐지앗 공식 URL
 탐지앗 공식 홈페이지 : https://tamjiat.hopto.org:3365/<br><br>
-탐지앗 애플리케이션 : 구글 스토어 어플 심사중...
+탐지앗 애플리케이션 : 구글 스토어 어플 심사중... <a href="https://tamjiat.hopto.org:3365/tamjiat.apk">임시 앱 다운로드</a>
 
 <br><br>
 
