@@ -37,4 +37,15 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 
 <br><br><br>
 
-# :bookmark_tabs: License
+# :bookmark_tabs: OpenSource Licenses
+
+우리 서비스에 사용 되는 오픈소스 라이브러리 개발자들에게 감사의 인사를 전합니다.
+
+## WEB
+
+```markdown
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+
+* Star Admin 2 Free is released under MIT license. This is a free Bootstrap 5 admin template developed from BootstrapDash. Feel free to download, use, share, and get creative with it.
+```
