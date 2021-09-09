@@ -24,6 +24,8 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 
 </p>
 
+<br><br><br>
+
 # 👨‍🦱 Development People
 |Developer|Tech Stack|
 |------|---|
@@ -32,5 +34,7 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 |Park Woosik|FrontEnd & AI
 |Song Junha| FrontEnd & AI
 |Lee Kyuhwan|BackEnd 
+
+<br><br><br>
 
 # :bookmark_tabs: License
