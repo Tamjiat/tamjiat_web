@@ -20,7 +20,7 @@ AI 기반 농작물 병ㆍ해충 관리 웹 및 애플리케이션 서비스 개
 
 ## :wrench: System Architecture
 <p align="center">
-<img src="https://user-images.githubusercontent.com/60692339/132666734-c37a09b4-1183-45dc-91ec-1e97e2448b8b.PNG" width="600" height="500">
+<img src="https://user-images.githubusercontent.com/60692339/132666734-c37a09b4-1183-45dc-91ec-1e97e2448b8b.PNG">
 
 </p>
 
