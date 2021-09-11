@@ -86,9 +86,8 @@ DashBoard Homepage
 
 ## Android
 
-## Retrofit2
-
 ```markdown
+# Retrofit2
 Copyright 2013 Square, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,11 +101,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-```
 
-## Glide
-
-```markdown
+# Glide
 License for everything not in third_party and not otherwise marked:
 
 Copyright 2014 Google, Inc. All rights reserved.
@@ -201,11 +197,8 @@ limitation the rights to use, copy, modify, merge, publish, distribute,
 sublicense, and/or sell copies of the Software, and to permit persons who
 receive copies from any such party to do so, with the only requirement being
 that this copyright notice remain intact.
-```
 
-## MarkdownView-Android
-
-```markdown
+# MarkdownView-Android
 Copyright (c) 2018 Mukesh Solanki
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -225,10 +218,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
-## Tedpermission
-```markdown
+# Tedpermission
 Copyright 2017 Ted Park
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -242,10 +233,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-```
 
-## AnimatedBottomBar
-```markdown
+# AnimatedBottomBar
 MIT License
 
 Copyright (c) 2021 Joery Droppers (https://github.com/Droppers)
@@ -267,10 +256,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
-## Lottie for Android
-```markdown
+# Lottie for Android
   Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -473,7 +460,6 @@ SOFTWARE.
    See the License for the specific language governing permissions and
    limitations under the License.
 ```
-
 
 ## AI
 
