@@ -19,8 +19,10 @@ router.post('/cropMulter', upload.fields([{name:'myFile', maxCount:1}]), dashCon
 router.get('/',dashController.dash_main);
 router.get('/crop/:num',dashController.dashCrop);
 router.get('/cropAdd',dashController.dashCropAdd);
+router.get('/cropUpdate',dashController.dashCropUpdate);
 router.get('/cropDetail/:num',dashController.dashCropDetail);
 router.post('/cropInsert',dashController.dashinsertCrop);
+
 router.post('/cropDelete',dashController.dashCropDelete);
 
 router.get('/dcrop/:num',dashController.dashDCrop);
