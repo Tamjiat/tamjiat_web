@@ -315,6 +315,14 @@ function dashNoticeDetail(req, res, next) {
         res.render('dash/notice_detail', {db_data, userimg:req.session.img,username: req.session.userName});
     }).catch(err => res.send("<script>alert('err')</script>"));
 }
+function dashNoticeUpdate(req, res, next) {
+    var parameters = {
+        "nid": req.params.num
+    }
+    DashDAO.select_noticeDetail(parameters).then((db_data) => {
+        res.render('dash/notice_update', {db_data, userimg:req.session.img,username: req.session.userName});
+    }).catch(err => res.send("<script>alert('err')</script>"));
+}
 
 function dashNoticeInsert(req, res, next) {
     res.render('dash/notice_write', {userimg:req.session.img,username: req.session.userName});
@@ -621,6 +629,7 @@ module.exports = {
     dashNotice,
     dashNoticeDetail,
     dashNoticeDelete,
+    dashNoticeUpdate,
     dashNoticeInsert,
     dashNoticeInsertData,
     dashPest,

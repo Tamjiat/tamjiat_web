@@ -36,6 +36,7 @@ router.get('/pest/:num',dashController.dashPest);
 
 router.get('/notice/:num',dashController.dashNotice);
 router.get('/noticeDetail/:num',dashController.dashNoticeDetail);
+router.get('/noticeUpdate',dashController.dashNoticeUpdate);
 router.get('/noticeInsert',dashController.dashNoticeInsert);
 router.post('/noticeInsert',dashController.dashNoticeInsertData);
 router.post('/noticeDelete',dashController.dashNoticeDelete);
